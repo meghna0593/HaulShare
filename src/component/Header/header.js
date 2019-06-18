@@ -32,6 +32,8 @@ class Header extends Component {
     }
 
     goToAds=()=>{
+        history.push('/my-ads')
+        history.go()
     }
 
     render(){

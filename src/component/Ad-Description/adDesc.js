@@ -39,6 +39,22 @@ class DescriptionModal extends Component{
                     </Row>
                     <Row className="row-padding">
                         <Col md={4} className="label-header-style">
+                            Luggage Dimension:
+                        </Col>
+                        <Col md={8}>
+                            25 x 45 x 100 inch
+                        </Col>
+                    </Row>
+                    <Row className="row-padding">
+                        <Col md={4} className="label-header-style">
+                            Luggage Weight:
+                        </Col>
+                        <Col md={8}>
+                            20kg
+                        </Col>
+                    </Row>
+                    <Row className="row-padding">
+                        <Col md={4} className="label-header-style">
                             Date of Travel:
                         </Col>
                         <Col md={8}>
@@ -69,22 +85,7 @@ class DescriptionModal extends Component{
                             test@gmail.com
                         </Col>
                     </Row>
-                    <Row className="row-padding">
-                        <Col md={4} className="label-header-style">
-                            Travel Address:
-                        </Col>
-                        <Col md={8}>
-                            blandit lorem tortor, nec vehicula ipsum fermentum ut.
-                        </Col>
-                    </Row>
-                    <Row className="row-padding">
-                        <Col md={4} className="label-header-style">
-                            Luggage Dimension:
-                        </Col>
-                        <Col md={8}>
-                            25 x 45 x 100 inch
-                        </Col>
-                    </Row>
+                    
                     <Row style={{paddingBottom:'20px'}}>
                         <Col md={12} style={{justifyContent:'center'}} className="button-grp" >
                             <div className="btn-usage">

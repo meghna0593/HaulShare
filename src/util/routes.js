@@ -6,6 +6,7 @@ import UserProfile from '../component/User-Profile/userProfile.js';
 import PostAd from '../component/PostAd-Form/createAd';
 import VehicleInfo from '../component/Vehicle-Info/vehicleInfo';
 import MyTrips from '../component/My-Trips/myTrips';
+import MyAds from '../component/My-Ads/myAds';
 const Routes=(
     <Router>
         {/* Path to pages from “React-Router-Dom.” Npm, www.npmjs.com/package/react-router-dom. */}
@@ -16,6 +17,7 @@ const Routes=(
             <Route exact path="/post-ad" component={PostAd}/>
             <Route exact path="/vehicle-info" component={VehicleInfo}/>
             <Route exact path="/my-trips" component={MyTrips}/>
+            <Route exact path="/my-ads" component={MyAds}/>
         </div>
     </Router>
 )
