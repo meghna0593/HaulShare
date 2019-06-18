@@ -21,6 +21,19 @@ class Header extends Component {
         history.go()
     }
 
+    goToTrips=()=>{
+        history.push('/my-trips')
+        history.go()        
+    }
+
+    goToProfile=()=>{
+        history.push('/profile')
+        history.go()
+    }
+
+    goToAds=()=>{
+    }
+
     render(){
         return(
             <div className="header">
@@ -51,8 +64,9 @@ class Header extends Component {
                     } 
                     
                     id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">My Trips</NavDropdown.Item>
+                        <NavDropdown.Item onClick={this.goToProfile}>My Profile</NavDropdown.Item>
+                        <NavDropdown.Item onClick={this.goToTrips}>My Trips</NavDropdown.Item>
+                        <NavDropdown.Item onClick={this.goToAds}>My Ads</NavDropdown.Item>
                         
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="http://localhost:3000/">Sign Out</NavDropdown.Item>
