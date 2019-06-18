@@ -3,6 +3,7 @@ import Header from '../Header/header.js';
 import {FormControl,Card,Form,Button,Image,Container,Row,Col,Modal} from 'react-bootstrap';
 import Slider from '@material-ui/lab/Slider';
 import AdDescModal from '../Ad-Description/adDesc';
+import VehicleDescModal from '../Vehicle-Info/vehicleInfo';
 import './home.css'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
@@ -12,6 +13,7 @@ class Home extends Component {
 
         this.state = {
             showDesc:false,
+            showVehicleDesc:false,
             filter_time:false,
             filter_price:false,
             filter_transporter:false,
@@ -88,8 +90,17 @@ class Home extends Component {
     }
 
     handleDesc=()=>{
+        console.log(this.state.showDesc);
+        
         this.setState({
             showDesc:!this.state.showDesc
+        })
+    }
+
+    handleVehicleDesc=()=>{
+        
+        this.setState({
+            showVehicleDesc:!this.state.showVehicleDesc
         })
     }
 
@@ -99,6 +110,14 @@ class Home extends Component {
         return(
             <Modal show={this.state.showDesc} onHide={this.handleDesc}>
                 <AdDescModal userType={userType} />
+            </Modal>
+        )
+    }
+
+    openVehicleDesc=()=>{
+        return(
+            <Modal show={this.state.showVehicleDesc} onHide={this.handleVehicleDesc}>
+                <VehicleDescModal/>
             </Modal>
         )
     }
@@ -125,7 +144,7 @@ class Home extends Component {
                         <div>
                             Storage Space: ___xxx lb___<br/>
                             Destination : ___xxx city___<br/>
-                            Other: ___xxx details___<br/>
+                            <div className="vehicle-det" onClick={this.handleVehicleDesc}>Click here for Vehicle Details</div>
                         </div>                                    
                     </Col>  
                     <Col md={5} className="button-grp" >
@@ -253,6 +272,7 @@ class Home extends Component {
                                 </Col>
                                 <Col md={7} style={{borderRight:'1px ridge #80808099', backgroundColor:'#ededed'}}>
                                     {this.openDetailedDesc('transporter')}
+                                    {this.openVehicleDesc()}
                                     {this.displayCards('transporter')}
                                     {this.displayCards('customer')}
                                 </Col>

@@ -122,6 +122,17 @@ hr{
     font-style: italic;
 }
 
+.vehicle-det{
+    font-size: 12px;
+    color: #1996be;
+}
+
+.vehicle-det:hover{
+    color:#1944be;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 @media screen and (min-width:1350px) and (max-width:1480px){
     .button-grp{
         padding-left:0px;
