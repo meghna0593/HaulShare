@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../Header/header.js';
-import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootstrap';
+import {FormControl,Card,Form,Button,Image,Container,Row,Col,Modal} from 'react-bootstrap';
 import Slider from '@material-ui/lab/Slider';
+import AdDescModal from '../Ad-Description/adDesc';
 import './home.css'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
@@ -10,6 +11,7 @@ class Home extends Component {
         super(props);
 
         this.state = {
+            showDesc:false,
             filter_time:false,
             filter_price:false,
             filter_transporter:false,
@@ -84,6 +86,22 @@ class Home extends Component {
             history.go()
         }
     }
+
+    handleDesc=()=>{
+        this.setState({
+            showDesc:!this.state.showDesc
+        })
+    }
+
+    openDetailedDesc=(userType)=>{
+        console.log(this.state.showDesc);
+        
+        return(
+            <Modal show={this.state.showDesc} onHide={this.handleDesc}>
+                <AdDescModal userType={userType} />
+            </Modal>
+        )
+    }
     
     adDetails=(userType)=>{
         return(
@@ -99,7 +117,7 @@ class Home extends Component {
                             Storage space needed : Halifax <hr/>
                         </h3>
                         }
-                        <Image src="/images/full-screen.png" className="full-screen-btn" /> {/*image from "Full Screen Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/full-screen */}
+                        <Image src="/images/full-screen.png" className="full-screen-btn" onClick={this.handleDesc} /> {/*image from "Full Screen Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/full-screen */}
                     </Col>                                
                 </Row>
                 <Row>
@@ -162,6 +180,8 @@ class Home extends Component {
     }
     
     displayCards=(userType)=>{
+        console.log(userType);
+        
         return(
             <div className="card-container">
                 <Container style={{maxWidth:'100%',padding:'0px'}}>
@@ -232,6 +252,7 @@ class Home extends Component {
                                     {this.filterSection()}  
                                 </Col>
                                 <Col md={7} style={{borderRight:'1px ridge #80808099', backgroundColor:'#ededed'}}>
+                                    {this.openDetailedDesc('transporter')}
                                     {this.displayCards('transporter')}
                                     {this.displayCards('customer')}
                                 </Col>

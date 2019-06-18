@@ -1,0 +1,12 @@
+.modal-dialog {
+    max-width: 663px;
+}
+
+.row-padding{
+    padding-bottom:5px;
+}
+
+.label-header-style{
+    font-weight: 500;
+    color: #3b3a3af0;
+}
