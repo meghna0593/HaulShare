@@ -1,0 +1,75 @@
+.Switcher{
+  height:630px;
+  width:1000px auto;
+  padding: 28px;
+  margin-right:50px;
+  margin-top:50px auto;
+  border: 4px #FFFFFF;
+  background-color: #FFFFFF;
+  height:100% auto;
+}
+
+.PageSwitcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10%;
+  background-color: #FFFFFF;
+}
+
+.PageSwitcher__Item {
+  background-color: #34675C;
+  color: #FFFFFF;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size: .9em;
+  border: none;
+  outline: none;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.PageSwitcher__Item--Active {
+  background-color: #CCD4CD  ;
+  color: #000000;
+}
+
+.PageSwitcher__Item:first-child {
+  shape-outside: content-box;
+  margin-right:auto;
+  text-align: center;
+  width: 550px;
+}
+.PageSwitcher__Item:last-child {
+  text-align: center;
+  margin-left: auto;
+  width:550px;
+  shape-outside: content-box;
+
+}
+.FormOfferTrip{
+  background-color: #FFFFFF;
+}
+.FormField1{
+  background-color: #FFFFFF;
+
+}
+.FormField__Label1{
+  background-color: #FFFFFF;
+
+}
+.FormField11{
+  background-color: #FFFFFF;
+
+}
+
+.FormField__Button1{
+  background-color: #34675C;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin-top: 30px;
+  padding: 14px 40px;
+  font-size: .60em;
+  font-weight: 500;
+  outline: none;
+}

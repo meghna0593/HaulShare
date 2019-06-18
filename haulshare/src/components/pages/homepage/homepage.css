@@ -1,0 +1,91 @@
+.Searchbutton{
+ color:#000000;
+ background-color: #FFFFFF;
+ float: right;
+}
+.topnav {
+  background-color: #FFFFFF;
+  float:left;
+}
+.buttonsearch{
+  background-color: #FFFFFF;
+  float:right;
+}
+.place{
+  background-color: #FFFFFF;
+  width: 1210px;
+}
+.Tripsuggestions{
+  height:100% auto;
+  width:1275px;
+  padding: 0px;
+  margin-right:0px;
+  margin-top:0px;
+  box-shadow: 2px 2px 8px 2px  grey;
+  border: 4px #FFFFFF;
+  background-color: #FFFFFF;
+}
+
+.Profile_page_link{
+  margin-right: 3px;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-size: .70em;
+
+}
+.topnav1{
+  background-color: #FFFFFF;
+  margin-right: 2px;
+
+}
+.topnav2{
+  width: 1210px;
+  margin-top: 80px;
+  margin-right: 0px;
+  height:680px;
+  padding: 28px;
+  box-shadow: 0px 0px 0px 1px  grey;
+  border: 3px #FFFFFF;
+  background-color: #FFFFFF;
+}
+
+
+.Filter{
+  margin-top: 10px;
+
+}
+
+
+.Mainhome{
+  margin-top: 75px;
+  width: 150px;
+  height:380px ;
+  padding: 1px;
+  margin-left: 0px;
+  border: 0px #98cea0;
+  background-color: #FFFFFF;
+}
+
+.Passwordfield_Button{
+background-color: #34675C;
+color: white;
+border: none;
+border-radius: 20px;
+margin-top: 30px;
+padding: 14px 60px;
+font-size: .60em;
+font-weight: 500;
+outline: none;
+}
+
+
+.topnav3{
+  width: 200px;
+  margin-top: 100px;
+  margin-right:0px;
+  height:668px;
+  padding: 28px;
+  box-shadow: 0px 0px 2px 2px  grey;
+  border: 3px #FFFFFF;
+  background-color: #FFFFFF;
+}

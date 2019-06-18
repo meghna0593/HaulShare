@@ -1,0 +1,101 @@
+.img-fluid{
+  max-width: 100%;
+  height: 50px;
+}
+
+.Body{
+  color:#202538;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.MainSignin{
+  width: 300px;
+  height: 350px;
+  padding: 28px;
+  top:0px;
+  margin:40px auto;
+  box-shadow: 0px 0px 4px 2px  grey;
+  border: 4px #98cea0;
+  background-color: #202538;
+}
+.MainSigninSignup{
+  width: 300px;
+  height: 550px;
+  padding: 28px;
+  top:25px;
+  margin:140px auto;
+  box-shadow: 2px 2px 8px 2px  grey;
+  border: 4px #98cea0;
+  background-color: #202538;
+}
+
+.FormFields{
+    background-color: #202538;
+}
+
+.Formsignin{
+  background-color: #202538;
+
+}
+.Formsignin_Label {
+  color: #FFFFFF;
+  background-color:#202538;
+  margin-top: 20px;
+  display: block;
+  font-size: .70em;
+
+}
+
+.Formsignin_Input::placeholder {
+  background-color: #FFFFFF;
+  margin-top: 10px;
+}
+.Formsignin_Button {
+  background-color: #52875f;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin-top: 30px;
+  padding: 14px 40px;
+  font-size: .60em;
+  font-weight: 500;
+  outline: none;
+}
+.FormField{
+  background-color: #202538;
+
+}
+.Form_Link{
+  background-color: #202538;
+  color: #FFFFFF;
+  font-size: .70em;
+}
+.Form_Link:active {
+  background-color: #FFFFFF;
+}
+
+.na{
+  background-color: #34675C;
+  height: 60px;
+  width:1278px;
+}
+
+.logo1{
+  width:1278px;
+}
+
+.card{
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.card-img-top{
+  opacity: 0.5;
+
+}
+.card{
+  width:100%;
+  margin-left: 3px;
+}
