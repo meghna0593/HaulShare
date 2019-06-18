@@ -1,0 +1,8 @@
+@media screen and (max-width:480px){
+    .text-area-placement-small{
+        display:flex;
+        justify-content: center;
+        padding-right:17px;
+        padding-left:17px;
+    }
+}

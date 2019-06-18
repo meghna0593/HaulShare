@@ -1,0 +1,77 @@
+.container_login{
+    margin-left:30%;
+    margin-right:30%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.field-img{
+    /* 003399 */
+    height:20px;
+}
+
+.small-grey-text{
+    font-size: 12px;
+    margin-left:16%;
+    color: grey;
+}
+
+.small-link-text{
+    font-size: 12px;
+}
+
+.MuiAppBar-colorPrimary {
+    color: #fff;
+    background-color: #1a61ad !important;
+}
+
+.MuiTab-textColorSecondary.Mui-selected {
+    color: #f5eef0 !important;
+}
+
+.MuiPaper-elevation4 {
+    box-shadow: none !important;
+}
+
+.button-placement{
+    margin-top: 20px;
+}
+
+.forgotpass-placement{
+    margin-top: 15px;
+    margin-bottom: 9px;
+}
+
+.justify-center{
+    display: flex;
+    justify-content: center;
+}
+
+.button-placement .btn-primary{
+    width: 120px !important;
+    background-color: #1a61ad !important;
+}
+
+.MuiAppBar-root {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+@media screen and (max-width:480px){
+    .container_login{
+        margin-left:3%;
+        margin-right:3%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+    .img-size{
+        width:82%;
+    }
+}
+
+@media screen and (min-width:481px) and (max-width:1024px){
+    .container_login{
+        margin-left:15%;
+        margin-right:15%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+    
+}
