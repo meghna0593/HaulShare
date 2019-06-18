@@ -1,0 +1,389 @@
+.App {
+  height: 100vh;
+  display: flex;
+  color: white;
+}
+
+.App__Form {
+  width: 50%;
+  background-color: #6616c2;
+  padding: 25px 40px;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+  .App__Form {
+    width: 100%;
+  }
+}
+
+.App__Aside {
+  width: 50%;
+  background-color: #9c66da;
+  font-family: "Lucida Sans";
+}
+
+@media (max-width: 768px) {
+  .App__Aside {
+    display: none;
+  }
+}
+
+.App_Aside_Font {
+  font-family: "Lucida Sans";
+  margin: 20px;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .App__Aside_Font {
+    display: none;
+  }
+}
+
+.PageSwitcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10%;
+}
+
+@media (max-width: 768px) {
+  .PageSwitcher {
+    width: 50%;
+  }
+}
+
+.PageSwitcher__Item {
+  background-color: #0f0f0f;
+  color: #be7516;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size: 0.9em;
+  border: none;
+  outline: none;
+  display: inline-block;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .PageSwitcher__Item {
+    width: 75%;
+  }
+}
+.PageSwitcher__Item:hover {
+  cursor: pointer;
+  color: #ff8901;
+}
+
+.PageSwitcher__Item--Active {
+  background-color: #d7f1ee;
+  color: #3163d1;
+}
+
+@media (max-width: 768px) {
+  .PageSwitcher__Item--Active {
+    width: 75%;
+  }
+}
+
+.PageSwitcher__Item:first-child {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+@media (max-width: 768px) {
+  .PageSwitcher__Item:first-child {
+    width: 75%;
+  }
+}
+
+.PageSwitcher__Item:last-child {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+@media (max-width: 768px) {
+  .PageSwitcher__Item:last-child {
+    width: 75%;
+  }
+}
+
+.FormCenter {
+  margin-bottom: 100px;
+}
+@media (max-width: 768px) {
+  .FormCenter {
+    width: 75%;
+  }
+}
+
+.FormTitle {
+  color: #707c8b;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .FormTitle {
+    width: 30%;
+  }
+}
+
+.FormTitle__Link {
+  color: #707c8b;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.7em;
+  margin: 0 10px;
+  padding-bottom: 5px;
+}
+.FormTitle__Link:hover {
+  cursor: pointer;
+  color: #9dadc0;
+}
+@media (max-width: 768px) {
+  .FormTitle__Link {
+    width: 50%;
+  }
+}
+
+.FormTitle__Link:first-child {
+  margin-left: 0;
+}
+
+@media (max-width: 768px) {
+  .FormTitle__Link:first-child {
+    width: 75%;
+  }
+}
+
+.FormTitle__Link--Active {
+  color: white;
+  border-bottom: 1px solid #199087;
+}
+
+@media (max-width: 768px) {
+  .FormTitle__Link--Active {
+    width: 75%;
+  }
+}
+
+.FormField {
+  margin-bottom: 40px;
+}
+@media (max-width: 768px) {
+  .FormField {
+    width: 75%;
+  }
+}
+
+.FormField__Label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  color: rgb(248, 244, 244);
+}
+
+@media (max-width: 768px) {
+  .FormField__Label {
+    width: 75%;
+  }
+}
+
+.FormField__Input {
+  width: 85%;
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  border-bottom: 1px solid #445366;
+  font-size: 1em;
+  font-weight: 300;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .FormField__Input {
+    width: 75%;
+  }
+}
+.FormField__Input::placeholder {
+  color: #798ba3;
+}
+@media (max-width: 768px) {
+  .FormField__Input::placeholder {
+    width: 75%;
+  }
+}
+
+.FormField__Button {
+  background-color: #c77c1a;
+  color: rgb(15, 14, 14);
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  padding: 15px 70px;
+  font-size: 0.8em;
+  font-weight: 500;
+  justify-content: "center";
+  align-items: "center";
+}
+@media (max-width: 768px) {
+  .FormField__Button {
+    width: 75%;
+  }
+}
+.FormField__Button:hover {
+  cursor: pointer;
+  background-color: #ff8901;
+  color: rgb(0, 0, 0);
+}
+
+.FormField__Link {
+  color: #8794a7;
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 1.5px solid #225e62;
+  padding-bottom: 5px;
+}
+
+.FormField__Link:hover {
+  cursor: pointer;
+  color: #b2c1d6;
+}
+
+@media (max-width: 768px) {
+  .FormField__Link {
+    width: 75%;
+  }
+}
+
+.FormField__CheckboxLabel {
+  color: #646f7d;
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  .FormField__CheckboxLabel {
+    width: 75%;
+  }
+}
+
+.FormField__Checkbox {
+  position: relative;
+  top: 1.5px;
+}
+
+.FormField__TermsLink {
+  color: white;
+  border-bottom: 1px solid #199087;
+  text-decoration: none;
+  display: inline-block;
+  padding-bottom: 2px;
+  margin-left: 5px;
+}
+@media (max-width: 768px) {
+  .FormField__TermsLink {
+    width: 75%;
+  }
+}
+
+.input-feedback {
+  color: rgb(235, 54, 54);
+  margin-top: -15px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+input {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #777;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+input.error {
+  border-color: red;
+}
+
+Dropdown {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #777;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+#title {
+  text-align: center;
+  font-family: arial, sans-serif;
+}
+
+#viewpost {
+  text-align: center;
+  font-family: "Lucida Sans";
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  width: 100%;
+}
+
+#viewpost td,
+#viewpost th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  overflow: "scroll";
+  display: "block";
+}
+
+#viewpost tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#viewpost tr:hover {
+  background-color: #ddd;
+}
+
+#viewpost th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #000000;
+  color: rgb(240, 147, 26);
+}
+
+.searchbar input {
+  border: 1px solid #bdbdbd;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.searchbox {
+  margin-left: 20px;
+}
+
+.recentpost {
+  margin-left: 20px;
+  margin-top: 100px;
+}
+
+.profile {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  margin-left: 42%;
+}
+
+.DetailDesc {
+  width: 300px;
+  height: 300px;
+  border-radius: 100px;
+  margin-left: 38%;
+}
+
+.detaildescmargin {
+  margin-left: 10px;
+  margin-right: 10px;
+}
