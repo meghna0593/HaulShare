@@ -40,14 +40,14 @@ class PostAd extends Component{
                                 <Row>
                                     
                                    {/* <div className = "resultsPageCard1" >*/} 
-                                <Col md={12}>     
-                                <Card style={{backgroundColor:'white'}} >
-                                    <Row>
-                                    <Col md={9} sm={12}>
-                                <Card.Img variant="top" src="/images/imageCard1.jpg" style={{height:'fit-content', width: 'fit-content'}}/>
+                                <Col md={12} style={{display:'flex',justifyContent:'center'}}>     
+                                <Card style={{backgroundColor:'white',width:'97%'}} >
+                                <Row>
+                                <Col md={8} sm={12}>
+                                <Card.Img variant="top" src="/images/imageCard1.jpg" style={{height:'350px', width: '90%'}}/>
                                 </Col>
-                                <Col md={3} sm={12}>
-                                <div class = "float-center" style={{height:'400px', width: '400px',alignItems:'0px',marginTop:50}} > 
+                                <Col md={4} sm={12}>
+                                <div class = "float-center" style={{ alignItems:'0px',marginTop:'50px'}} > 
                                 <div>
                                 <b>Name: John</b><br />
                                     </div>
@@ -67,30 +67,38 @@ class PostAd extends Component{
                                     <div>
                                     <b>Trip cost: $50</b><br />
                                     </div>
+                                    <a href="rating">View rating/feedback</a><br />
+                                    <div className="btn-usage" >
+                                        <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
+                                           View Map
+                                        </Button> 
+                                        <Button variant="secondary" type="submit" id="viewProfile">
+                                            View Profile
+                                        </Button>
+                                    </div> 
 
-                                    <div>
+                                    {/* <div>
                                         <a href="rating">View rating/feedback</a><br />
                                         </div>
                                         <div><Button  color="primary" style={{backgroundColor:'#1a61ad'}}   type="submit" onClick={this.alert} value="Submit" > View Map </Button> </div>
-                                    <div><Button style={{backgroundColor:'grey'}} type="submit" onClick={this.alert} value="Submit" > Cancel Request </Button><br/> <br/> </div>
+                                    <div><Button style={{backgroundColor:'grey'}} type="submit" onClick={this.alert} value="Submit" > Cancel Request </Button><br/> <br/> </div> */}
                                 </div>
                                 </Col>
                                 </Row>
                                 </Card>
-                                {/*</div>*/}   </Col>                
+                                </Col>                
                                 </Row>
 
-                                <Row>
+                                <Row style={{marginTop:'30px'}}>
                                     
-                                   {/* <div className = "resultsPageCard1" >*/} 
-                                <Col md={12}>     
-                                <Card style={{backgroundColor:'white'}} >
+                                <Col md={12} style={{display:'flex',justifyContent:'center'}}>     
+                                <Card style={{backgroundColor:'white',width:'97%'}} >
                                     <Row>
-                                    <Col md={9} sm={12}>
-                                <Card.Img variant="top" src="/images/imageCard2.png" style={{height:'350px', width: '600px'}}/>
+                                    <Col md={8} sm={12}>
+                                <Card.Img variant="top" src="/images/imageCard2.png" style={{height:'350px', width: '90%'}}/>
                                 </Col>
-                                <Col md={3} sm={12}>
-                                <div class = "float-center" style={{height:'400px', width: '400px',alignItems:'0px',marginTop:50}} > 
+                                <Col md={4} sm={12}>
+                                <div class= "float-center" style={{alignItems:'0px',marginTop:'50px'}} > 
                                 <div>
                                 <b>Name: Mike</b><br />
                                     </div>
@@ -110,17 +118,26 @@ class PostAd extends Component{
                                     <div>
                                     <b>Trip cost: $50</b><br />
                                     </div>
+                                    <a href="rating">View rating/feedback</a><br />
+                                    <div className="btn-usage" >
+                                        <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
+                                           View Map
+                                        </Button> 
+                                        <Button variant="secondary" type="submit" id="viewProfile">
+                                            View Profile
+                                        </Button>
+                                    </div> 
 
-                                    <div>
+                                    {/* <div>
                                         <a href="rating">View rating/feedback</a><br />
                                         </div>
                                         <div><Button  color="primary" style={{backgroundColor:'#1a61ad'}}   type="submit" onClick={this.alert} value="Submit" > View Map </Button> </div>
-                                    <div><Button style={{backgroundColor:'grey'}} type="submit" onClick={this.alert} value="Submit" > Cancel Request </Button><br/> <br/> </div>
+                                    <div><Button style={{backgroundColor:'grey'}} type="submit" onClick={this.alert} value="Submit" > Cancel Request </Button><br/> <br/> </div> */}
                                 </div>
                                 </Col>
                                 </Row>
                                 </Card>
-                                {/*</div>*/}   </Col>                
+                                </Col>                
                                 </Row>
 
 
@@ -139,11 +156,11 @@ class PostAd extends Component{
                                 <Col md={12}>     
                                 <Card style={{backgroundColor:'white'}} >
                                     <Row>
-                                    <Col md={9} sm={12}>
-                                <Card.Img variant="top" src="/images/imageCard3.jpg" style={{height:'350px', width: '600px'}}/>
+                                    <Col md={8} sm={12}>
+                                <Card.Img variant="top" src="/images/imageCard3.jpg" style={{height:'350px', width: '90%'}}/>
                                 </Col>
-                                <Col md={3} sm={12}>
-                                <div class = "float-center" style={{height:'400px', width: '400px',alignItems:'0px',marginTop:50}} > 
+                                <Col md={4} sm={12}>
+                                <div class = "float-center" style={{alignItems:'0px',marginTop:'50px'}} > 
                                 <div>
                                 <b>Name: Jacob</b><br />
                                     </div>
@@ -164,11 +181,21 @@ class PostAd extends Component{
                                     <b>Trip cost: $80</b><br />
                                     </div>
 
-                                    <div>
+                                    <a href="rating">View rating/feedback</a><br />
+                                    <div className="btn-usage" >
+                                        <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
+                                           View Map
+                                        </Button> 
+                                        <Button variant="secondary" type="submit" id="viewProfile">
+                                            View Profile
+                                        </Button>
+                                    </div> 
+
+                                    {/* <div>
                                         <a href="rating">View rating/feedback</a><br />
                                         </div>
                                         <div><Button  color="primary" style={{backgroundColor:'#1a61ad'}}   type="submit" onClick={this.alert} value="Submit" > View Map </Button> </div>
-                                    <div><Button style={{backgroundColor:'grey'}} type="submit" onClick={this.alert} value="Submit" > Cancel Request </Button><br/> <br/> </div>
+                                    <div><Button style={{backgroundColor:'grey'}} type="submit" onClick={this.alert} value="Submit" > Cancel Request </Button><br/> <br/> </div> */}
                                 </div>
                                 </Col>
                                 </Row>
@@ -176,17 +203,17 @@ class PostAd extends Component{
                                 {/*</div>*/}   </Col>                
                                 </Row>
 
-                                <Row>
+                                <Row style={{marginTop:'30px'}}>
                                     
                                    {/* <div className = "resultsPageCard1" >*/} 
                                 <Col md={12}>     
                                 <Card style={{backgroundColor:'white'}} >
                                     <Row>
-                                    <Col md={9} sm={12}>
-                                <Card.Img variant="top" src="/images/imageCard2.png" style={{height:'350px', width: '600px'}}/>
+                                    <Col md={8} sm={12}>
+                                <Card.Img variant="top" src="/images/imageCard2.png" style={{height:'350px', width: '90%'}}/>
                                 </Col>
-                                <Col md={3} sm={12}>
-                                <div class = "float-center" style={{height:'400px', width: '400px',alignItems:'0px',marginTop:50}} > 
+                                <Col md={4} sm={12}>
+                                <div class = "float-center" style={{alignItems:'0px',marginTop:50}} > 
                                 <div>
                                 <b>Name: Mike</b><br />
                                     </div>
@@ -207,11 +234,21 @@ class PostAd extends Component{
                                     <b>Trip cost: $50</b><br />
                                     </div>
 
-                                    <div>
+                                    <a href="rating">View rating/feedback</a><br />
+                                    <div className="btn-usage" >
+                                        <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
+                                           View Map
+                                        </Button> 
+                                        <Button variant="secondary" type="submit" id="viewProfile">
+                                            View Profile
+                                        </Button>
+                                    </div> 
+
+                                    {/* <div>
                                         <a href="rating">View rating/feedback</a><br />
                                         </div>
                                         <div><Button  color="primary" style={{backgroundColor:'#1a61ad'}}   type="submit" onClick={this.alert} value="Submit" > View Map </Button> </div>
-                                    <div><Button style={{backgroundColor:'grey'}} type="submit" onClick={this.alert} value="Submit" > Cancel Request </Button><br/> <br/> </div>
+                                    <div><Button style={{backgroundColor:'grey'}} type="submit" onClick={this.alert} value="Submit" > Cancel Request </Button><br/> <br/> </div> */}
                                 </div>
                                 </Col>
                                 </Row>
