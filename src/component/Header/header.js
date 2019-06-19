@@ -52,7 +52,7 @@ class Header extends Component {
                             Post Ad
                         </Button>
                     </div>
-                    <Nav.Link href="#home">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Home</Nav.Link>
+                    <Nav.Link href="https://haul-share-official.herokuapp.com/home">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Home</Nav.Link>
                     <Nav.Link href="#about">|&nbsp;&nbsp;&nbsp;&nbsp;About</Nav.Link>
                     <Nav.Link href="#contact">|&nbsp;&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;&nbsp;|</Nav.Link>
                     <NavDropdown 
