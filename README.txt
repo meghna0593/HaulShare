@@ -117,3 +117,6 @@ Links to the pages given in 'Installation and Setup' section.
 [28] “Visual Studio Code - Code Editing. Redefined.” RSS, Microsoft, 14 Apr. 2016, code.visualstudio.com/.
 [29] Foundation, Node.js. “Download.” Node.js, nodejs.org/en/download/.
 [30] “NPM.” Npm, www.npmjs.com/get-npm.
+[31] (n.d.). Retrieved from http://stat.overdrive.in/wp-content/uploads/2018/08/2019-Hyundai-Elantra-facelift-01.jpg.
+[32] (n.d.). Retrieved from https://motorbikewriter.com/content/uploads/2018/02/3.png.
+[33] (n.d.). Retrieved from https://www.supplychaindigital.com/sites/default/files/styles/slider_detail/public/bizclik-drupal-prod/topic/image/article_im2504_shutterstock_10728025_0.jpg?itok=tkhcV8Cd.
