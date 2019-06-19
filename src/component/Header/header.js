@@ -53,8 +53,8 @@ class Header extends Component {
                         </Button>
                     </div>
                     <Nav.Link href="#home">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Home</Nav.Link>
-                    <Nav.Link href="#features">|&nbsp;&nbsp;&nbsp;&nbsp;About</Nav.Link>
-                    <Nav.Link href="#pricing">|&nbsp;&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;&nbsp;|</Nav.Link>
+                    <Nav.Link href="#about">|&nbsp;&nbsp;&nbsp;&nbsp;About</Nav.Link>
+                    <Nav.Link href="#contact">|&nbsp;&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;&nbsp;|</Nav.Link>
                     <NavDropdown 
                     title={
                              /*image from “User Icons.” Free Download, PNG and SVG, https://icons8.com/icons/set/user.*/

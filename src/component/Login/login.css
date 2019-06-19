@@ -56,6 +56,13 @@
     border-top-right-radius: 0.25rem;
 }
 
+.validationLogin{
+    display: flex;
+    justify-content: center;
+    font-size: 9px;
+    color: red;
+}
+
 @media screen and (max-width:480px){
     .container_login{
         margin-left:3%;
