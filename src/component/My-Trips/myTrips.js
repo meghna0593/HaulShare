@@ -4,7 +4,7 @@ import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootst
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
-class PostAd extends Component{
+class MyTrips extends Component{
 
     constructor(props){
         super(props);
@@ -20,6 +20,11 @@ class PostAd extends Component{
             userOption:0,
             tripTime:''
         }
+    }
+
+    goToRating=()=>{
+        history.push('/my-feedback')
+        history.go()
     }
 
     render(){
@@ -67,16 +72,19 @@ class PostAd extends Component{
                                     <div>
                                     <b>Trip cost: $50</b><br />
                                     </div>
-                                    <a href="rating">View rating/feedback</a><br />
+                                    
+                                    <div className="vehicle-det" >View Map</div>
+                                    <br/><br/>
                                     <div className="btn-usage" >
                                         <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
-                                           View Map
+                                           Start Trip
                                         </Button> 
-                                        <Button variant="secondary" type="submit" id="viewProfile">
-                                            View Profile
-                                        </Button>
+                                        <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
+                                           End Trip
+                                        </Button> 
                                     </div> 
-
+                                    <br/>
+                                    <div className="vehicle-det" onClick={this.goToRating}>Give Rating and Feedback</div>
                                     {/* <div>
                                         <a href="rating">View rating/feedback</a><br />
                                         </div>
@@ -118,16 +126,18 @@ class PostAd extends Component{
                                     <div>
                                     <b>Trip cost: $50</b><br />
                                     </div>
-                                    <a href="rating">View rating/feedback</a><br />
+                                    <div className="vehicle-det" >View Map</div>
+                                    <br/><br/>
                                     <div className="btn-usage" >
                                         <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
-                                           View Map
+                                           Start Trip
                                         </Button> 
-                                        <Button variant="secondary" type="submit" id="viewProfile">
-                                            View Profile
-                                        </Button>
+                                        <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
+                                           End Trip
+                                        </Button> 
                                     </div> 
-
+                                    <br/>
+                                    <div className="vehicle-det" onClick={this.goToRating}>Give Rating and Feedback</div>
                                     {/* <div>
                                         <a href="rating">View rating/feedback</a><br />
                                         </div>
@@ -153,8 +163,8 @@ class PostAd extends Component{
                                 <Row>
                                     
                                    {/* <div className = "resultsPageCard1" >*/} 
-                                <Col md={12}>     
-                                <Card style={{backgroundColor:'white'}} >
+                                <Col md={12} style={{display:'flex',justifyContent:'center'}}>     
+                                <Card style={{backgroundColor:'white',width:'97%'}} >
                                     <Row>
                                     <Col md={8} sm={12}>
                                 <Card.Img variant="top" src="/images/imageCard3.jpg" style={{height:'350px', width: '90%'}}/>
@@ -180,17 +190,16 @@ class PostAd extends Component{
                                     <div>
                                     <b>Trip cost: $80</b><br />
                                     </div>
-
-                                    <a href="rating">View rating/feedback</a><br />
+                                    <div className="vehicle-det" >View Map</div>
+                                    <br/><br/>
                                     <div className="btn-usage" >
-                                        <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
-                                           View Map
-                                        </Button> 
                                         <Button variant="secondary" type="submit" id="viewProfile">
-                                            View Profile
-                                        </Button>
+                                           View Profile
+                                        </Button> 
                                     </div> 
-
+                                    <br/>
+                                    <div className="vehicle-det" onClick={this.goToRating}>Give Rating and Feedback</div>
+                                    
                                     {/* <div>
                                         <a href="rating">View rating/feedback</a><br />
                                         </div>
@@ -206,8 +215,8 @@ class PostAd extends Component{
                                 <Row style={{marginTop:'30px'}}>
                                     
                                    {/* <div className = "resultsPageCard1" >*/} 
-                                <Col md={12}>     
-                                <Card style={{backgroundColor:'white'}} >
+                                <Col md={12} style={{display:'flex',justifyContent:'center'}}>     
+                                <Card style={{backgroundColor:'white', width:'97%'}} >
                                     <Row>
                                     <Col md={8} sm={12}>
                                 <Card.Img variant="top" src="/images/imageCard2.png" style={{height:'350px', width: '90%'}}/>
@@ -234,15 +243,16 @@ class PostAd extends Component{
                                     <b>Trip cost: $50</b><br />
                                     </div>
 
-                                    <a href="rating">View rating/feedback</a><br />
+                                    <div className="vehicle-det" >View Map</div>
+                                    <br/><br/>
                                     <div className="btn-usage" >
-                                        <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
-                                           View Map
-                                        </Button> 
                                         <Button variant="secondary" type="submit" id="viewProfile">
-                                            View Profile
-                                        </Button>
+                                           View Profile
+                                        </Button> 
                                     </div> 
+                                    <br/>
+                                    <div className="vehicle-det" onClick={this.goToRating}>Give Rating and Feedback</div>
+                                     
 
                                     {/* <div>
                                         <a href="rating">View rating/feedback</a><br />
@@ -265,4 +275,4 @@ class PostAd extends Component{
     }
 }
 
-export default PostAd;
+export default MyTrips;
