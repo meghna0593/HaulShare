@@ -117,6 +117,6 @@ Links to the pages given in 'Installation and Setup' section.
 [28] “Visual Studio Code - Code Editing. Redefined.” RSS, Microsoft, 14 Apr. 2016, code.visualstudio.com/.
 [29] Foundation, Node.js. “Download.” Node.js, nodejs.org/en/download/.
 [30] “NPM.” Npm, www.npmjs.com/get-npm.
-[31] Stat.overdrive.in, 2019. [Online]. Available: http://stat.overdrive.in/wp-content/uploads/2018/08/2019-Hyundai-Elantra-facelift-01.jpg. [Accessed: 19- Jun- 2019].
-[32] Motorbikewriter.com, 2019. [Online]. Available: https://motorbikewriter.com/content/uploads/2018/02/3.png. [Accessed: 19- Jun- 2019].
-[33] Supplychaindigital.com, 2019. [Online]. Available: https://www.supplychaindigital.com/sites/default/files/styles/slider_detail/public/bizclik-drupal-prod/topic/image/article_im2504_shutterstock_10728025_0.jpg?itok=tkhcV8Cd. [Accessed: 19- Jun- 2019].
+[31] (n.d.). Retrieved from http://stat.overdrive.in/wp-content/uploads/2018/08/2019-Hyundai-Elantra-facelift-01.jpg.
+[32] (n.d.). Retrieved from https://motorbikewriter.com/content/uploads/2018/02/3.png.
+[33] (n.d.). Retrieved from https://www.supplychaindigital.com/sites/default/files/styles/slider_detail/public/bizclik-drupal-prod/topic/image/article_im2504_shutterstock_10728025_0.jpg?itok=tkhcV8Cd.
