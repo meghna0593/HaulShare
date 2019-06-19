@@ -71,7 +71,7 @@ class Header extends Component {
                         <NavDropdown.Item onClick={this.goToAds}>My Ads</NavDropdown.Item>
                         
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="http://localhost:3000/">Sign Out</NavDropdown.Item>
+                        <NavDropdown.Item href="https://haul-share-official.herokuapp.com">Sign Out</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                     </Navbar.Collapse>
