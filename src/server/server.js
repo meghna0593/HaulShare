@@ -1,3 +1,4 @@
+//Meghna Ramachandra Holla , B00812604
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -9,7 +10,7 @@ app.use(bodyParser.json()) //application/json
 app.use(bodyParser.urlencoded({
     extended:true
 }))
-// app.use(cors());
+app.use(cors());
 // const router = express.Router();
 
 const corsHost = { origin: 'http://localhost:8080' }
@@ -39,37 +40,25 @@ app.get('/getAdsList', cors(corsHost), function (req, res) {
     });
 });
 app.post("/postAnAd", (req, res) => {
-    // var myData = new User(req.body);
-    // var url_mongo = "mongodb://localhost:27017/";
-    // MongoClient.connect(url_mongo, function (err, db) {
-    //   if (err) throw err;
-    //   var dbo = db.db("haul");
+
       var table = 'Advertisements'
-      var query = {};
       database.collection(table).insertOne(req.body, function(err, records) {
           if (err) throw err;
         console.log(records);
         res.send(records);
         // database.close();
       });
-    // });
-    // myData.save()
-    // .then(item => {
-    // res.send("item saved to database");
-    // })
-    // .catch(err => {
-    // res.status(400).send("unable to save to database");
-    // });
     });    
-  
+
 
 app.listen(5000, () => {
     console.log('Go to http://localhost:5000/getData to see posts');
   });
-  
-  app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-type,Accept');
-    next();
-  });
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-type,Accept');
+  next();
+});  
+

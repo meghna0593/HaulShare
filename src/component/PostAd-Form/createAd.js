@@ -15,6 +15,7 @@ class PostAd extends Component{
             luggageWgt:'',
             tripDate:'',
             destn:'',
+            src:'',
             tripCost:'',
             desc:'',
             vhclType:'',
@@ -29,7 +30,8 @@ class PostAd extends Component{
             tripCost_err:'',
             vhclType_err:'',
             vhclNum_err:'',
-            tripTime_err:''
+            tripTime_err:'',
+            src_err:''
         }
     }
 
@@ -74,6 +76,11 @@ class PostAd extends Component{
             this.setState({destn_err:'Please enter destination, only alphabet allowed'})
             return false
         }
+        else if(this.state.src==='' || !destChar.test(this.state.src)){
+            // alert('Please enter destination, only alphabet allowed')
+            this.setState({src_err:'Please enter source, only alphabet allowed'})
+            return false
+        }
         else if(this.state.tripTime===''){
             // alert('Please enter trip time')
             this.setState({tripTime_err:'Please enter trip time'})
@@ -100,12 +107,50 @@ class PostAd extends Component{
         }
     }
 
-    submitForm=()=>{
-        var allowSubmission = this.validate()
-        if(allowSubmission){
+    postAdToMongo=()=>{
+        let url_post="http://localhost:5000/postAnAd"
+        let send_data= {
+                    "userType":(this.state.userOption===1)?"T":"C",
+                    "adTitle":this.state.adTitle,
+                    "strgDim":this.state.strgDim,
+                    "luggageWgt":this.state.luggageWgt,
+                    "destination":this.state.destn,
+                    "source":this.state.src,
+                    "tripDt":this.state.tripDate,
+                    "tripTime":this.state.tripTime,
+                    "tripFee":this.state.tripCost,
+                    "desc":this.state.desc,
+                    "vhclType":this.state.vhclType,
+                    "vhclNum":this.state.vhclNum,
+                    "vhclImg":this.state.vhclImg
+                    }
+        fetch(url_post,{
+            method:'POST',
+            headers: {
+                'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Origin',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+              },
+            body:JSON.stringify(send_data),
+            
+        })
+        .then((resp) => resp.json())
+		.then((responseJson) => {
+            console.log(responseJson)	
+
             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
             history.push('/home')
             history.go()
+        })
+        .catch((e) => alert('Error Occured. Error is:',e))
+
+    }
+
+    submitForm=()=>{
+        var allowSubmission = this.validate()
+        
+        if(allowSubmission){
+            this.postAdToMongo()
         }
     }
 
@@ -218,6 +263,21 @@ class PostAd extends Component{
                                             aria-describedby="basic-addon1"
                                         />
                                         <div className="validationLogin">{this.state.luggageWgt_err}</div> 
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextPassword">
+                                        <Form.Label column md="4" sm="12" className="label-placement">
+                                        Source *
+                                        </Form.Label>
+                                        <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
+                                        <FormControl 
+                                            placeholder="Source" 
+                                            value={this.state.src}
+                                            onChange={this.assignValue}
+                                            id="src"
+                                            aria-describedby="basic-addon1"
+                                        />
+                                        <div className="validationLogin">{this.state.src_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
