@@ -140,6 +140,7 @@ class PostAd extends Component{
     postAdToMongo=()=>{
         let url_post="http://localhost:5000/postAnAd"
         let send_data= {
+                    "user_id":"Iam123",
                     "userType":(this.state.userOption===1)?"T":"C",
                     "adTitle":this.state.adTitle,
                     "strgDim":this.state.strgDim,
@@ -310,7 +311,8 @@ class PostAd extends Component{
                                             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                                             <div >
                                                 <input
-                                                style={{  width:'100%', height:'38px',fontSize: '1rem',
+                                                style={{  
+                                                    width:'100%', height:'38px',fontSize: '1rem',
                                                     fontWeight: 400,
                                                     lineHeight: 1.5,
                                                     color: '#495057',
