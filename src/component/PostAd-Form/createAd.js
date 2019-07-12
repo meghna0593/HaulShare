@@ -3,6 +3,7 @@ import Header from '../Header/header.js';
 import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootstrap';
 import { createBrowserHistory } from 'history';
 import './createAd.css'
+import Autocomplete from 'react-google-autocomplete';
 const history = createBrowserHistory();
 
 class PostAd extends Component{
@@ -48,7 +49,7 @@ class PostAd extends Component{
         “Regular Expressions.” MDN Web Docs, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions.
         */
         var strgRe = /^([0-9][0-9]*x[0-9][0-9]*x[0-9][0-9]*)$/
-        var destChar = /^([a-zA-Z]+)$/
+        var destChar = /^(([a-zA-Z]+)([,]?[ ]?)([a-zA-Z]*)([,]?[ ]?)([a-zA-Z]*))$/
         var tripCostChar = /^([0-9]+.?([0-9])*)$/
         
         if(this.state.adTitle===''){
@@ -71,14 +72,19 @@ class PostAd extends Component{
             this.setState({tripDate_err:'Please enter the Trip Date'})
             return false
         }
-        else if(this.state.destn==='' || !destChar.test(this.state.destn)){
-            // alert('Please enter destination, only alphabet allowed')
-            this.setState({destn_err:'Please enter destination, only alphabet allowed'})
-            return false
-        }
         else if(this.state.src==='' || !destChar.test(this.state.src)){
+            console.log(this.state.src);
+            console.log(!destChar.test(this.state.src));
             // alert('Please enter destination, only alphabet allowed')
             this.setState({src_err:'Please enter source, only alphabet allowed'})
+            return false
+        }
+        else if(this.state.destn==='' || !destChar.test(this.state.destn)){
+            console.log(this.state.destn);
+            console.log(!destChar.test(this.state.destn));
+            
+            // alert('Please enter destination, only alphabet allowed')
+            this.setState({destn_err:'Please enter destination, only alphabet allowed'})
             return false
         }
         else if(this.state.tripTime===''){
@@ -139,8 +145,8 @@ class PostAd extends Component{
             console.log(responseJson)	
 
             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
-            history.push('/home')
-            history.go()
+            // history.push('/home')
+            // history.go()
         })
         .catch((e) => alert('Error Occured. Error is:',e))
 
@@ -270,13 +276,23 @@ class PostAd extends Component{
                                         Source *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
+                                        <Autocomplete
+                                            class="form-control"
+                                            placeholder="Source" 
+                                            onPlaceSelected={(place) => {
+                                            console.log(place);
+                                            this.setState({src:place.formatted_address,src_err:''})
+                                            }}  
+                                            id="src"                                          
+                                            types={['(regions)']}
+                                        />
+                                        {/* <FormControl 
                                             placeholder="Source" 
                                             value={this.state.src}
                                             onChange={this.assignValue}
                                             id="src"
                                             aria-describedby="basic-addon1"
-                                        />
+                                        /> */}
                                         <div className="validationLogin">{this.state.src_err}</div> 
                                         </Col>
                                     </Form.Group>
@@ -285,13 +301,23 @@ class PostAd extends Component{
                                         Destination *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
+                                        <Autocomplete
+                                            class="form-control"
+                                            placeholder="Destination" 
+                                            onPlaceSelected={(place) => {
+                                            console.log(place);
+                                            this.setState({destn:place.formatted_address,destn_err:''})
+                                            }}  
+                                            id="destn"                                          
+                                            types={['(regions)']}
+                                        />
+                                        {/* <FormControl 
                                             placeholder="Destination" 
                                             value={this.state.destn}
                                             onChange={this.assignValue}
                                             id="destn"
                                             aria-describedby="basic-addon1"
-                                        />
+                                        /> */}
                                         <div className="validationLogin">{this.state.destn_err}</div> 
                                         </Col>
                                     </Form.Group>
