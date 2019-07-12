@@ -3,8 +3,11 @@ import Header from '../Header/header.js';
 import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootstrap';
 import { createBrowserHistory } from 'history';
 import './createAd.css'
-import Autocomplete from 'react-google-autocomplete';
-const history = createBrowserHistory();
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+  } from 'react-places-autocomplete';
+  const history = createBrowserHistory();
 
 class PostAd extends Component{
 
@@ -32,9 +35,30 @@ class PostAd extends Component{
             vhclType_err:'',
             vhclNum_err:'',
             tripTime_err:'',
-            src_err:''
+            src_err:'',
+            address:''
         }
     }
+
+    handleChangeSrc = src => {
+        this.setState({ src });
+      };
+      handleChangeDestn = destn => {
+        this.setState({ destn });
+      };
+      handleSelectSrc = (address) => {          
+        geocodeByAddress(address)
+        .then(results =>  {console.log(results);
+         this.setState({ src:results[0].formatted_address })})
+        .catch(error => console.error(error));
+      };
+      handleSelectDestn = (address) => {          
+        geocodeByAddress(address)
+        .then(results =>  {console.log(results);
+         this.setState({ destn:results[0].formatted_address })})
+        .catch(error => console.error(error));
+      };
+    
 
     assignValue=(event)=>{
         console.log(event.target.value);
@@ -49,7 +73,7 @@ class PostAd extends Component{
         “Regular Expressions.” MDN Web Docs, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions.
         */
         var strgRe = /^([0-9][0-9]*x[0-9][0-9]*x[0-9][0-9]*)$/
-        var destChar = /^(([a-zA-Z]+)([,]?[ ]?)([a-zA-Z]*)([,]?[ ]?)([a-zA-Z]*))$/
+        var destChar = /^(([0-9]+)([a-z A-Z]+)([,]?[ ]?)([a-zA-Z]*)([,]?[ ]?)([a-zA-Z 0-9,]*))$/
         var tripCostChar = /^([0-9]+.?([0-9])*)$/
         
         if(this.state.adTitle===''){
@@ -145,8 +169,8 @@ class PostAd extends Component{
             console.log(responseJson)	
 
             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
-            // history.push('/home')
-            // history.go()
+            history.push('/home')
+            history.go()
         })
         .catch((e) => alert('Error Occured. Error is:',e))
 
@@ -275,17 +299,55 @@ class PostAd extends Component{
                                         <Form.Label column md="4" sm="12" className="label-placement">
                                         Source *
                                         </Form.Label>
-                                        <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <Autocomplete
-                                            class="form-control"
-                                            placeholder="Source" 
-                                            onPlaceSelected={(place) => {
-                                            console.log(place);
-                                            this.setState({src:place.formatted_address,src_err:''})
-                                            }}  
-                                            id="src"                                          
-                                            types={['(regions)']}
-                                        />
+                                        <Col md="8" sm="12" className="text-area-placement">
+                                        {/* Used from https://github.com/hibiken/react-places-autocomplete */}
+                                        <PlacesAutocomplete
+                                            value={this.state.src}
+                                            onChange={this.handleChangeSrc}
+                                            onSelect={this.handleSelectSrc}
+                                            id='src'
+                                        >
+                                            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                            <div >
+                                                <input
+                                                style={{  width:'100%', height:'38px',fontSize: '1rem',
+                                                    fontWeight: 400,
+                                                    lineHeight: 1.5,
+                                                    color: '#495057',
+                                                    backgroundColor: '#fff',
+                                                    backgroundClip: 'padding-box',
+                                                    border: '1px solid #ced4da',
+                                                    borderRadius:'.25rem'}}
+                                                {...getInputProps({
+                                                    placeholder: 'Search Places for Source',
+                                                    className: 'location-search-input',
+                                                })}
+                                                />
+                                                <div className="autocomplete-dropdown-container">
+                                                {loading && <div>Loading...</div>}
+                                                {suggestions.map(suggestion => {
+                                                    const className = suggestion.active
+                                                    ? 'suggestion-item--active'
+                                                    : 'suggestion-item';
+                                                    // inline style for demonstration purpose
+                                                    const style = suggestion.active
+                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                                    return (
+                                                    <div
+                                                        {...getSuggestionItemProps(suggestion, {
+                                                        className,
+                                                        style,
+                                                        })}
+                                                    >
+                                                        <span>{suggestion.description}</span>
+                                                    </div>
+                                                    );
+                                                })}
+                                                </div>
+                                            </div>
+                                            )}
+                                        </PlacesAutocomplete>
                                         {/* <FormControl 
                                             placeholder="Source" 
                                             value={this.state.src}
@@ -300,8 +362,56 @@ class PostAd extends Component{
                                         <Form.Label column md="4" sm="12" className="label-placement">
                                         Destination *
                                         </Form.Label>
-                                        <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <Autocomplete
+                                        <Col md="8" sm="12" className="text-area-placement">
+                                        {/* Used from https://github.com/hibiken/react-places-autocomplete */}
+                                        <PlacesAutocomplete
+                                            value={this.state.destn}
+                                            onChange={this.handleChangeDestn}
+                                            onSelect={this.handleSelectDestn}
+                                            id='destn'
+                                        >
+                                            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                            <div >
+                                                <input
+                                                style={{  width:'100%', height:'38px',fontSize: '1rem',
+                                                    fontWeight: 400,
+                                                    lineHeight: 1.5,
+                                                    color: '#495057',
+                                                    backgroundColor: '#fff',
+                                                    backgroundClip: 'padding-box',
+                                                    border: '1px solid #ced4da',
+                                                    borderRadius:'.25rem'}}
+                                                {...getInputProps({
+                                                    placeholder: 'Search Places for Destination',
+                                                    className: 'location-search-input',
+                                                })}
+                                                />
+                                                <div className="autocomplete-dropdown-container">
+                                                {loading && <div>Loading...</div>}
+                                                {suggestions.map(suggestion => {
+                                                    const className = suggestion.active
+                                                    ? 'suggestion-item--active'
+                                                    : 'suggestion-item';
+                                                    // inline style for demonstration purpose
+                                                    const style = suggestion.active
+                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                                    return (
+                                                    <div
+                                                        {...getSuggestionItemProps(suggestion, {
+                                                        className,
+                                                        style,
+                                                        })}
+                                                    >
+                                                        <span>{suggestion.description}</span>
+                                                    </div>
+                                                    );
+                                                })}
+                                                </div>
+                                            </div>
+                                            )}
+                                        </PlacesAutocomplete>
+                                        {/* <Autocomplete
                                             class="form-control"
                                             placeholder="Destination" 
                                             onPlaceSelected={(place) => {
@@ -310,14 +420,8 @@ class PostAd extends Component{
                                             }}  
                                             id="destn"                                          
                                             types={['(regions)']}
-                                        />
-                                        {/* <FormControl 
-                                            placeholder="Destination" 
-                                            value={this.state.destn}
-                                            onChange={this.assignValue}
-                                            id="destn"
-                                            aria-describedby="basic-addon1"
                                         /> */}
+                                        
                                         <div className="validationLogin">{this.state.destn_err}</div> 
                                         </Col>
                                     </Form.Group>

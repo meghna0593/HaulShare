@@ -19,6 +19,7 @@
     "react-geosuggest": "^2.12.0",
     "react-google-autocomplete": "^1.1.0",
     "react-load-script": "0.0.6",
+    "react-places-autocomplete": "^7.2.1",
     "react-ratings-declarative": "^3.4.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
