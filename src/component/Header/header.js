@@ -9,7 +9,7 @@ class Header extends Component {
     constructor(props){
         super(props);
     }
-    
+
     /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
     submitForm=()=>{
         history.push('/post-ad')
@@ -23,7 +23,7 @@ class Header extends Component {
 
     goToTrips=()=>{
         history.push('/my-trips')
-        history.go()        
+        history.go()
     }
 
     goToProfile=()=>{
@@ -34,6 +34,12 @@ class Header extends Component {
     goToAds=()=>{
         history.push('/my-ads')
         history.go()
+    }
+
+    clearStrg=()=>{
+      localStorage.removeItem('user_id')
+      history.push('/')
+      history.go()
     }
 
     render(){
@@ -55,23 +61,23 @@ class Header extends Component {
                     <Nav.Link href="https://haul-share-official.herokuapp.com/home">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;Home</Nav.Link>
                     <Nav.Link href="#about">|&nbsp;&nbsp;&nbsp;&nbsp;About</Nav.Link>
                     <Nav.Link href="#contact">|&nbsp;&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;&nbsp;|</Nav.Link>
-                    <NavDropdown 
+                    <NavDropdown
                     title={
                              /*image from “User Icons.” Free Download, PNG and SVG, https://icons8.com/icons/set/user.*/
-                            <img  
-                                src="/images/user_profile.png" 
+                            <img
+                                src="/images/user_profile.png"
                                 alt="user pic"
-                                style={{height:'25px'}} 
+                                style={{height:'25px'}}
                             />
-                    } 
-                    
+                    }
+
                     id="collasible-nav-dropdown">
                         <NavDropdown.Item onClick={this.goToProfile}>My Profile</NavDropdown.Item>
                         <NavDropdown.Item onClick={this.goToTrips}>My Trips</NavDropdown.Item>
                         <NavDropdown.Item onClick={this.goToAds}>My Ads</NavDropdown.Item>
-                        
+
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="https://haul-share-official.herokuapp.com">Sign Out</NavDropdown.Item>
+                        <NavDropdown.Item onClick={this.clearStrg}>Sign Out</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                     </Navbar.Collapse>

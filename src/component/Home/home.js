@@ -25,6 +25,10 @@ class Home extends Component {
         };
     }
 
+    componentWillMount(){
+      console.log(localStorage.getItem('user_id'));
+    }
+
     handleSliderChange = (event, value) => {
         this.setState({ price_value:value });
       };
@@ -32,27 +36,27 @@ class Home extends Component {
     checkBoxChange=(event)=>{
         if(event.target.id==='filter_time'){
             this.setState({
-                filter_time : !this.state.filter_time  
+                filter_time : !this.state.filter_time
               })
         }
         else if(event.target.id==='filter_price'){
             this.setState({
-                filter_price : !this.state.filter_price  
+                filter_price : !this.state.filter_price
               })
         }
         else if(event.target.id==='filter_transporter'){
             this.setState({
-                filter_transporter : !this.state.filter_transporter  
+                filter_transporter : !this.state.filter_transporter
               })
         }
         else if(event.target.id==='filter_customer'){
             this.setState({
-                filter_customer : !this.state.filter_customer  
+                filter_customer : !this.state.filter_customer
               })
         }
         else if(event.target.id==='filter_distance'){
             this.setState({
-                filter_distance : !this.state.filter_distance  
+                filter_distance : !this.state.filter_distance
               })
         }
     }
@@ -76,13 +80,13 @@ class Home extends Component {
                 <Col md={12} className="img-name">
                     <div style={{display: 'inline-block'}}>Bran Stark </div>
                 </Col>
-            </Row> 
+            </Row>
             </div>
         )
     }
 
-    submitForm=(event)=>{        
-        if(event.target.id==='viewProfile'){   
+    submitForm=(event)=>{
+        if(event.target.id==='viewProfile'){
             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
             history.push('/profile')
             history.go()
@@ -91,14 +95,14 @@ class Home extends Component {
 
     handleDesc=()=>{
         console.log(this.state.showDesc);
-        
+
         this.setState({
             showDesc:!this.state.showDesc
         })
     }
 
     handleVehicleDesc=()=>{
-        
+
         this.setState({
             showVehicleDesc:!this.state.showVehicleDesc
         })
@@ -106,7 +110,7 @@ class Home extends Component {
 
     openDetailedDesc=(userType)=>{
         console.log(this.state.showDesc);
-        
+
         return(
             <Modal show={this.state.showDesc} onHide={this.handleDesc}>
                 <AdDescModal userType={userType} />
@@ -121,7 +125,7 @@ class Home extends Component {
             </Modal>
         )
     }
-    
+
     adDetails=(userType)=>{
         return(
             <div>
@@ -137,7 +141,7 @@ class Home extends Component {
                         </h3>
                         }
                         <Image src="/images/full-screen.png" className="full-screen-btn" onClick={this.handleDesc} /> {/*image from "Full Screen Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/full-screen */}
-                    </Col>                                
+                    </Col>
                 </Row>
                 <Row>
                     <Col md={7} className="ad-body">
@@ -145,18 +149,18 @@ class Home extends Component {
                             Storage Space: ___xxx lb___<br/>
                             Destination : ___xxx city___<br/>
                             <div className="vehicle-det" onClick={this.handleVehicleDesc}>Click here for Vehicle Details</div>
-                        </div>                                    
-                    </Col>  
+                        </div>
+                    </Col>
                     <Col md={5} className="button-grp" >
                         <div className="btn-usage">
                             <Button variant="primary" type="submit" id="trip" className="buttonSpacing" onClick={this.submitForm}>
                                 {(userType==='transporter')?<div>Request Trip</div>:<div>Offer Trip</div>}
-                            </Button> 
+                            </Button>
                             <Button variant="secondary" type="submit" id="viewProfile" onClick={this.submitForm}>
                                 View Profile
                             </Button>
-                        </div>                                  
-                    </Col>                               
+                        </div>
+                    </Col>
                 </Row>
             </div>
         )
@@ -173,15 +177,15 @@ class Home extends Component {
                         max={this.state.price_max}
                         step={10}
                         onChange={this.handleSliderChange}
-                    /> 
+                    />
                     <div className="filter-options" style={{display:'flex',justifyContent:'space-between',marginTop:'6px'}}>
                         <div>{this.state.price_min}</div>
                         <div>{this.state.price_max}</div>
                     </div>
                 </div>
-                
+
             )
-        }        
+        }
     }
 
     filterSection=()=>{
@@ -197,23 +201,23 @@ class Home extends Component {
             </div>
         )
     }
-    
+
     displayCards=(userType)=>{
         console.log(userType);
-        
+
         return(
             <div className="card-container">
                 <Container style={{maxWidth:'100%',padding:'0px'}}>
                     <Row style={{marginRight:'0px',marginLeft:'0px'}}>
                         <Col md={2} style={{padding:'0px'}}>
-                            {this.userDetails(userType)}                           
+                            {this.userDetails(userType)}
                         </Col>
                         <Col md={10} style={{padding:'0px'}}>
                             {this.adDetails(userType)}
                         </Col>
                     </Row>
                 </Container>
-                
+
             </div>
         )
     }
@@ -268,7 +272,7 @@ class Home extends Component {
                             </Row>
                             <Row style={{marginTop:'30px',marginBottom:'30px',height:'100vh',borderTop:'1px ridge #80808099'}}>
                                 <Col md={2} style={{display:'flex',justifyContent:'center',borderRight:'1px ridge #80808099'}}>
-                                    {this.filterSection()}  
+                                    {this.filterSection()}
                                 </Col>
                                 <Col md={7} style={{borderRight:'1px ridge #80808099', backgroundColor:'#ededed'}}>
                                     {this.openDetailedDesc('transporter')}
