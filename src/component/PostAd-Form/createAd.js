@@ -3,7 +3,11 @@ import Header from '../Header/header.js';
 import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootstrap';
 import { createBrowserHistory } from 'history';
 import './createAd.css'
-const history = createBrowserHistory();
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+  } from 'react-places-autocomplete';
+  const history = createBrowserHistory();
 
 class PostAd extends Component{
 
@@ -15,6 +19,7 @@ class PostAd extends Component{
             luggageWgt:'',
             tripDate:'',
             destn:'',
+            src:'',
             tripCost:'',
             desc:'',
             vhclType:'',
@@ -29,9 +34,31 @@ class PostAd extends Component{
             tripCost_err:'',
             vhclType_err:'',
             vhclNum_err:'',
-            tripTime_err:''
+            tripTime_err:'',
+            src_err:'',
+            address:''
         }
     }
+
+    handleChangeSrc = src => {
+        this.setState({ src });
+      };
+      handleChangeDestn = destn => {
+        this.setState({ destn });
+      };
+      handleSelectSrc = (address) => {          
+        geocodeByAddress(address)
+        .then(results =>  {console.log(results);
+         this.setState({ src:results[0].formatted_address })})
+        .catch(error => console.error(error));
+      };
+      handleSelectDestn = (address) => {          
+        geocodeByAddress(address)
+        .then(results =>  {console.log(results);
+         this.setState({ destn:results[0].formatted_address })})
+        .catch(error => console.error(error));
+      };
+    
 
     assignValue=(event)=>{
         console.log(event.target.value);
@@ -46,7 +73,7 @@ class PostAd extends Component{
         “Regular Expressions.” MDN Web Docs, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions.
         */
         var strgRe = /^([0-9][0-9]*x[0-9][0-9]*x[0-9][0-9]*)$/
-        var destChar = /^([a-zA-Z]+)$/
+        var destChar = /^(([0-9]+)([a-z A-Z]+)([,]?[ ]?)([a-zA-Z]*)([,]?[ ]?)([a-zA-Z 0-9,]*))$/
         var tripCostChar = /^([0-9]+.?([0-9])*)$/
         
         if(this.state.adTitle===''){
@@ -69,7 +96,17 @@ class PostAd extends Component{
             this.setState({tripDate_err:'Please enter the Trip Date'})
             return false
         }
+        else if(this.state.src==='' || !destChar.test(this.state.src)){
+            console.log(this.state.src);
+            console.log(!destChar.test(this.state.src));
+            // alert('Please enter destination, only alphabet allowed')
+            this.setState({src_err:'Please enter source, only alphabet allowed'})
+            return false
+        }
         else if(this.state.destn==='' || !destChar.test(this.state.destn)){
+            console.log(this.state.destn);
+            console.log(!destChar.test(this.state.destn));
+            
             // alert('Please enter destination, only alphabet allowed')
             this.setState({destn_err:'Please enter destination, only alphabet allowed'})
             return false
@@ -100,12 +137,51 @@ class PostAd extends Component{
         }
     }
 
-    submitForm=()=>{
-        var allowSubmission = this.validate()
-        if(allowSubmission){
+    postAdToMongo=()=>{
+        let url_post="http://localhost:5000/postAnAd"
+        let send_data= {
+                    "user_id":(localStorage.getItem('user_id')===null?'xyz':localStorage.getItem('user_id')),
+                    "userType":(this.state.userOption===1)?"T":"C",
+                    "adTitle":this.state.adTitle,
+                    "strgDim":this.state.strgDim,
+                    "luggageWgt":this.state.luggageWgt,
+                    "destination":this.state.destn,
+                    "source":this.state.src,
+                    "tripDt":this.state.tripDate,
+                    "tripTime":this.state.tripTime,
+                    "tripFee":this.state.tripCost,
+                    "desc":this.state.desc,
+                    "vhclType":this.state.vhclType,
+                    "vhclNum":this.state.vhclNum,
+                    "vhclImg":this.state.vhclImg
+                    }
+        fetch(url_post,{
+            method:'POST',
+            headers: {
+                'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Origin',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+              },
+            body:JSON.stringify(send_data),
+            
+        })
+        .then((resp) => resp.json())
+		.then((responseJson) => {
+            console.log(responseJson)	
+
             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
             history.push('/home')
             history.go()
+        })
+        .catch((e) => alert('Error Occured. Error is:',e))
+
+    }
+
+    submitForm=()=>{
+        var allowSubmission = this.validate()
+        
+        if(allowSubmission){
+            this.postAdToMongo()
         }
     }
 
@@ -222,16 +298,132 @@ class PostAd extends Component{
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
                                         <Form.Label column md="4" sm="12" className="label-placement">
+                                        Source *
+                                        </Form.Label>
+                                        <Col md="8" sm="12" className="text-area-placement">
+                                        {/* Used from https://github.com/hibiken/react-places-autocomplete */}
+                                        <PlacesAutocomplete
+                                            value={this.state.src}
+                                            onChange={this.handleChangeSrc}
+                                            onSelect={this.handleSelectSrc}
+                                            id='src'
+                                        >
+                                            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                            <div >
+                                                <input
+                                                style={{  
+                                                    width:'100%', height:'38px',fontSize: '1rem',
+                                                    fontWeight: 400,
+                                                    lineHeight: 1.5,
+                                                    color: '#495057',
+                                                    backgroundColor: '#fff',
+                                                    backgroundClip: 'padding-box',
+                                                    border: '1px solid #ced4da',
+                                                    borderRadius:'.25rem'}}
+                                                {...getInputProps({
+                                                    placeholder: 'Search Places for Source',
+                                                    className: 'location-search-input',
+                                                })}
+                                                />
+                                                <div className="autocomplete-dropdown-container">
+                                                {loading && <div>Loading...</div>}
+                                                {suggestions.map(suggestion => {
+                                                    const className = suggestion.active
+                                                    ? 'suggestion-item--active'
+                                                    : 'suggestion-item';
+                                                    // inline style for demonstration purpose
+                                                    const style = suggestion.active
+                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                                    return (
+                                                    <div
+                                                        {...getSuggestionItemProps(suggestion, {
+                                                        className,
+                                                        style,
+                                                        })}
+                                                    >
+                                                        <span>{suggestion.description}</span>
+                                                    </div>
+                                                    );
+                                                })}
+                                                </div>
+                                            </div>
+                                            )}
+                                        </PlacesAutocomplete>
+                                        {/* <FormControl 
+                                            placeholder="Source" 
+                                            value={this.state.src}
+                                            onChange={this.assignValue}
+                                            id="src"
+                                            aria-describedby="basic-addon1"
+                                        /> */}
+                                        <div className="validationLogin">{this.state.src_err}</div> 
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} controlId="formPlaintextPassword">
+                                        <Form.Label column md="4" sm="12" className="label-placement">
                                         Destination *
                                         </Form.Label>
-                                        <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="Destination" 
+                                        <Col md="8" sm="12" className="text-area-placement">
+                                        {/* Used from https://github.com/hibiken/react-places-autocomplete */}
+                                        <PlacesAutocomplete
                                             value={this.state.destn}
-                                            onChange={this.assignValue}
-                                            id="destn"
-                                            aria-describedby="basic-addon1"
-                                        />
+                                            onChange={this.handleChangeDestn}
+                                            onSelect={this.handleSelectDestn}
+                                            id='destn'
+                                        >
+                                            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                            <div >
+                                                <input
+                                                style={{  width:'100%', height:'38px',fontSize: '1rem',
+                                                    fontWeight: 400,
+                                                    lineHeight: 1.5,
+                                                    color: '#495057',
+                                                    backgroundColor: '#fff',
+                                                    backgroundClip: 'padding-box',
+                                                    border: '1px solid #ced4da',
+                                                    borderRadius:'.25rem'}}
+                                                {...getInputProps({
+                                                    placeholder: 'Search Places for Destination',
+                                                    className: 'location-search-input',
+                                                })}
+                                                />
+                                                <div className="autocomplete-dropdown-container">
+                                                {loading && <div>Loading...</div>}
+                                                {suggestions.map(suggestion => {
+                                                    const className = suggestion.active
+                                                    ? 'suggestion-item--active'
+                                                    : 'suggestion-item';
+                                                    // inline style for demonstration purpose
+                                                    const style = suggestion.active
+                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                                    return (
+                                                    <div
+                                                        {...getSuggestionItemProps(suggestion, {
+                                                        className,
+                                                        style,
+                                                        })}
+                                                    >
+                                                        <span>{suggestion.description}</span>
+                                                    </div>
+                                                    );
+                                                })}
+                                                </div>
+                                            </div>
+                                            )}
+                                        </PlacesAutocomplete>
+                                        {/* <Autocomplete
+                                            class="form-control"
+                                            placeholder="Destination" 
+                                            onPlaceSelected={(place) => {
+                                            console.log(place);
+                                            this.setState({destn:place.formatted_address,destn_err:''})
+                                            }}  
+                                            id="destn"                                          
+                                            types={['(regions)']}
+                                        /> */}
+                                        
                                         <div className="validationLogin">{this.state.destn_err}</div> 
                                         </Col>
                                     </Form.Group>
