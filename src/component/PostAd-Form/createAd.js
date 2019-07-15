@@ -99,9 +99,10 @@ class PostAd extends Component{
             return true
         }
     }
-
+//return html , js changes
     submitForm=()=>{
         var allowSubmission = this.validate()
+        //fetch
         if(allowSubmission){
             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
             history.push('/home')

@@ -7,11 +7,16 @@ import VehicleDescModal from '../Vehicle-Info/vehicleInfo';
 import './home.css'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
+
 class Home extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+           // username:'',
+          //  users:[],
+          //  desc:'',
+            uType:'',
             showDesc:false,
             showVehicleDesc:false,
             filter_time:false,
@@ -21,7 +26,10 @@ class Home extends Component {
             filter_distance:false,
             price_value:30,
             price_min:20,
-            price_max:200
+            price_max:200,
+            result:[],
+            adId:'',
+            
         };
     }
 
@@ -57,13 +65,13 @@ class Home extends Component {
         }
     }
 
-    userDetails=(userType)=>{
+    userDetails=(userType,e)=>{
         return(
             <div>
             <Row>
                 <Col md={12}>
                     <div className="label-container">
-                            {(userType==='transporter')?<div className="label-transporter">Transporter</div>:<div className="label-transporter">Customer</div>}
+                            {(userType==='T')?<div className="label-transporter">Transporter</div>:<div className="label-transporter">Requestor</div>}
                     </div>
                 </Col>
             </Row>
@@ -74,7 +82,7 @@ class Home extends Component {
             </Row>
             <Row>
                 <Col md={12} className="img-name">
-                    <div style={{display: 'inline-block'}}>Bran Stark </div>
+                    <div style={{display: 'inline-block'}}>{e.username} </div>
                 </Col>
             </Row> 
             </div>
@@ -85,22 +93,23 @@ class Home extends Component {
         if(event.target.id==='viewProfile'){   
             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
             history.push('/profile')
-            history.go()
+            history.go() 
         }
     }
 
     handleDesc=()=>{
-        console.log(this.state.showDesc);
+        console.log(this.state.showDesc); //false
         
         this.setState({
-            showDesc:!this.state.showDesc
+            showDesc:!this.state.showDesc  //not operator - showDesc initially false. not(false)=true
         })
     }
 
-    handleVehicleDesc=()=>{
+    handleVehicleDesc=(id)=>{
         
         this.setState({
-            showVehicleDesc:!this.state.showVehicleDesc
+            showVehicleDesc:!this.state.showVehicleDesc,
+            adId:this.state.adId===''?id:''
         })
     }
 
@@ -108,26 +117,85 @@ class Home extends Component {
         console.log(this.state.showDesc);
         
         return(
-            <Modal show={this.state.showDesc} onHide={this.handleDesc}>
+            <Modal show={this.state.showDesc} onHide={this.handleDesc}> {/* showVehicleDesc-true/false */}
                 <AdDescModal userType={userType} />
             </Modal>
         )
     }
 
     openVehicleDesc=()=>{
+        console.log(this.state.adId);
+        
         return(
-            <Modal show={this.state.showVehicleDesc} onHide={this.handleVehicleDesc}>
-                <VehicleDescModal/>
+            <Modal show={this.state.showVehicleDesc} onHide={this.handleVehicleDesc}> 
+                <VehicleDescModal adId={this.state.adId}/>
             </Modal>
         )
     }
+
+    // componentDidMount() {
+    //     this.getDataFromDb();
+        
+    //     if (!this.state.intervalIsSet) {
+    //       let interval = setInterval(this.getDataFromDb, 1000);
+    //       this.setState({ intervalIsSet: interval });
+    //     }
+    // }
+
+    componentWillMount() { //on page load
+        fetch('http://localhost:5000/users/',{ method:'GET'})
+          .then((data) => data.json())
+          .then((res) => //this.setState({ data: res.data }));
+          {console.log(res)
+            this.setState({
+               // users:res.data.map(user => user.username),
+                result:res,
+                //desc: res.username
+                uName: res[0].username,
+                storage: res[0].storageSpace,
+                dest: res[0].destination,
+                uType: res[0].typeOfUser
+             //  desc: res.data[0].username
+
+                //state 
+            })
+            
+            }
+        //  console.log(data[0]);
+          ).catch((e) => alert('Error occurred:',e));
+         }
     
-    adDetails=(userType)=>{
+    // getDataFromDb = () => {
+    //     fetch('http://localhost:5000/users/')
+    //       .then((data) => data.json())
+    //       .then((res) => this.setState({ data: res.data }));
+    //     //  console.log(data[0]);
+    //   };
+    
+    // getDataFromDb = () => {
+    //     fetch('http://localhost:5000/users/',{ method:'GET'})
+    //       .then((data) => data.json())
+    //       .then((res) => //this.setState({ data: res.data }));
+    //       {console.log(res)}
+    //     //  console.log(data[0]);
+    //       ).catch((e) => alert('Error occurred:',e));
+    // }
+    
+    // showNothing=()=>{
+    //     fetch('http://localhost:5000/users/')
+    //   .then((data) => data.json())
+    //   .then((res) => this.setState({ data: res.data }));
+// return(
+//     <div>hi</div>
+// )
+   // }
+
+    adDetails=(userType,e)=>{
         return(
             <div>
                 <Row>
                     <Col md={12} className="ad-title">
-                        {(userType==='transporter')?
+                        {(userType==='T')?
                         <h3 className="h3-size">
                             Storage space available : Halifax <hr/>
                         </h3>
@@ -141,18 +209,19 @@ class Home extends Component {
                 </Row>
                 <Row>
                     <Col md={7} className="ad-body">
-                        <div>
-                            Storage Space: ___xxx lb___<br/>
-                            Destination : ___xxx city___<br/>
-                            <div className="vehicle-det" onClick={this.handleVehicleDesc}>Click here for Vehicle Details</div>
+                        <div> 
+                        
+                            Storage Space: {e.storageSpace}<br/>
+                            Destination : {e.destination}<br/>
+                            <div className="vehicle-det" onClick={()=>this.handleVehicleDesc(e._id)}>Click here for Vehicle Details</div>
                         </div>                                    
                     </Col>  
                     <Col md={5} className="button-grp" >
                         <div className="btn-usage">
                             <Button variant="primary" type="submit" id="trip" className="buttonSpacing" onClick={this.submitForm}>
-                                {(userType==='transporter')?<div>Request Trip</div>:<div>Offer Trip</div>}
+                                {(userType==='T')?<div>Request Trip</div>:<div>Offer Trip</div>}
                             </Button> 
-                            <Button variant="secondary" type="submit" id="viewProfile" onClick={this.submitForm}>
+                            <Button variant="secondary" type="submit" id="viewProfile" onClick={this.submitForm} >
                                 View Profile
                             </Button>
                         </div>                                  
@@ -198,7 +267,7 @@ class Home extends Component {
         )
     }
     
-    displayCards=(userType)=>{
+    displayCards=(userType,e)=>{
         console.log(userType);
         
         return(
@@ -206,10 +275,10 @@ class Home extends Component {
                 <Container style={{maxWidth:'100%',padding:'0px'}}>
                     <Row style={{marginRight:'0px',marginLeft:'0px'}}>
                         <Col md={2} style={{padding:'0px'}}>
-                            {this.userDetails(userType)}                           
+                            {this.userDetails(userType,e)}                           
                         </Col>
                         <Col md={10} style={{padding:'0px'}}>
-                            {this.adDetails(userType)}
+                            {this.adDetails(userType,e)}
                         </Col>
                     </Row>
                 </Container>
@@ -249,6 +318,7 @@ class Home extends Component {
     }
 
     render(){
+        const a=["1","2"]
         return(
             <div className="wrapper">
                 <Header/>
@@ -273,8 +343,11 @@ class Home extends Component {
                                 <Col md={7} style={{borderRight:'1px ridge #80808099', backgroundColor:'#ededed'}}>
                                     {this.openDetailedDesc('transporter')}
                                     {this.openVehicleDesc()}
-                                    {this.displayCards('transporter')}
-                                    {this.displayCards('customer')}
+                                    {/* {this.state.result.map((e)=>{
+                                        {this.displayCards('transporter',e)}
+                                    })} */}
+                                    {this.state.result.map((e)=>this.displayCards(e.typeOfUser,e))}
+                                    {/* {this.displayCards('customer')} */}
                                 </Col>
                                 <Col md={3}  style={{display:'flex',justifyContent:'center',borderRight:'1px ridge #80808099'}}>
                                     {this.tripSuggestion()}
