@@ -8,6 +8,8 @@ class VehicleInfo extends Component{
     constructor (props){
         super(props);
         this.state = {
+            // vhId:this.props.adId,
+            vhId:'5d2251d91b28ca7ea49eaad7',
             vehicles:[],
             isLoaded: false,
         }
@@ -21,13 +23,17 @@ class VehicleInfo extends Component{
         idToUpdate: null,
         objectToUpdate: null,
       };
+    
+    
 
-    componentDidMount(){
+      componentWillMount(){
+          
         //api
         //static id mongo
         //fetch() method:GET
         //responsejson -> state variable
-        fetch('http://localhost:4000/data/hs_data/id/2')
+        //http://localhost:4000/data/hs_data/_id/5d2251d91b28ca7ea49eaad7
+        fetch('http://localhost:4000/data/hs_data/_id/'+this.state.vhId)
             .then(res => res.json())
             .then(json => {
                 this.setState({
@@ -41,7 +47,7 @@ class VehicleInfo extends Component{
         var {isLoaded, vehicles} = this.state;
 
         if(!isLoaded) {
-            return <div>not loaded</div>
+            return <div></div>
         }
         else{
 

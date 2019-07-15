@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongo = require('mongodb').MongoClient
+const {ObjectId} = require('mongodb');
 const PORT = 4000;
 
 app.use(cors());
@@ -26,7 +27,7 @@ app.get('/data/:table/:column/:id/', (req, res) => {
         var dbo = db.db("haul_share");
         var table = req.params.table
         var query = {};
-        query[req.params.column] = req.params.id
+        query[req.params.column] = ObjectId(req.params.id)
         dbo.collection(table).find(query).toArray(function(err,result){
             if(err) throw err;
         console.log(result);
