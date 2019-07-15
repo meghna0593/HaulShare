@@ -13,15 +13,17 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 // const router = express.Router();
 
-const corsHost = { origin: 'http://localhost:8080' }
+const corsHost = { origin: '*' }
 const mongo_url_local = "mongodb://localhost:27017/";
+const mongo_url="mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/test?retryWrites=true&w=majority";
 var database;
-MongoClient.connect(mongo_url_local,function(err,client){
+MongoClient.connect(mongo_url,function(err,client){
     if (err) {
         console.log(err);
         return;
     }
-    database = client.db("haulShare");
+    // database = client.db("haulShare");
+    database = client.db("Db_HaulShare")
 })
 
 
