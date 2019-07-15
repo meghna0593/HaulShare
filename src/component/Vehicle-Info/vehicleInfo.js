@@ -48,7 +48,7 @@ class VehicleInfo extends Component{
         var {isLoaded, vehicles} = this.state;
 
         if(!isLoaded) {
-            return <div>kushal</div>
+            return <div></div>
         }
         else{
 
