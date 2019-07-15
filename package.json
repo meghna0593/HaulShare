@@ -9,6 +9,8 @@
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "history": "^4.9.0",
+    "joi": "^14.3.1",
+    "joi-objectid": "^2.0.0",
     "material-ui-search-bar": "^0.4.2",
     "mdbreact": "^4.15.0",
     "mongodb": "^3.2.7",
