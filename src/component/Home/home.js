@@ -95,14 +95,12 @@ class Home extends Component {
 
     handleDesc=()=>{
         console.log(this.state.showDesc);
-
         this.setState({
             showDesc:!this.state.showDesc
         })
     }
 
     handleVehicleDesc=()=>{
-
         this.setState({
             showVehicleDesc:!this.state.showVehicleDesc
         })
@@ -110,7 +108,6 @@ class Home extends Component {
 
     openDetailedDesc=(userType)=>{
         console.log(this.state.showDesc);
-
         return(
             <Modal show={this.state.showDesc} onHide={this.handleDesc}>
                 <AdDescModal userType={userType} />
@@ -125,7 +122,6 @@ class Home extends Component {
             </Modal>
         )
     }
-
     adDetails=(userType)=>{
         return(
             <div>
@@ -204,7 +200,6 @@ class Home extends Component {
 
     displayCards=(userType)=>{
         console.log(userType);
-
         return(
             <div className="card-container">
                 <Container style={{maxWidth:'100%',padding:'0px'}}>

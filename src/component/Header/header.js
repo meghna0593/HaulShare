@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import { Image,Button,Navbar,Nav, NavDropdown} from 'react-bootstrap';
-import './header.css'
-import { createBrowserHistory } from 'history';
+import React, { Component } from "react";
+import { Image, Button, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import "./header.css";
+import { createBrowserHistory } from "history";
 const history = createBrowserHistory();
 
 class Header extends Component {
-
-    constructor(props){
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
     /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
     submitForm=()=>{
@@ -16,10 +15,10 @@ class Header extends Component {
         history.go()
     }
 
-    goHome=()=>{
-        history.push('/home')
-        history.go()
-    }
+  goHome = () => {
+    history.push("/home");
+    history.go();
+  };
 
     goToTrips=()=>{
         history.push('/my-trips')

@@ -27,6 +27,12 @@ class MyTrips extends Component{
         history.go()
     }
 
+    goToMaps=(id_trip)=>{
+        localStorage.setItem('trip_id',id_trip)
+        history.push('/maps')
+        history.go()
+    }
+
     render(){
         return(
             <div>
@@ -73,7 +79,7 @@ class MyTrips extends Component{
                                     <b>Trip cost: $50</b><br />
                                     </div>
                                     
-                                    <div className="vehicle-det" >View Map</div>
+                                    <div className="vehicle-det" onClick={()=>this.goToMaps(1)} >View Map</div>
                                     <br/><br/>
                                     <div className="btn-usage" >
                                         <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
@@ -126,7 +132,7 @@ class MyTrips extends Component{
                                     <div>
                                     <b>Trip cost: $50</b><br />
                                     </div>
-                                    <div className="vehicle-det" >View Map</div>
+                                    <div className="vehicle-det" onClick={()=>this.goToMaps(2)}>View Map</div>
                                     <br/><br/>
                                     <div className="btn-usage" >
                                         <Button variant="primary" type="submit" id="trip" className="buttonSpacing">
@@ -190,7 +196,7 @@ class MyTrips extends Component{
                                     <div>
                                     <b>Trip cost: $80</b><br />
                                     </div>
-                                    <div className="vehicle-det" >View Map</div>
+                                    <div className="vehicle-det" onClick={()=>this.goToMaps(3)}>View Map</div>
                                     <br/><br/>
                                     <div className="btn-usage" >
                                         <Button variant="secondary" type="submit" id="viewProfile">
@@ -243,7 +249,7 @@ class MyTrips extends Component{
                                     <b>Trip cost: $50</b><br />
                                     </div>
 
-                                    <div className="vehicle-det" >View Map</div>
+                                    <div className="vehicle-det" onClick={()=>this.goToMaps(4)}>View Map</div>
                                     <br/><br/>
                                     <div className="btn-usage" >
                                         <Button variant="secondary" type="submit" id="viewProfile">

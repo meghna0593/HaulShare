@@ -196,8 +196,7 @@ class Login extends Component {
 
 
     assignValue=(event)=>{
-        console.log(event.target.id+'_err');
-
+        console.log(event.target.id+'_err');        
         this.setState({
             [event.target.id]:event.target.value,
             [event.target.id+'_err']:'',
