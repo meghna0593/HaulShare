@@ -13,20 +13,31 @@ class PostAd extends Component{
             adTitle:'',
             strgDim:'',
             luggageWgt:'',
+            tripDate:'',
             destn:'',
             tripCost:'',
             desc:'',
             vhclType:'',
             vhclNum:'',
             userOption:0,
-            tripTime:''
+            tripTime:'',
+            adTitle_err:'',
+            strgDim_err:'',
+            luggageWgt_err:'',
+            tripDate_err:'',
+            destn_err:'',
+            tripCost_err:'',
+            vhclType_err:'',
+            vhclNum_err:'',
+            tripTime_err:''
         }
     }
 
     assignValue=(event)=>{
         console.log(event.target.value);
         this.setState({
-            [event.target.id]:event.target.value
+            [event.target.id]:event.target.value,
+            [event.target.id+'_err']:''
         })
     }
 
@@ -39,35 +50,48 @@ class PostAd extends Component{
         var tripCostChar = /^([0-9]+.?([0-9])*)$/
         
         if(this.state.adTitle===''){
-            alert('Please enter Ad Title')
+            // alert('Please enter Ad Title')
+            this.setState({adTitle_err:'Please enter Ad Title'})
             return false
         }
         else if(this.state.strgDim===''||!strgRe.test(this.state.strgDim)){
-            alert('Please enter storage dimension in format widthxheightxdepth')
+            // alert('Please enter storage dimension in format widthxheightxdepth')
+            this.setState({strgDim_err:'Please enter storage dimension in format widthxheightxdepth'})
             return false
         }
         else if(this.state.luggageWgt===''){
-            alert('Please enter luggage details')
+            // alert('Please enter luggage details')
+            this.setState({luggageWgt_err:'Please enter luggage details'})
+            return false
+        }
+        else if(this.state.tripDate===''){
+            // alert('Please enter the Trip Date')
+            this.setState({tripDate_err:'Please enter the Trip Date'})
             return false
         }
         else if(this.state.destn==='' || !destChar.test(this.state.destn)){
-            alert('Please enter destination, only alphabet allowed')
+            // alert('Please enter destination, only alphabet allowed')
+            this.setState({destn_err:'Please enter destination, only alphabet allowed'})
             return false
         }
         else if(this.state.tripTime===''){
-            alert('Please enter trip time')
+            // alert('Please enter trip time')
+            this.setState({tripTime_err:'Please enter trip time'})
             return false
         }
         else if(this.state.tripCost==='' || !tripCostChar.test(this.state.tripCost)){
-            alert('Please enter trip cost as a proper number')
+            // alert('Please enter trip cost as a proper number')
+            this.setState({tripCost_err:'Please enter trip cost as a proper number'})
             return false
         }
-        else if(this.state.vhclType===''){
-            alert('Please enter a Vehicle Type')
+        else if(this.state.vhclType==='' && this.state.userOption===0){
+            // alert('Please enter a Vehicle Type')
+            this.setState({vhclType_err:'Please enter a Vehicle Type'})
             return false
         }
-        else if(this.state.vhclNum===''){
-            alert('Please enter a Vehicle Number')
+        else if(this.state.vhclNum==='' && this.state.userOption===0){
+            // alert('Please enter a Vehicle Number')
+            this.setState({vhclNum_err:'Please enter a Vehicle Number'})
             return false
         }
         else{
@@ -162,6 +186,7 @@ class PostAd extends Component{
                                             id="adTitle"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.adTitle_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -176,6 +201,7 @@ class PostAd extends Component{
                                             id="strgDim"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.strgDim_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -191,6 +217,7 @@ class PostAd extends Component{
                                             type="number"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.luggageWgt_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -205,6 +232,7 @@ class PostAd extends Component{
                                             id="destn"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.destn_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -220,6 +248,7 @@ class PostAd extends Component{
                                             type="date"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.tripDate_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -235,6 +264,7 @@ class PostAd extends Component{
                                             type="time"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.tripTime_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -250,6 +280,7 @@ class PostAd extends Component{
                                             type="number"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.tripCost_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -280,6 +311,7 @@ class PostAd extends Component{
                                             id="vhclType"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.vhclType_err}</div> 
                                         </Col>
                                     </Form.Group> 
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -294,6 +326,7 @@ class PostAd extends Component{
                                             id="vhclNum"
                                             aria-describedby="basic-addon1"
                                         />
+                                        <div className="validationLogin">{this.state.vhclNum_err}</div> 
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">

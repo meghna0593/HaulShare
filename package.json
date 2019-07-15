@@ -5,14 +5,28 @@
   "dependencies": {
     "@material-ui/core": "^4.0.0-rc.0",
     "@material-ui/lab": "^4.0.0-alpha.14",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
+    "concurrently": "^4.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "google-map-react": "^1.1.4",
     "history": "^4.9.0",
     "mdbreact": "^4.15.0",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.6.4",
+    "morgan": "^1.9.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-addons": "^0.9.1-deprecated",
     "react-app-polyfill": "^1.0.1",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-datepicker": "^2.5.0",
     "react-dom": "^16.8.6",
+    "react-geocode": "^0.1.2",
+    "react-native-maps-directions": "^1.7.0",
+    "react-pure-render": "^1.0.2",
     "react-ratings-declarative": "^3.4.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
@@ -20,7 +34,7 @@
     "react-star-ratings": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start \" \"cd src/server && nodemon server_v.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,5 +55,19 @@
       "last 1 safari version",
       "ie 11"
     ]
-  }
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-decorators": "^7.4.4"
+  },
+  "proxy": "http://localhost:3001",
+  "description": "######Installation and Setup######",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@git.cs.dal.ca:holla/haul-share-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

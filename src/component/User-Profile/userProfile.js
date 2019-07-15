@@ -15,6 +15,10 @@ class UserProfile extends Component{
           dob:'1993-03-05',
           phone:9021110000,
           email:'arya93@gmail.com',
+          name_err:'',
+          dob_err:'',
+          phone_err:'',
+          email_err:'',
           edu:'Bachelor\'s in CS',
           emp:'Software Engineer',
           hobbies:'Archery',
@@ -32,7 +36,8 @@ class UserProfile extends Component{
     assignValue=(event)=>{
         console.log(event.target.value);
         this.setState({
-            [event.target.id]:event.target.value
+            [event.target.id]:event.target.value,
+            [event.target.id+'_err']:'',            
         })
     }
 
@@ -50,19 +55,24 @@ class UserProfile extends Component{
         var phoneRe = /^([0-9]{10})$/
         var emailRe = /^[a-zA-Z0-9_-]+@[a-zA-Z]+\b(.com|.in|.co.in|.ca)\b$/
         if(this.state.name===''){
-            alert('Please enter name details')
+            // alert('Please enter name details')
+            this.setState({name_err:'Please enter full name'})
             return false
         }
-        else if(this.state.data===''){
-            alert('Please enter Date of Birth')
+        else if(this.state.dob===''){
+            // alert('Please enter Date of Birth')
+            this.setState({dob_err:'Please enter Date of Birth'})
             return false
         }
         else if(this.state.phone==='' || !phoneRe.test(this.state.phone)){
-            alert('Please enter a valid Phone number with 10 digits')
+            // alert('Please enter a valid Phone number with 10 digits')
+            this.setState({phone_err:'Please enter a valid Phone number with 10 digits'})
             return false
         }
         if(this.state.email==='' || !emailRe.test(this.state.email)){
-            alert('Please enter a valid email address')
+            // alert('Please enter a valid email address')
+            this.setState({email_err:'Please enter a valid email address'})        
+            return false
         }
         else{
             alert('Succesfully saved the changes')
@@ -153,6 +163,7 @@ class UserProfile extends Component{
                                                                 aria-describedby="basic-addon1"
                                                                 disabled={this.state.editOption}
                                                             />
+                                                            <div className="validationLogin">{this.state.name_err}</div>
                                                             </Col>
                                                         </Form.Group>
                                                         <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -169,6 +180,7 @@ class UserProfile extends Component{
                                                                 aria-describedby="basic-addon1"
                                                                 disabled={this.state.editOption}
                                                             />
+                                                            <div className="validationLogin">{this.state.dob_err}</div>
                                                             </Col>
                                                         </Form.Group>
                                                         <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -185,6 +197,7 @@ class UserProfile extends Component{
                                                                 aria-describedby="basic-addon1"
                                                                 disabled={this.state.editOption}    
                                                             />
+                                                            <div className="validationLogin">{this.state.phone_err}</div>
                                                             </Col>
                                                         </Form.Group>
                                                         <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -200,6 +213,7 @@ class UserProfile extends Component{
                                                                 aria-describedby="basic-addon1"
                                                                 disabled={this.state.editOption}                                                        
                                                             />
+                                                            <div className="validationLogin">{this.state.email_err}</div>
                                                             </Col>
                                                         </Form.Group>
                                                         </Card.Text>
