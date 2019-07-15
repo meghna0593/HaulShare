@@ -1,3 +1,5 @@
+//Done by Megna
+//Connecting back-end and front-end connection- Archanaapriya Nallasivan
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -33,18 +35,21 @@ class Login extends Component {
             pass_log:'',
             uname:'',
             email_reg:'',
-            phone:'',
             new_pass:'',
             confirm_pass:'',
             email_log_err:'',
             pass_log_err:'',
             uname_err:'',
             email_reg_err:'',
-            phone_err:'',
             new_pass_err:'',
             confirm_pass_err:''
         };
     }
+
+    componentWillMount(){
+      console.log(localStorage.getItem('user_id'));
+    }
+
     handleChange=(event, newValue)=>{
         this.setState({value:newValue});
     }
@@ -66,8 +71,7 @@ class Login extends Component {
 
         if(id==='register'){
             var nameRe = /^[a-zA-Z]+$/
-            var phoneRe = /^([0-9]{10})$/
-            
+
             if(this.state.uname==='' || !nameRe.test(this.state.uname)){
                 // alert('Please enter name. Only letters allowed')
                 this.setState({uname_err:'Please enter name. Only letters allowed'});
@@ -78,11 +82,7 @@ class Login extends Component {
                 this.setState({email_reg_err:'Please enter valid email address'})
                 return false
             }
-            else if(this.state.phone==='' || !phoneRe.test(this.state.phone)){
-                // alert('Please enter valid phone number that has 10 digits')
-                this.setState({phone_err:'Please enter valid phone number that has 10 digits'})
-                return false
-            }
+
             else if(this.state.new_pass==='' || !passRe.test(this.state.new_pass)){
                 // alert('Please enter a password. Password should have atleast 4 characters that are letters or numbers')
                 this.setState({new_pass_err:'Please enter a password. Password should have atleast 4 characters that are letters or numbers'})
@@ -99,14 +99,14 @@ class Login extends Component {
                 return false
             }
             else{
-                alert('Registration Successful')
+                //alert('Registration Successful')
                 return true
             }
         }
         else{
             if(this.state.email_log==='' || !emailRe.test(this.state.email_log)){
-                // alert('Please enter valid email address')
-                this.setState({email_log_err:'Please enter valid email address'})
+                // alert('Please enter a valid email address')
+                this.setState({email_log_err:'Please enter a valid email address'})
                 return false
             }
             else if(this.state.pass_log==='' || !passRe.test(this.state.pass_log)){
@@ -115,27 +115,89 @@ class Login extends Component {
                 return false
             }
             else{
-                alert('Login Successful')
+                // alert('Login Successful')
                 return true
             }
-        }        
+        }
     }
 
-    submitForm=(event)=>{
-        console.log(event.target.value);
-        var passCheck = this.validateForm(event.target.id,event.target.value)
-        if(passCheck && event.target.id==='login'){
-            /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
-            history.push('/home')
-            history.go()
-        }
-        console.log(passCheck);
-        
-    }
+    // Using fetch ,connecting front end react with back-end node
+     Login = () => {
+       console.log("login");
+         let url_post = "http://localhost:19000/login"
+         let send_data = {
+             "email_reg": this.state.email_log,
+             "confirm_pass": this.state.pass_log
+         }
+         fetch(url_post, {
+                 method: 'POST',
+                 headers: {
+                     'Access-Control-Allow-Headers': 'Content-Type,Access-Control-Allow-Origin',
+                     'Content-Type': 'application/json',
+                     'Access-Control-Allow-Origin': '*'
+                 },
+                 body: JSON.stringify(send_data),
+
+             })
+             .then((resp) => resp.json())
+             .then((responseJson) => {
+                 console.log(responseJson)
+                 alert('Login Successful')
+                 localStorage.setItem('user_id',this.state.email_log)
+                 /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
+                 history.push('/home')
+                 history.go()
+             })
+             .catch((e) => alert('Error Occured. Error is:', e))
+     }
+
+    // Using fetch ,connecting front end react with back-end node
+     Register = () => {
+         let url_post = "http://localhost:19000/register"
+         let send_data = {
+             "uname": this.state.uname,
+             "email_reg": this.state.email_reg,
+             "new_pass": this.state.new_pass,
+             "confirm_pass": this.state.confirm_pass
+         }
+         fetch(url_post, {
+                 method: 'POST',
+                 headers: {
+                     'Access-Control-Allow-Headers': 'Content-Type,Access-Control-Allow-Origin',
+                     'Content-Type': 'application/json',
+                     'Access-Control-Allow-Origin': '*'
+                 },
+                 body: JSON.stringify(send_data),
+
+             })
+             .then((resp) => resp.json())
+             .then((responseJson) => {
+                 console.log(responseJson)
+                 alert('Registration Successful')
+                 /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
+                 history.push('/')
+                 history.go()
+             })
+             .catch((e) => alert('Error Occured. Error is:'+ e))
+
+     }
+     submitForm = (event) => {
+
+         var passCheck = this.validateForm(event.target.id, event.target.value)
+         console.log(passCheck);
+         if (passCheck && event.target.id === 'login') {
+             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
+             this.Login()
+         } else if (passCheck && event.target.id === 'register') {
+             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
+             this.Register()
+         }
+     }
+
 
     assignValue=(event)=>{
         console.log(event.target.id+'_err');
-        
+
         this.setState({
             [event.target.id]:event.target.value,
             [event.target.id+'_err']:'',
@@ -168,7 +230,7 @@ class Login extends Component {
                         <Tab label="My Account" />
                         <Tab label="Sign Up" />
                     </Tabs>
-                </AppBar>                 
+                </AppBar>
                 {this.state.value === 0 && <TabContainer>
                     <div style={{marginBottom:'1rem'}}>
                         <InputGroup style={{marginTop:'25px',marginLeft:'16%',width:'70%'}}>
@@ -186,7 +248,7 @@ class Login extends Component {
                             aria-describedby="basic-addon1"
                             />
                         </InputGroup>
-                        <div className="validationLogin">{this.state.email_log_err}</div> 
+                        <div className="validationLogin">{this.state.email_log_err}</div>
                     </div>
                     <div style={{marginBottom:'1rem'}}>
                     <InputGroup style={{marginLeft:'16%',width:'70%'}}>
@@ -204,7 +266,7 @@ class Login extends Component {
                         aria-describedby="basic-addon1"
                         />
                     </InputGroup>
-                    <div className="validationLogin">{this.state.pass_log_err}</div> 
+                    <div className="validationLogin">{this.state.pass_log_err}</div>
                     </div>
                     <Form.Check type="checkbox" className="small-grey-text" checked={this.state.check} onChange={this.checkBoxChange} label="Remember Me" />
                     <div className="justify-center button-placement">
@@ -232,9 +294,9 @@ class Login extends Component {
                         aria-describedby="basic-addon1"
                         />
                     </InputGroup>
-                    <div className="validationLogin">{this.state.uname_err}</div> 
+                    <div className="validationLogin">{this.state.uname_err}</div>
                     </div>
-                    
+
                     <div style={{marginBottom:'1rem'}}>
                     <InputGroup style={{marginTop:'25px',marginLeft:'16%',width:'70%'}}>
                         <InputGroup.Prepend>
@@ -250,28 +312,11 @@ class Login extends Component {
                         aria-describedby="basic-addon1"
                         />
                     </InputGroup>
-                    <div className="validationLogin">{this.state.email_reg_err}</div> 
+                    <div className="validationLogin">{this.state.email_reg_err}</div>
                     </div>
-                    
-                    <div style={{marginBottom:'1rem'}}>
-                    <InputGroup style={{marginTop:'25px',marginLeft:'16%',width:'70%'}}>
-                        <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1">
-                            <Image src="/images/phone.png" className="field-img"/> {/* image from "Phone Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/phone  */}
-                        </InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl
-                        defaultValue={this.state.phone}
-                        onChange={this.assignValue.bind(this)}
-                        type="number"
-                        placeholder="Phone"
-                        id="phone"
-                        aria-describedby="basic-addon1"
-                        />
-                    </InputGroup>
-                    <div className="validationLogin">{this.state.phone_err}</div> 
-                    </div>
-                    
+
+
+
                     <div style={{marginBottom:'1rem'}}>
                     <InputGroup style={{marginLeft:'16%',width:'70%'}}>
                         <InputGroup.Prepend>
@@ -288,9 +333,9 @@ class Login extends Component {
                         aria-describedby="basic-addon1"
                         />
                     </InputGroup>
-                    <div className="validationLogin">{this.state.new_pass_err}</div> 
+                    <div className="validationLogin">{this.state.new_pass_err}</div>
                     </div>
-                    
+
                     <div style={{marginBottom:'1rem'}}>
                     <InputGroup style={{marginLeft:'16%',width:'70%'}}>
                         <InputGroup.Prepend>
@@ -307,18 +352,18 @@ class Login extends Component {
                         aria-describedby="basic-addon1"
                         />
                     </InputGroup>
-                    <div className="validationLogin">{this.state.confirm_pass_err}</div> 
+                    <div className="validationLogin">{this.state.confirm_pass_err}</div>
                     </div>
-                    
+
                     <div className="justify-center button-placement">
                         <Button variant="primary" id="register" type="submit" onClick={this.submitForm}>
                             Sign me up!
                         </Button>
                     </div>
-                    
-                </TabContainer>}              
+
+                </TabContainer>}
             </div>
-        </div> 
+        </div>
          )
     }
 }
