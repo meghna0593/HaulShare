@@ -73,15 +73,5 @@
         "nodemon": "^1.19.1",
         "@babel/plugin-proposal-class-properties": "^7.5.0",
         "@babel/plugin-proposal-decorators": "^7.4.4"
-    },
-    "proxy": "http://localhost:3030",
-    "description": "######Installation and Setup######",
-    "main": "index.js",
-    "repository": {
-        "type": "git",
-        "url": "git@git.cs.dal.ca:holla/haul-share-project.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+    }
 }
