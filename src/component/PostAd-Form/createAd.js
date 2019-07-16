@@ -413,16 +413,6 @@ class PostAd extends Component{
                                             </div>
                                             )}
                                         </PlacesAutocomplete>
-                                        {/* <Autocomplete
-                                            class="form-control"
-                                            placeholder="Destination" 
-                                            onPlaceSelected={(place) => {
-                                            console.log(place);
-                                            this.setState({destn:place.formatted_address,destn_err:''})
-                                            }}  
-                                            id="destn"                                          
-                                            types={['(regions)']}
-                                        /> */}
                                         
                                         <div className="validationLogin">{this.state.destn_err}</div> 
                                         </Col>
