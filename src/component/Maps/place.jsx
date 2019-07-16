@@ -1,3 +1,4 @@
+//Varun Gopalakrishnan, B00823111
 import React, { Component } from "react";
 import shouldPureComponentUpdate from "react-pure-render/function";
 import PropTypes from "prop-types";
