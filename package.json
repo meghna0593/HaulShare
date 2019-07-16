@@ -47,7 +47,7 @@
         "union-value": "^2.0.1"
     },
     "scripts": {
-        "start": "react-scripts start \" \"cd src/server && node server.js\"",
+        "start": "concurrently \"set react-scripts start \" \"cd src/server && node server_v.js\" \"cd src/server && node server_m.js\" \"cd src/server && node server_k.js\" \"cd src/server && node server.js\" \"cd src/server && node server_a.js\"",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
@@ -73,5 +73,15 @@
         "nodemon": "^1.19.1",
         "@babel/plugin-proposal-class-properties": "^7.5.0",
         "@babel/plugin-proposal-decorators": "^7.4.4"
-    }
+    },
+    "proxy": "http://localhost:3030",
+    "description": "######Installation and Setup######",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git@git.cs.dal.ca:holla/haul-share-project.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
 }
