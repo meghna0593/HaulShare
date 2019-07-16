@@ -141,7 +141,7 @@ class PostAd extends Component{
         let url_post="http://localhost:5000/postAnAd"
         let send_data= {
                     "user_id":(localStorage.getItem('user_id')===null?'xyz':localStorage.getItem('user_id')),
-                    "userType":(this.state.userOption===1)?"T":"C",
+                    "userType":(this.state.userOption===0)?"T":"C",
                     "adTitle":this.state.adTitle,
                     "strgDim":this.state.strgDim,
                     "luggageWgt":this.state.luggageWgt,
