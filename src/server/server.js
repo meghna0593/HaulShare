@@ -76,7 +76,7 @@ app.post('/register', cors(corsHost), async(req, res) => {
 });
 
 //running on port 17008
-const port = process.env.PORT || 19000;
+const port = process.env.PORT || 3030;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 //setting headers..
 app.use(function(req, res, next) {
