@@ -8,8 +8,8 @@ class VehicleInfo extends Component{
     constructor (props){
         super(props);
         this.state = {
-            // vhId:this.props.adId,
-            vhId:'5d2cd235ab77750064a9e4e1',
+            vhId:this.props.adId,
+            // vhId:'5d2cd235ab77750064a9e4e1',
             vehicles:[],
             isLoaded: false,
         }

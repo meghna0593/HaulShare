@@ -36,8 +36,21 @@ class PostAd extends Component{
             vhclNum_err:'',
             tripTime_err:'',
             src_err:'',
-            address:''
+            address:'',
+            uname:''
         }
+    }
+
+    componentWillMount(){
+        let url_post="http://localhost:5000/getUname/"+(localStorage.getItem('user_id')) ;
+        fetch(url_post,{
+            method:'GET' })
+        .then((resp) => resp.json())
+		.then((responseJson) => {
+            console.log(responseJson)	
+            this.setState({uname:responseJson[0].uname})
+        })
+        .catch((e) => alert('Error Occured. Error is:',e))
     }
 
     handleChangeSrc = src => {
@@ -141,6 +154,7 @@ class PostAd extends Component{
         let url_post="http://localhost:5000/postAnAd"
         let send_data= {
                     "user_id":(localStorage.getItem('user_id')===null?'xyz':localStorage.getItem('user_id')),
+                    "uname":this.state.uname,
                     "userType":(this.state.userOption===1)?"T":"C",
                     "adTitle":this.state.adTitle,
                     "strgDim":this.state.strgDim,

@@ -27,21 +27,21 @@ MongoClient.connect(mongo_url,function(err,client){
 })
 
 
-app.get('/getAdsList', cors(corsHost), function (req, res) {
-    MongoClient.connect(url_mongo, function (err, db) {
-      if (err) throw err;
-    //   var dbo = db.db("haul"); //database
-      var table = 'Advertisements' //collections or table
-      var query = {}; 
-      database.collection(table).find(query).toArray(function (err, result) { //make api call
-          if (err) throw err;
-        console.log(result);
-        res.send(result);
-        db.close();
-      });
-    });
-});
-app.post("/postAnAd", (req, res) => {
+// app.get('/getAdsList', cors(corsHost), function (req, res) {
+//     MongoClient.connect(url_mongo, function (err, db) {
+//       if (err) throw err;
+//     //   var dbo = db.db("haul"); //database
+//       var table = 'Advertisements' //collections or table
+//       var query = {}; 
+//       database.collection(table).find(query).toArray(function (err, result) { //make api call
+//           if (err) throw err;
+//         console.log(result);
+//         res.send(result);
+//         db.close();
+//       });
+//     });
+// });
+app.post("/postAnAd", cors(corsHost), (req, res) => {
 
       var table = 'Advertisements'
       database.collection(table).insertOne(req.body, function(err, records) {
@@ -52,6 +52,19 @@ app.post("/postAnAd", (req, res) => {
       });
     });    
 
+app.get("/getUname/:id", cors(corsHost), (req, res) => {
+  var email = encodeURI(req.params.id)
+  var table = 'users'
+  console.log(email);
+  query={}
+  query['email_reg'] = email
+  database.collection(table).find(query).toArray(function (err, result) { //make api call
+    if (err) throw err;
+  console.log(result);
+  res.send(result);
+  db.close();
+});
+}); 
 
 app.listen(5000, () => {
     console.log('Go to http://localhost:5000/getData to see posts');

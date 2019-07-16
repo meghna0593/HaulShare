@@ -27,7 +27,7 @@ class SimpleMap extends Component {
     console.log(this.state.trip_id);
     localStorage.removeItem("trip_id");
     const url =
-      "http://localhost:3001/api/getData/100/" +
+      "http://localhost:5543/api/getData/100/" +
       (this.state.trip_id === null ? 1 : this.state.trip_id);
     const response = await fetch(url);
     const data = await response.json();
