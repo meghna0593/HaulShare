@@ -9,13 +9,11 @@ import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
 
 class Home extends Component {
+    // Constructor to initialize the values.
     constructor(props) {
         super(props);
 
         this.state = {
-           // username:'',
-          //  users:[],
-          //  desc:'',
             uType:'',
             showDesc:false,
             showVehicleDesc:false,
@@ -29,7 +27,7 @@ class Home extends Component {
             price_max:200,
             result:[],
             adId:'',
-            
+            fullDesc:''
         };
     }
 
@@ -41,6 +39,10 @@ class Home extends Component {
         this.setState({ price_value:value });
       };
 
+      // This method will handle all the filters for
+      // refining the Requests. As far as assignment 4 is concerned
+    // this has not been implemented. and it will be handled
+    // as part of the group roject.
     checkBoxChange=(event)=>{
         if(event.target.id==='filter_time'){
             this.setState({
@@ -101,14 +103,17 @@ class Home extends Component {
         }
     }
 
-    handleDesc=()=>{
+    handleDesc=(e)=>{
         console.log(this.state.showDesc); //false
         
         this.setState({
-            showDesc:!this.state.showDesc  //not operator - showDesc initially false. not(false)=true
+            showDesc:!this.state.showDesc,  //not operator - showDesc initially false. not(false)=true
+            fullDesc:this.state.fullDesc===''?e:'',
         })
     }
 
+    // This method will display the vehicle description
+    // based on the request received.
     handleVehicleDesc=(id)=>{
         
         this.setState({
@@ -117,11 +122,14 @@ class Home extends Component {
         })
     }
 
-    openDetailedDesc=(userType)=>{
-        console.log(this.state.showDesc);
+    // This method will open a prompt box which contains
+    // all the desired information for the request
+    // eg: luggage dimension, user id, trip date etc.
+    openDetailedDesc=(data)=>{
+        console.log(this.state.fullDesc);
         return(
             <Modal show={this.state.showDesc} onHide={this.handleDesc}> {/* showVehicleDesc-true/false */}
-                <AdDescModal userType={userType} />
+                <AdDescModal data={data}/>
             </Modal>
         )
     }
@@ -136,40 +144,32 @@ class Home extends Component {
         )
     }
 
-    // componentDidMount() {
-    //     this.getDataFromDb();
-        
-    //     if (!this.state.intervalIsSet) {
-    //       let interval = setInterval(this.getDataFromDb, 1000);
-    //       this.setState({ intervalIsSet: interval });
-    //     }
-    // }
-
+// This method will be loaded as soon as the 
+// page loads. It will fetch all the required
+// values using the GET request and save it
+// in the declared variables.
     componentWillMount() { //on page load
         fetch('http://localhost:20000/users/',{ method:'GET'})
           .then((data) => data.json())
-          .then((res) => //this.setState({ data: res.data }));
+          .then((res) => 
           {console.log(res)
             this.setState({
-               // users:res.data.map(user => user.username),
                 result:res,
-                //desc: res.username
-                // uName: res[0].username,
                 storage: res[0].storageSpace,
                 dest: res[0].destination,
                 uType: res[0].typeOfUser
-             //  desc: res.data[0].username
-
-                //state 
+              
             })
             
             }
-        //  console.log(data[0]);
+        
           ).catch((e) => alert('Error occurred:',e));
          }
     
     
-
+// This method will display the details on the card.
+// Since the card has a limited size, it will only 
+//display some fields only.
     adDetails=(userType,e)=>{
         return(
             <div>
@@ -178,23 +178,15 @@ class Home extends Component {
                         <h3 className="h3-size">
                             {e.adTitle} <hr/>
                         </h3>
-                        {/* {(userType==='T')?
-                        <h3 className="h3-size">
-                            Storage space available : Halifax <hr/>
-                        </h3>
-                        :
-                        <h3 className="h3-size">
-                            Storage space needed : Halifax <hr/>
-                        </h3>
-                        } */}
-                        <Image src="/images/full-screen.png" className="full-screen-btn" onClick={this.handleDesc} /> {/*image from "Full Screen Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/full-screen */}
+                        
+                        <Image src="/images/full-screen.png" className="full-screen-btn" onClick={()=>this.handleDesc(e)} /> {/*image from "Full Screen Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/full-screen */}
                     </Col>
                 </Row>
                 <Row>
                     <Col md={7} className="ad-body">
                         <div> 
                         
-                            Storage Space: {e.storageSpace}<br/>
+                            Storage Space: {e.strgDim}<br/>
                             Destination : {e.destination}<br/>
                             <div className="vehicle-det" onClick={()=>this.handleVehicleDesc(e._id)}>Click here for Vehicle Details</div>
                         </div>                                    
@@ -236,6 +228,9 @@ class Home extends Component {
         }
     }
 
+    // This method is creating the various filters to be
+    // used t filter the search results. This functionality will
+    // be implemented as part of the group project. 
     filterSection=()=>{
         return(
             <div className="small-container">
@@ -251,7 +246,7 @@ class Home extends Component {
     }
     
     displayCards=(userType,e)=>{
-        console.log(userType);
+        console.log(e);
         return(
             <div className="card-container">
                 <Container style={{maxWidth:'100%',padding:'0px'}}>
@@ -269,6 +264,8 @@ class Home extends Component {
         )
     }
 
+    // This will display the Trip suggestions based on the user search 
+    // results and user's location.
     tripSuggestionCard=()=>{
         return(
             <div>
@@ -301,6 +298,8 @@ class Home extends Component {
 
     render(){
         return(
+            // This will create the web page for displaying the requests 
+            // posted by the user.
             <div className="wrapper">
                 <Header/>
                 <div className="content">
@@ -322,12 +321,12 @@ class Home extends Component {
                                     {this.filterSection()}
                                 </Col>
                                 <Col md={7} style={{borderRight:'1px ridge #80808099', backgroundColor:'#ededed'}}>
-                                    {this.openDetailedDesc('transporter')}
+                                     {this.openDetailedDesc(this.state.fullDesc)} 
                                     {this.openVehicleDesc()}
                                     {/* {this.state.result.map((e)=>{
                                         {this.displayCards('transporter',e)}
                                     })} */}
-                                    {this.state.result.map((e)=>this.displayCards(e.typeOfUser,e))}
+                                    {this.state.result.map((e)=>this.displayCards(e.userType,e))}
                                     {/* {this.displayCards('customer')} */}
                                 </Col>
                                 <Col md={3}  style={{display:'flex',justifyContent:'center',borderRight:'1px ridge #80808099'}}>

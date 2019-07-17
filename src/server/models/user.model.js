@@ -6,6 +6,9 @@ const userSchema = new Schema({
   
   adTitle: {
     
+    // add validations for each field.
+    // for eg: field's value is required,
+    // it's minimum length should be 3 characters.
     type: String,
     required: true,
     unique: true,
@@ -46,6 +49,8 @@ const userSchema = new Schema({
   }
 });
 
+// Fetch the details from "Advertisements" collection/table
+// in MongoDB Atlas.
 const User = mongoose.model('User', userSchema,'Advertisements');
 
 module.exports = User;
