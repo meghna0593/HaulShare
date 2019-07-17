@@ -87,12 +87,7 @@ class PostAd extends Component{
         var destChar = /^(([0-9]+)([a-z A-Z]+)([,]?[ ]?)([a-zA-Z]*)([,]?[ ]?)([a-zA-Z 0-9,]*))$/
         var tripCostChar = /^([0-9]+.?([0-9])*)$/
 
-        if(this.state.tripCost==='' || !tripCostChar.test(this.state.tripCost)){
-            // alert('Please enter trip cost as a proper number')
-            this.setState({tripCost_err:'Please enter trip cost as a proper number'})
-            return false
-        }
-        else if(this.state.adTitle===''){
+        if(this.state.adTitle===''){
             // alert('Please enter Ad Title')
             this.setState({adTitle_err:'Please enter Ad Title'})
             return false
@@ -127,11 +122,11 @@ class PostAd extends Component{
             this.setState({tripTime_err:'Please enter trip time'})
             return false
         }
-        // else if(this.state.tripCost==='' || !tripCostChar.test(this.state.tripCost)){
-        //     // alert('Please enter trip cost as a proper number')
-        //     this.setState({tripCost_err:'Please enter trip cost as a proper number'})
-        //     return false
-        // }
+        else if(this.state.tripCost==='' || !tripCostChar.test(this.state.tripCost)){
+            // alert('Please enter trip cost as a proper number')
+            this.setState({tripCost_err:'Please enter trip cost as a proper number'})
+            return false
+        }
         else if(this.state.vhclType==='' && this.state.userOption===0){
             // alert('Please enter a Vehicle Type')
             this.setState({vhclType_err:'Please enter a Vehicle Type'})
