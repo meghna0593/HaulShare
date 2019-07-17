@@ -74,7 +74,6 @@
         "@babel/plugin-proposal-class-properties": "^7.5.0",
         "@babel/plugin-proposal-decorators": "^7.4.4"
     },
-    "proxy": "http://localhost:3030",
     "description": "######Installation and Setup######",
     "main": "index.js",
     "repository": {
