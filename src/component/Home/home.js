@@ -149,7 +149,7 @@ class Home extends Component {
 // values using the GET request and save it
 // in the declared variables.
     componentWillMount() { //on page load
-        fetch('http://localhost:20000/users/',{ method:'GET'})
+        fetch('https://haul-share-anuj.herokuapp.com/users',{ method:'GET'})
           .then((data) => data.json())
           .then((res) => 
           {console.log(res)

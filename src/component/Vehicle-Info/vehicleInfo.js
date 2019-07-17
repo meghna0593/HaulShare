@@ -33,7 +33,7 @@ class VehicleInfo extends Component{
         //fetch() method:GET
         //responsejson -> state variable
         //http://localhost:4000/data/hs_data/_id/5d2251d91b28ca7ea49eaad7
-        fetch('http://localhost:4000/data/Advertisements/_id/'+this.state.vhId)
+        fetch('https://haul-share-kushal.herokuapp.com/data/Advertisements/_id/'+this.state.vhId)
             .then(res => res.json())
             .then(json => {
 
