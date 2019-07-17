@@ -20,8 +20,10 @@ II. Project Setup on the local system from GitLab
 III. Project link on Heroku:
 https://haul-share-official.herokuapp.com/ [2]
 
-IV. Link to pages for the application running on Heroku
-Create Ad Page - https://haul-share-official.herokuapp.com/post-ad 
+IV. Link to pages for the feature I worked on
+Link: https://haul-share-official.herokuapp.com/
+Login using credentials given in 'Login Details' section
+Click on Post Ad button on the header
 
 ######Login Details######
 Either register with the system and then login using those credentials, or use the login details given below.
