@@ -14,6 +14,7 @@ export default class MyGreatPlace extends Component {
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
+  // calling map_styles.js method to render the pickup and drop icon in the fronend maps.
   render() {
     return <div style={greatPlaceStyle}>{this.props.text}</div>;
   }

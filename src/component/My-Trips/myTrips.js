@@ -27,6 +27,8 @@ class MyTrips extends Component{
         history.go()
     }
 
+    //varun Gopalakrishnan, B00823111
+    //passing trip_id from the my-trips page to the maps.
     goToMaps=(id_trip)=>{
         localStorage.setItem('trip_id',id_trip)
         history.push('/maps')
