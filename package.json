@@ -47,7 +47,7 @@
         "union-value": "^2.0.1"
     },
     "scripts": {
-        "start": "concurrently \"set react-scripts start \" \"cd src/server && node server_v.js\" \"cd src/server && node server_m.js\" \"cd src/server && node server_k.js\" \"cd src/server && node server.js\" \"cd src/server && node server_a.js\"",
+        "start": "concurrently \"set PORT=12777 && react-scripts start \" \"cd src/server && node server_v.js\" \"cd src/server && node server_m.js\" \"cd src/server && node server_k.js\" \"cd src/server && node server.js\" \"cd src/server && node server_a.js\"",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
