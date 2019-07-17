@@ -1,23 +1,20 @@
-/*Author:Meghna Ramachandra Holla
- *B00812604 
- */
+//Author: Meghna Ramachandra Holla, B00812604
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 var MongoClient = require('mongodb').MongoClient;
 
-// const API_PORT  = 3001;
+const API_PORT  = 5000;
 const app = express();
 app.use(bodyParser.json()) //application/json
 app.use(bodyParser.urlencoded({
     extended:true
 }))
 app.use(cors());
-// const router = express.Router();
 
 const corsHost = { origin: '*' }
-const mongo_url_local = "mongodb://localhost:27017/";
-const mongo_url="mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/test?retryWrites=true&w=majority";
+const mongo_url_local = "mongodb://localhost:27017/"; //local server
+const mongo_url="mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/test?retryWrites=true&w=majority"; //remote server
 var database;
 MongoClient.connect(mongo_url,function(err,client){
     if (err) {
@@ -47,14 +44,15 @@ app.get("/getUname/:id", cors(corsHost), (req, res) => {
   query={}
   query['email_reg'] = email
   database.collection(table).find(query).toArray(function (err, result) { 
-    if (err) throw err;
+    if (err) console.log(err);
+    ;
   console.log(result);
   res.send(result);
   db.close();
 });
 }); 
 
-app.listen(5000, () => {
+app.listen(API_PORT, () => {
     console.log('Go to http://localhost:5000/getData to see posts');
   });
 

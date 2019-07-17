@@ -49,13 +49,13 @@ class PostAd extends Component{
       handleSelectSrc = (address) => {          
         geocodeByAddress(address)
         .then(results =>  {console.log(results);
-         this.setState({ src:results[0].formatted_address })})
+         this.setState({ src:results[0].formatted_address,src_err:'' })})
         .catch(error => console.error(error));
       };
       handleSelectDestn = (address) => {          
         geocodeByAddress(address)
         .then(results =>  {console.log(results);
-         this.setState({ destn:results[0].formatted_address })})
+         this.setState({ destn:results[0].formatted_address,destn_err:'' })})
         .catch(error => console.error(error));
       };
     
@@ -68,15 +68,31 @@ class PostAd extends Component{
         })
     }
 
-    validate=()=>{
+    checkDate=()=>{
+        let selectedDate = new Date(this.state.tripDate);
+        let today = new Date()
+        if(selectedDate < today){
+            console.log("inside");
+            
+            return false
+        }
+        return true        
+    }
+
+    validate=()=>{        
         /*
         “Regular Expressions.” MDN Web Docs, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions.
         */
         var strgRe = /^([0-9][0-9]*x[0-9][0-9]*x[0-9][0-9]*)$/
         var destChar = /^(([0-9]+)([a-z A-Z]+)([,]?[ ]?)([a-zA-Z]*)([,]?[ ]?)([a-zA-Z 0-9,]*))$/
         var tripCostChar = /^([0-9]+.?([0-9])*)$/
-        
-        if(this.state.adTitle===''){
+
+        if(this.state.tripCost==='' || !tripCostChar.test(this.state.tripCost)){
+            // alert('Please enter trip cost as a proper number')
+            this.setState({tripCost_err:'Please enter trip cost as a proper number'})
+            return false
+        }
+        else if(this.state.adTitle===''){
             // alert('Please enter Ad Title')
             this.setState({adTitle_err:'Please enter Ad Title'})
             return false
@@ -91,24 +107,19 @@ class PostAd extends Component{
             this.setState({luggageWgt_err:'Please enter luggage details'})
             return false
         }
-        else if(this.state.tripDate===''){
-            // alert('Please enter the Trip Date')
-            this.setState({tripDate_err:'Please enter the Trip Date'})
-            return false
-        }
         else if(this.state.src==='' || !destChar.test(this.state.src)){
-            console.log(this.state.src);
-            console.log(!destChar.test(this.state.src));
             // alert('Please enter destination, only alphabet allowed')
-            this.setState({src_err:'Please enter source, only alphabet allowed'})
+            this.setState({src_err:'Please enter source and choose from the option. The format is street number, street address, city, postal code'})
             return false
         }
         else if(this.state.destn==='' || !destChar.test(this.state.destn)){
-            console.log(this.state.destn);
-            console.log(!destChar.test(this.state.destn));
-            
             // alert('Please enter destination, only alphabet allowed')
-            this.setState({destn_err:'Please enter destination, only alphabet allowed'})
+            this.setState({destn_err:'Please enter destination and choose from the option. The format is street number, street address, city, postal code'})
+            return false
+        }
+        else if(this.state.tripDate==='' || !(this.checkDate())){
+            // alert('Please enter the Trip Date')
+            this.setState({tripDate_err:'Please enter the Trip Date that is valid and not before today'})
             return false
         }
         else if(this.state.tripTime===''){
@@ -116,11 +127,11 @@ class PostAd extends Component{
             this.setState({tripTime_err:'Please enter trip time'})
             return false
         }
-        else if(this.state.tripCost==='' || !tripCostChar.test(this.state.tripCost)){
-            // alert('Please enter trip cost as a proper number')
-            this.setState({tripCost_err:'Please enter trip cost as a proper number'})
-            return false
-        }
+        // else if(this.state.tripCost==='' || !tripCostChar.test(this.state.tripCost)){
+        //     // alert('Please enter trip cost as a proper number')
+        //     this.setState({tripCost_err:'Please enter trip cost as a proper number'})
+        //     return false
+        // }
         else if(this.state.vhclType==='' && this.state.userOption===0){
             // alert('Please enter a Vehicle Type')
             this.setState({vhclType_err:'Please enter a Vehicle Type'})
@@ -132,7 +143,6 @@ class PostAd extends Component{
             return false
         }
         else{
-            alert('Succesfully posted the ad')
             return true
         }
     }
@@ -167,8 +177,7 @@ class PostAd extends Component{
         })
         .then((resp) => resp.json())
 		.then((responseJson) => {
-            console.log(responseJson)	
-
+            alert('Succesfully posted the ad')
             /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
             history.push('/home')
             history.go()
@@ -180,6 +189,7 @@ class PostAd extends Component{
     submitForm=()=>{
         var allowSubmission = this.validate()
         
+        //posting advertisement only if the validation of all fields pass
         if(allowSubmission){
             this.postAdToMongo()
         }
@@ -301,7 +311,7 @@ class PostAd extends Component{
                                         Source *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement">
-                                        {/* Used from https://github.com/hibiken/react-places-autocomplete */}
+                                        {/* Referred and altered from Hibiken. “Hibiken/React-Places-Autocomplete.” GitHub, 18 Feb. 2019, github.com/hibiken/react-places-autocomplete. */}
                                         <PlacesAutocomplete
                                             value={this.state.src}
                                             onChange={this.handleChangeSrc}
@@ -350,13 +360,7 @@ class PostAd extends Component{
                                             </div>
                                             )}
                                         </PlacesAutocomplete>
-                                        {/* <FormControl 
-                                            placeholder="Source" 
-                                            value={this.state.src}
-                                            onChange={this.assignValue}
-                                            id="src"
-                                            aria-describedby="basic-addon1"
-                                        /> */}
+                                       
                                         <div className="validationLogin">{this.state.src_err}</div> 
                                         </Col>
                                     </Form.Group>
@@ -365,7 +369,7 @@ class PostAd extends Component{
                                         Destination *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement">
-                                        {/* Used from https://github.com/hibiken/react-places-autocomplete */}
+                                        {/* Referred and altered from Hibiken. “Hibiken/React-Places-Autocomplete.” GitHub, 18 Feb. 2019, github.com/hibiken/react-places-autocomplete. */}
                                         <PlacesAutocomplete
                                             value={this.state.destn}
                                             onChange={this.handleChangeDestn}
