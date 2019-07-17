@@ -1,74 +1,90 @@
-#########################################################################################
-# Group         : Runtime Terror                                                        #
-# Project Name  : Haul Share                                                            #
-# Course Code   : CSCI5709												                #
-#########################################################################################
+-- Anuj Sharma (B00825885)
 
-######Installation and Setup######
+Feature Description:
 
-I. Project link to GitLab
-https://git.cs.dal.ca/holla/haul-share-project/ [27]
+As part of Assignment 4, I am implementing the "View Requests" feature. In this feature, the user will be able to see all the requests posted by
+both Service provider and the Customer. Requests  will be visible to the user as soon as he/she logs in. The requests are divided into 2 parts:
+"Transporter" and "Requester". Each request is displayed in a card. Each card will display the type of the request at the top left. If a customer
+requests for a trip, the card will display "Requester" and it will display "Transporter" if a Service provider posts a trip.
+On the Home page, the card will display only few details like Storage space and destination. To view more details, the user has to click the
+button on top right button. This will open a prompt where all the details like source, destination, service charge, email id etc. will be present.
 
-II. Project Setup on the local system from GitLab
-1. Clone project from gitlab.cs.dal.ca
-2. Go to the directory 'Haul-Share-Project_RuntimeTerror' on the terminal/console
-3. Run 'npm install' on the terminal  (Install node[29] and npm[30] before this step)
-4. After the installation, run 'npm start' on the terminal
-5. A browser will open locally and run the application on 'localhost:3000' (The port might change depending on the applications running on the user's browser)
+Also, if a customer posts an advertisement, then that request will be visible on the Home page in the card.
 
-III. Project link on Heroku:
-https://haul-share-official.herokuapp.com/ [1]
+A button (Request trip or Offer trip) on each card as well as on each prompt box will be present. If the requested is posted by a transporter,
+then the card will contain "Request Trip" button so that the user can request the service provider. Similarly, if the request is posted by a 
+customer, then the card will contain "Offer Trip" button so that a service provider can offer his/her services to that customer.
 
-######Compatiblility######
-The application is compatible with different browsers like Microsoft Edge, Google Chrome, FireFox.
-The application is responsive. It can be viewed on phones(screen width upto 480px), tablets (screen width from 480px-1024px) and large screens(screen width greater than 1024px)
+For now, clicking the Request Trip/Offer Trip button will not provide any functionality since that will be covered in the Notification feature.
 
-######Technology###### 
-Framework used: ReactJS[2]
-Boilerplates used: ReactBootstrap[3], MaterialUI[4], React-Star-Rating-Component[5], React-router-dom[25]
+Database: We are using MongoDB Atlas for posting and fetching the data for our web application.
 
--Used FormControl,Card,Form,Button,Image,Container,Row,Col,InputGroup,Image,Navbar,Nav,NavDropdown from ReactBootstrap[3].
--Used Slider, AppBar, Tabs, Tab, Typography from MaterialUI[4].
--Used StarRatingComponent from React-Star-Rating-Component[5]
--Used React Router DOM[25] to create path to pages
--Navigating between pages using history[26].
--Not defined font family explicitly. Used ReactBootstrap's and MaterialUI's default font-family.[3][4][14]
--Icons used from Icons8[6]
--Application logo created on LogoMakr[7]
--Used getFileUpload() function from MDN Web Docs [21]. Used this function to upload picture on 'Post Ad' page. This function was edited by adding different styling attributes and by changing single selection to multiple selection.
--Used Radio buttons[22] to select between 'Transporter' and 'Customer' options. The CSS properties were changed. Improved the toggling between these two radio buttons.
+Javascript files:
 
-######References######
-[1] “Heroku.” Cloud Application Platform, www.heroku.com/
-[2] “React – A JavaScript Library for Building User Interfaces.” – A JavaScript Library for Building User Interfaces, reactjs.org/.
-[3] “React Bootstrap.” React, react-bootstrap.github.io/
-[4] “The World's Most Popular React UI Framework - Material-UI.” Material, material-ui.com/
-[5] “React-Star-Rating-Component.” Npm, www.npmjs.com/package/react-star-rating-component. 
-[6] “Download Free Icons, Music, Stock Photos, Vectors.” Download Free Icons, Music, Stock Photos, Vectors, icons8.com/.
-[7] “Free Logo Maker - Create Your Own Logo in Minutes!” Free Logo Maker - Create Your Own Logo in Minutes!, logomakr.com/.
-[8] “User Icons.” Free Download, PNG and SVG, https://icons8.com/icons/set/user
-[9] “Human Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/human
-[10] "Full Screen Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/full-screen
-[11] "Slider React Component - Material-UI.” Material, material-ui.com/components/slider/ 
-[12] "Trip Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/trip
-[13] "Search Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/search
-[14] “Tabs React Component - Material-UI.” Material, material-ui.com/components/tabs/.
-[15] “Regular Expressions.” MDN Web Docs, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions.
-[16] Goyvaerts, Jan. “Alternation with The Vertical Bar or Pipe Symbol.” Regex Tutorial - Alternation with The Vertical Bar, www.regular-expressions.info/alternation.html.
-[17] "Key Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/key
-[18] "Email Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/email
-[19] "Phone Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/phone
-[20] "Lock Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/lock
-[21] “FileReader.readAsDataURL().” MDN Web Docs, developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL.
-[22] “Custom Radio Buttons.” Tryit Editor v3.6, www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_radio
-[23] “React-Star-Rating-Component.” Npm, www.npmjs.com/package/react-star-rating-component. 
-[24] "Pencil Icons.” Free Download, PNG and SVG, https://icons8.com/icons/set/pencil
-[25] “React-Router-Dom.” Npm, www.npmjs.com/package/react-router-dom.
-[26] “History.” Npm, www.npmjs.com/package/history.
-[27] “GitLab.” GitLab, git.cs.dal.ca/
-[28] “Visual Studio Code - Code Editing. Redefined.” RSS, Microsoft, 14 Apr. 2016, code.visualstudio.com/.
-[29] Foundation, Node.js. “Download.” Node.js, nodejs.org/en/download/.
-[30] “NPM.” Npm, www.npmjs.com/get-npm.
-[31] (n.d.). Retrieved from http://stat.overdrive.in/wp-content/uploads/2018/08/2019-Hyundai-Elantra-facelift-01.jpg.
-[32] (n.d.). Retrieved from https://motorbikewriter.com/content/uploads/2018/02/3.png.
-[33] (n.d.). Retrieved from https://www.supplychaindigital.com/sites/default/files/styles/slider_detail/public/bizclik-drupal-prod/topic/image/article_im2504_shutterstock_10728025_0.jpg?itok=tkhcV8Cd.
+The following files are used for developing the feature:
+
+haul-share-project/src/component/Home/home.js : This will display the home page where all the requests can be viewed.
+
+haul-share-project/src/component/Ad-Description/adDesc.js: This will display the detailed description of each request.
+
+haul-share-project/src/server/models/user.model.js : For connecting to the database.
+
+haul-share-project/src/server/routes/users.js : For routing.
+
+
+NOTE: For now, the Search box and filters will not be working as those are separate features, which will be implemented later.
+
+
+Code reference/modification : 
+
+a.) For connecting to the database: const uri = "mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/Db_HaulShare"
+(Referred from: [3] ("Learn the MERN stack by building an exercise tracker — MERN Tutorial", Medium, 2019.))
+
+
+b.) For fetching data from backend to frontend:
+
+<Row className="row-padding">
+                        <Col md={4} className="label-header-style">
+                            Current Address:
+                        </Col>
+                        <Col md={8}>
+                        {this.state.data.source}
+                        </Col>
+                    </Row>
+(Referred from: [4] "Let’s build a full stack MongoDB, React, Node and Express (MERN) app", Medium, 2019. [Online].) 
+
+
+c.) componentWillMount() { //on page load
+        fetch('http://localhost:20000/users/',{ method:'GET'})
+          .then((data) => data.json())
+          .then((res) => //this.setState({ data: res.data }));
+          {console.log(res)
+            this.setState({
+                result:res,
+                storage: res[0].storageSpace,
+                dest: res[0].destination,
+                uType: res[0].typeOfUser
+                 })
+            
+            }
+(Referred from: [4] "Let’s build a full stack MongoDB, React, Node and Express (MERN) app", Medium, 2019. [Online].) 
+
+
+
+References:
+
+[1]"Access MongoDB in Node.js", Tutorialsteacher.com, 2019. [Online]. 
+Available: https://www.tutorialsteacher.com/nodejs/access-mongodb-in-nodejs. 
+[Accessed: 17- Jul- 2019].
+
+[2]"Introduction about Node.js and MongoDB - GeeksforGeeks", GeeksforGeeks, 2019. [Online]. 
+Available: https://www.geeksforgeeks.org/introduction-about-node-js-and-mongodb/. 
+[Accessed: 17- Jul- 2019].
+
+[3]"Learn the MERN stack by building an exercise tracker — MERN Tutorial", Medium, 2019. [Online]. 
+Available: https://medium.com/@beaucarnes/learn-the-mern-stack-by-building-an-exercise-tracker-mern-tutorial-59c13c1237a1. 
+[Accessed: 17- Jul- 2019].
+
+[4]"Let’s build a full stack MongoDB, React, Node and Express (MERN) app", Medium, 2019. [Online]. 
+Available: https://medium.com/javascript-in-plain-english/full-stack-mongodb-react-node-js-express-js-in-one-simple-app-6cc8ed6de274. 
+[Accessed: 17- Jul- 2019].
