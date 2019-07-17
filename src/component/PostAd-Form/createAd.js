@@ -146,48 +146,52 @@ class PostAd extends Component{
         // let url_post="http://localhost:5000/postAnAd"
         // let url_get="http://localhost:5000/getUname"+localStorage.getItem('user_id');
         let url_post="https://haul-share-meghna.herokuapp.com/postAnAd"
-        let url_get="https://haul-share-meghna.herokuapp.com/getUname"+localStorage.getItem('user_id');
+        let url_get="https://haul-share-meghna.herokuapp.com/getUname/"+localStorage.getItem('user_id');
         let uname=''
         fetch(url_get,{method:'GET'})
         .then((data)=>data.json())
         .then((res)=>{
             uname=res[0].uname
+
+            let send_data= {
+                "user_id":(localStorage.getItem('user_id')===null?'xyz':localStorage.getItem('user_id')),
+                "userType":(this.state.userOption===0)?"T":"C",
+                "uname":uname,
+                "adTitle":this.state.adTitle,
+                "strgDim":this.state.strgDim,
+                "luggageWgt":this.state.luggageWgt,
+                "destination":this.state.destn,
+                "source":this.state.src,
+                "tripDt":this.state.tripDate,
+                "tripTime":this.state.tripTime,
+                "tripFee":this.state.tripCost,
+                "desc":this.state.desc,
+                "vhclType":this.state.vhclType,
+                "vhclNum":this.state.vhclNum,
+                "vhclImg":this.state.vhclImg
+                }
+                console.log(send_data);
+                
+    // fetch(url_post,{
+    //     method:'POST',
+    //     headers: {
+    //         'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Origin',
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': '*'
+    //       },
+    //     body:JSON.stringify(send_data),
+        
+    // })
+    // .then((resp) => resp.json())
+    // .then((responseJson) => {
+    //     alert('Succesfully posted the ad')
+    //     /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
+    //     history.push('/home')
+    //     history.go()
+    // })
+    // .catch((e) => alert('Error Occured. Error is:',e))
         })
-        let send_data= {
-                    "user_id":(localStorage.getItem('user_id')===null?'xyz':localStorage.getItem('user_id')),
-                    "userType":(this.state.userOption===0)?"T":"C",
-                    "uname":uname,
-                    "adTitle":this.state.adTitle,
-                    "strgDim":this.state.strgDim,
-                    "luggageWgt":this.state.luggageWgt,
-                    "destination":this.state.destn,
-                    "source":this.state.src,
-                    "tripDt":this.state.tripDate,
-                    "tripTime":this.state.tripTime,
-                    "tripFee":this.state.tripCost,
-                    "desc":this.state.desc,
-                    "vhclType":this.state.vhclType,
-                    "vhclNum":this.state.vhclNum,
-                    "vhclImg":this.state.vhclImg
-                    }
-        fetch(url_post,{
-            method:'POST',
-            headers: {
-                'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Origin',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-              },
-            body:JSON.stringify(send_data),
-            
-        })
-        .then((resp) => resp.json())
-		.then((responseJson) => {
-            alert('Succesfully posted the ad')
-            /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
-            history.push('/home')
-            history.go()
-        })
-        .catch((e) => alert('Error Occured. Error is:',e))
+        
 
     }
 
