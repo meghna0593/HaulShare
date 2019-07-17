@@ -106,7 +106,7 @@ class UserProfile extends Component{
                                             <div className="profile-flex">
                                             <Image id="img1" src="/images/user-profile-icon.png" style={{height:'170px'}}/> {/*image from “User Icons.” Free Download, PNG and SVG, https://icons8.com/icons/set/user.*/}
                                             </div>
-                                            <div className="profile-flex">
+                                            <div className="profile-flex">{/*[3]*/}
                                                 {/* Stars for rating from “React-Star-Rating-Component.” Npm, www.npmjs.com/package/react-star-rating-component. */}
                                                 <StarRatingComponent 
                                                     name="rate1" 

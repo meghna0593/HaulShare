@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import Header from '../Header/header.js';
 import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootstrap';
-import { PromiseProvider } from 'mongoose';
+//import { PromiseProvider } from 'mongoose';
 
 class VehicleInfo extends Component{
 
     constructor (props){
         super(props);
-        this.state = {
+        this.state = {//giving mongoId for fetching the data
             // vhId:this.props.adId,
-            vhId:'5d2251d91b28ca7ea49eaad7',
-            vehicles:[],
+            vhId:'5d2e80e81c9d440000f657ad',
+            vehicles:[],//stores the fetched data
             isLoaded: false,
         }
     }
@@ -26,14 +26,10 @@ class VehicleInfo extends Component{
     
     
 
-      componentWillMount(){
-          
-        //api
-        //static id mongo
-        //fetch() method:GET
-        //responsejson -> state variable
-        //http://localhost:4000/data/hs_data/_id/5d2251d91b28ca7ea49eaad7
-        fetch('http://localhost:4000/data/hs_data/_id/'+this.state.vhId)
+       componentWillMount(){//[9]
+        //[6]   
+        fetch('http://localhost:4000/data/hs_data/_id/'+this.state.vhId)//[10]
+        //used to fetch the data and for converting into JSON format
             .then(res => res.json())
             .then(json => {
                 this.setState({
@@ -46,20 +42,20 @@ class VehicleInfo extends Component{
     render(){
         var {isLoaded, vehicles} = this.state;
 
-        if(!isLoaded) {
+        if(!isLoaded) {//checks data is empty or not
             return <div></div>
         }
         else{
 
             return(
                 
-                
-                
                 <div>
+                    {/* mapping the fetched data */}
                     {this.state.vehicles.map(vehicle => 
                     <div>
 
-                        
+                        {/* [2] */}
+                        {/* used key for implementing the loop concept */}
                         <div key={vehicle.id}>
                             <Container style={{fontSize:'14px'}}>
                             <Row>
@@ -68,6 +64,7 @@ class VehicleInfo extends Component{
                                 </Col>
                             </Row>
                             <Row>
+                                {/* [12] */}
                                 <Col md={12} style={{display:'flex',justifyContent:'center'}}>
                                     <Image src="/images/truck.png" style={{width:'20%',height:'100%',paddingBottom:'17px'}} />
                                 </Col>
@@ -78,6 +75,7 @@ class VehicleInfo extends Component{
                                     Vehicle Name:
                                 </Col>
                                 <Col md={3} style={{display:'flex',justifyContent:'flex-end'}}>
+                                    {/* showing fetched data into react page */}
                                     {vehicle.vehicle_name}
                                 </Col>
                                 <Col md={3}/>

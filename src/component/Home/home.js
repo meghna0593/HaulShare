@@ -57,7 +57,7 @@ class Home extends Component {
         }
     }
 
-    userDetails=(userType)=>{
+    userDetails=(userType)=>{//giving the image and label to the post
         return(
             <div>
             <Row>
@@ -104,7 +104,7 @@ class Home extends Component {
         })
     }
 
-    openDetailedDesc=(userType)=>{
+    openDetailedDesc=(userType)=>{//[11]
         console.log(this.state.showDesc);
         
         return(
@@ -114,7 +114,8 @@ class Home extends Component {
         )
     }
 
-    openVehicleDesc=()=>{
+    openVehicleDesc=()=>{//[11]
+        //opens the vehicle details modal
         return(
             <Modal show={this.state.showVehicleDesc} onHide={this.handleVehicleDesc}>
                 <VehicleDescModal/>
@@ -144,6 +145,8 @@ class Home extends Component {
                         <div>
                             Storage Space: ___xxx lb___<br/>
                             Destination : ___xxx city___<br/>
+                            {/* [5] */}
+                            {/* after clicking on this hyperlink users will get to know the vehicle details appeared in react-modal */}
                             <div className="vehicle-det" onClick={this.handleVehicleDesc}>Click here for Vehicle Details</div>
                         </div>                                    
                     </Col>  
@@ -198,7 +201,7 @@ class Home extends Component {
         )
     }
     
-    displayCards=(userType)=>{
+    displayCards=(userType)=>{//displaying the posts in card
         console.log(userType);
         
         return(
@@ -206,9 +209,11 @@ class Home extends Component {
                 <Container style={{maxWidth:'100%',padding:'0px'}}>
                     <Row style={{marginRight:'0px',marginLeft:'0px'}}>
                         <Col md={2} style={{padding:'0px'}}>
+                            {/* adding user details */}
                             {this.userDetails(userType)}                           
                         </Col>
                         <Col md={10} style={{padding:'0px'}}>
+                            {/* adding the advertisement details */}
                             {this.adDetails(userType)}
                         </Col>
                     </Row>
@@ -273,8 +278,9 @@ class Home extends Component {
                                 <Col md={7} style={{borderRight:'1px ridge #80808099', backgroundColor:'#ededed'}}>
                                     {this.openDetailedDesc('transporter')}
                                     {this.openVehicleDesc()}
+                                    {/* calling the card for transporter */}
                                     {this.displayCards('transporter')}
-                                    {this.displayCards('customer')}
+                                    {/* {this.displayCards('customer')} */}
                                 </Col>
                                 <Col md={3}  style={{display:'flex',justifyContent:'center',borderRight:'1px ridge #80808099'}}>
                                     {this.tripSuggestion()}
