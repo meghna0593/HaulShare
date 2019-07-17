@@ -143,10 +143,20 @@ class PostAd extends Component{
     }
 
     postAdToMongo=()=>{
-        let url_post="http://localhost:5000/postAnAd"
+        // let url_post="http://localhost:5000/postAnAd"
+        // let url_get="http://localhost:5000/getUname"+localStorage.getItem('user_id');
+        let url_post="https://haul-share-meghna.herokuapp.com/postAnAd"
+        let url_get="https://haul-share-meghna.herokuapp.com/getUname"+localStorage.getItem('user_id');
+        let uname=''
+        fetch(url_get,{method:'GET'})
+        .then((data)=>data.json())
+        .then((res)=>{
+            uname=res[0].uname
+        })
         let send_data= {
                     "user_id":(localStorage.getItem('user_id')===null?'xyz':localStorage.getItem('user_id')),
                     "userType":(this.state.userOption===0)?"T":"C",
+                    "uname":uname,
                     "adTitle":this.state.adTitle,
                     "strgDim":this.state.strgDim,
                     "luggageWgt":this.state.luggageWgt,

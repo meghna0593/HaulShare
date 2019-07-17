@@ -124,7 +124,8 @@ class Login extends Component {
     // Using fetch ,connecting front end react with back-end node
      Login = () => {
        console.log("login");
-         let url_post = "http://localhost:19000/login"
+        //  let url_post = "http://localhost:19000/login" //local
+         let url_post = "https://haul-share-archana.herokuapp.com/login"
          let send_data = {
              "email_reg": this.state.email_log,
              "confirm_pass": this.state.pass_log
@@ -148,12 +149,13 @@ class Login extends Component {
                  history.push('/home')
                  history.go()
              })
-             .catch((e) => alert('Error Occured. Error is:', e))
+             .catch((e) => alert('Invalid email or password'))
      }
 
     // Using fetch ,connecting front end react with back-end node
      Register = () => {
-         let url_post = "http://localhost:19000/register"
+        //  let url_post = "http://localhost:19000/register"
+         let url_post="https://haul-share-archana.herokuapp.com/register"
          let send_data = {
              "uname": this.state.uname,
              "email_reg": this.state.email_reg,
@@ -178,7 +180,7 @@ class Login extends Component {
                  history.push('/')
                  history.go()
              })
-             .catch((e) => alert('Error Occured. Error is:'+ e))
+             .catch((e) => alert('User already registered'))
 
      }
      submitForm = (event) => {
