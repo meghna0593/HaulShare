@@ -2,23 +2,37 @@ import React, { Component } from 'react';
 import Header from '../Header/header.js';
 import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootstrap';
 import './adDesc.css'
+
+// This file is responsible for opening a
+// prompt box, which will contain all the
+// details for that particular trip on
+// the card.
 class DescriptionModal extends Component{
 
     constructor(props){
         super(props);
         this.state={
-            userType:this.props.userType
+            data:this.props.data
         }
+    }
+
+    // This will start executing as soon as the page loads.
+    componentWillMount(){
+        console.log(this.state.data);
+        
     }
 
     render(){
         return(
+            // This will create all the attributes for the prompt box.
+            // It will also display the values corresponding to the fields
+            // after fetching from the database.
             <div>
                 <Container style={{fontSize:'14px'}}>
                     <Row>
                         <Col md={12} style={{paddingBottom:'17px'}}>
                             <h5 className="ad-title" style={{paddingLeft:'0px',display:'flex',justifyContent:'center'}}>Detailed Description</h5> <div><hr style={{width:'100%'}}/></div>
-                            <div>Proin porttitor aliquet odio non mollis. Pellentesque eget augue id augue facilisis facilisis non eu lectus. Nullam orci turpis, rutrum quis tellus scelerisque</div>
+                            <div>{this.state.data.desc}</div>
                         </Col>
                     </Row>
                     <Row className="row-padding">
@@ -26,7 +40,7 @@ class DescriptionModal extends Component{
                             Current Address:
                         </Col>
                         <Col md={8}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+                        {this.state.data.source}
                         </Col>
                     </Row>
                     <Row className="row-padding">
@@ -34,7 +48,7 @@ class DescriptionModal extends Component{
                             Travel Address:
                         </Col>
                         <Col md={8}>
-                            blandit lorem tortor, nec vehicula ipsum fermentum ut.
+                        {this.state.data.destination}
                         </Col>
                     </Row>
                     <Row className="row-padding">
@@ -42,7 +56,7 @@ class DescriptionModal extends Component{
                             Luggage Dimension:
                         </Col>
                         <Col md={8}>
-                            25 x 45 x 100 inch
+                        {this.state.data.strgDim}
                         </Col>
                     </Row>
                     <Row className="row-padding">
@@ -50,7 +64,7 @@ class DescriptionModal extends Component{
                             Luggage Weight:
                         </Col>
                         <Col md={8}>
-                            20kg
+                        {this.state.data.luggageWgt}
                         </Col>
                     </Row>
                     <Row className="row-padding">
@@ -58,7 +72,7 @@ class DescriptionModal extends Component{
                             Date of Travel:
                         </Col>
                         <Col md={8}>
-                            21 Dec 2019
+                        {this.state.data.tripDt}
                         </Col>
                     </Row>
                     <Row className="row-padding">
@@ -66,15 +80,32 @@ class DescriptionModal extends Component{
                             Travel Start Time:
                         </Col>
                         <Col md={8}>
-                            8.30am
+                        {this.state.data.tripTime}
+                        </Col>
+                    </Row>
+                    
+                    <Row className="row-padding">
+                        <Col md={4} className="label-header-style">
+                            Service Charge:
+                        </Col>
+                        <Col md={8}>
+                        {this.state.data.tripFee}
                         </Col>
                     </Row>
                     <Row className="row-padding">
                         <Col md={4} className="label-header-style">
-                            Mobile:
+                            Vehicle Type:
                         </Col>
                         <Col md={8}>
-                            +1 9021111111
+                        {this.state.data.vhclType}
+                        </Col>
+                    </Row>
+                    <Row className="row-padding">
+                        <Col md={4} className="label-header-style">
+                            Vehicle Number:
+                        </Col>
+                        <Col md={8}>
+                        {this.state.data.vhclNum}
                         </Col>
                     </Row>
                     <Row className="row-padding">
@@ -82,7 +113,7 @@ class DescriptionModal extends Component{
                             Email ID:
                         </Col>
                         <Col md={8}>
-                            test@gmail.com
+                        {this.state.data.user_id}
                         </Col>
                     </Row>
                     
@@ -90,7 +121,7 @@ class DescriptionModal extends Component{
                         <Col md={12} style={{justifyContent:'center'}} className="button-grp" >
                             <div className="btn-usage">
                                 <Button variant="primary" type="submit" id="trip" onClick={this.submitForm}>
-                                    {(this.state.userType==='transporter')?<div>Request Trip</div>:<div>Offer Trip</div>}
+                                    {(this.state.data.userType==='T')?<div>Request Trip</div>:<div>Offer Trip</div>}
                                 </Button> 
                             </div>                                  
                         </Col>     
