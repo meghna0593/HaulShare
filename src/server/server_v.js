@@ -16,7 +16,7 @@ const router = express.Router();
 
 // MongoDB Atlas connection string
 const dbRoute =
-  "mongodb+srv://afsi01:testtest@haul-share-0g0hd.mongodb.net/db_haul_share";
+  "mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/Db_HaulShare";
 
 // connects the backend with the MongoDB atlas
 mongoose.connect(dbRoute, { useNewUrlParser: true });

@@ -1,9 +1,11 @@
+//Varun Gopalakrishnan, B00823111
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import Header from "../Header/header";
 import MarkerPin from "./place.jsx";
 import Geocode from "react-geocode";
 
+//setting initial position in map.
 class SimpleMap extends Component {
   static defaultProps = {
     center: {
@@ -23,6 +25,7 @@ class SimpleMap extends Component {
     trip_id: localStorage.getItem("trip_id")
   };
 
+  // async call to fetch pickup and drop address and extract lat,lng using geo-encoding.
   async componentDidMount() {
     console.log(this.state.trip_id);
     localStorage.removeItem("trip_id");
@@ -32,7 +35,8 @@ class SimpleMap extends Component {
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ location: data.data[0], loading: false });
-    // geo-encoder call
+
+    // geo-encoder function call, to change address to lat and lng.
     this.getGeocode(this.state.location.pickup_addr, "p");
     this.getGeocode(this.state.location.drop_addr, "d");
   }
@@ -44,27 +48,22 @@ class SimpleMap extends Component {
     }
   }
 
-  // getDataFromDb = () => {
-  //   fetch("http://localhost:3001/api/getData/5d23654eef258223c0a8ce90")
-  //     .then(data => data.json())
-  //     .then(res => this.setState({ data: res.data }));
-  // };
-
   getGeocode = (addr, p_d_ind) => {
-    // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
+    // set Google Maps Geocoding API for tracking request quota.
     Geocode.setApiKey("AIzaSyAZqC65fXp58nk_d1y5fsigHLXLEuwCkpE");
     Geocode.enableDebug();
     Geocode.fromAddress(addr).then(
       response => {
         let { lat, lng } = response.results[0].geometry.location;
+        //identifying pickup and drop address using a counter.
         if (p_d_ind == "p") {
           this.setState({ p_lat: lat });
           this.setState({ p_lng: lng });
-          console.log("hip", this.state.p_lat);
+          //console.log("hip", this.state.p_lat);
         } else if (p_d_ind == "d") {
           this.setState({ d_lat: lat });
           this.setState({ d_lng: lng });
-          console.log("hid", this.state.d_lat);
+          //console.log("hid", this.state.d_lat);
         }
       },
       error => {
@@ -75,11 +74,12 @@ class SimpleMap extends Component {
 
   render() {
     if (this.state.loading) {
+      //loading is displayed while waiting for api response.
       return <div>loading...</div>;
     }
 
     // console.log(this.state.location.d_lng);
-
+    //If no response is received below message is dispayed
     if (!this.state.location) {
       return <div>didn't get a location</div>;
     }
@@ -91,6 +91,7 @@ class SimpleMap extends Component {
         <Header />
         <GoogleMapReact
           bootstrapURLKeys={{
+            //google api key to access the maps
             key: "AIzaSyDY5sdxJ1y02C3cWKB4 - iezaXaCt0sKoKQ"
           }}
           defaultCenter={this.props.center}
