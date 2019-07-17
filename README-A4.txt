@@ -1,6 +1,6 @@
-﻿								              Haul Share Website
-							                   Group 5 - Runtime Terror
-						                        B00824760- Kushal Reshamdalal	 		
+﻿							Haul Share Website
+						     Group 5 - Runtime Terror
+						   B00824760- Kushal Reshamdalal	 		
 
 
 ============================================================================================================================================
@@ -11,8 +11,11 @@ Haul Share provides the platform to aid the people who want to transfer their go
 cheap options to the customers for transferring. Along with the customers, the people who want to earn money by filling up the space of their vehicles while they are traveling will also use this website. Moreover, our website includes rating and review feature which will
 guide these customers and transporters while choosing each other.
 
-*For checking the feature go through the following files.
+*For checking the code feature go through the following files.
 
+1) Go to Vehicle-Info --> vehicleinfo.js(frontend)
+2) Go to Home --> home.js --> adDetails,openVehicleDesc(frontend)
+3) Go to server --> server_k.js(backend)
 
 ============================================================================================================================================
 2. Installation guide
@@ -20,21 +23,30 @@ guide these customers and transporters while choosing each other.
 
 1) Git URL - https://git.cs.dal.ca/holla/haul-share-project/tree/KushalB00824760
 2) Download project from above URL.
+3) Heroku URL - https://haul-share-official.herokuapp.com/
 
 ============================================================================================================================================
-3.Steps to run
+3. Steps to run 
 ============================================================================================================================================
 
-1) Open the project in Visual Code
-2) Start two terminals using "+" sign from terminals. Write following commands.
-3) In first terminal write "npm start" for strating frontend. 
-4) In second terminal write following commands for changing directory
+1. Option-1 (Git - local running)(Specific to my feature)
+
+1) Clone the master branch using https://git.cs.dal.ca/holla/haul-share-project/tree/KushalB00824760
+2) Open the project in Visual Code
+3) Start two terminals using "+" sign from terminals. Write following commands.
+4) In first terminal write "npm start" for strating frontend. 
+     --> npm start
+5) In second terminal write following commands for changing directory and starting backend service
      --> cd src
      --> cd server
 5) Now run following command
      --> nodemon server_k
 
 6) After running following command the backend and front end will start.
+
+2. Option-2 (Heroku) (Perfectly running with other's features)
+
+1) Open https://haul-share-official.herokuapp.com/ into web browser.
 
 For checking the feature do the follwing flows mentioned in (4).
 
@@ -51,16 +63,16 @@ In the first step, users will have to log in to our website. In the second step,
 they will be able to find different posts posted by customers and transporters. On each post, there will be a link "Click here for Vehicle Details" 
 in the bottom to see the vehicle description provided by other users whether they are transporters or customers.
 
-Flow:
+*Flow:*
 
 	Home page -> Posts -> Click here for Vehicle Details
 
 Moreover, the users will be searching the posts through location keyword from search bar. After getting the posts and again they will be able
 to see vehicle description through this link.
 
-Flow:
+*Flow:*
 
-	Home page -> Search bar(Keyword input) -> Posts -> Click here for Vehicle Details  
+	Home page -> Search bar(Keyword input) -> Posts -> Click here for Vehicle Details(one can check after implementation of search bar feature) (Not available right now)  
 
 ============================================================================================================================================
 5. Technologies used
@@ -97,7 +109,6 @@ Flow:
     editing={Boolean} /* is component available for editing, default `true` */
 />
 
-
 4) HTML5 and CSS3
 
 5) MERN (MongoDB, express, React, NodeJs) framework
@@ -107,20 +118,31 @@ Flow:
    MongoDB is used because it is schemaless. Both structured and unstructured data can be stored easily.    
 
 
-
 6 W3C compliant
   We have used React for front-end development which is totally w3c compliant.
 
 ============================================================================================================================================
-6. Important Note
+7. Code Modification
 ============================================================================================================================================
 
-I have implemented my feature in my group website. But my feature is dependent upon my groupmate Anuj Sharma’s feature. My feature is to fetch data when the user clicks the “Click here for vehicle details” from the “Trip” card. One can see that from screenshot 1, it is bounded on the card which was developed by my other groupmate. For making my feature dynamic Anuj needs some changes in the design of the card and also in his features. The page needs to add form tag as on can see from screenshot-2(reference) which is not there currently in our website.
-
-So, currently for this assignment 4 my feature works perfectly but for static data in the database. After other groupmates’ implementation, it will work dynamically in the final part. So, I just want to confirm that it is okay to develop using my dummy data.
+In this feature I am just using GET request. So, I have not taken code from any website for refernce. And because of there is not code in my part which is modified.
 
 ============================================================================================================================================
-7. References
+7. Important Note
+============================================================================================================================================
+
+I have implemented my feature in my group website. But my feature is dependent upon my groupmate Anuj Sharma’s feature. My feature is to fetch data when the user clicks the “Click here for vehicle details” from the “Trip” card. My feature is bounded in the card which was developed by my other groupmate. For making my feature dynamic he needed some changes in the design of the card and also in his features. So, in my own branch it is not developed static only but from Heroku link on can check its dynamic implementation.
+
+--> For specific my feature
+use haul-share-project/KushalB00824760  link
+
+--> It is also working in Heroku link dynamically
+use https://haul-share-official.herokuapp.com/
+
+My second feature is left, which will be implemented for the final project after this submission. 
+
+============================================================================================================================================
+8. References
 ============================================================================================================================================
 
 [1]"Learn the MERN stack by building an exercise tracker — MERN Tutorial", Medium, 2019. [Online]. 
@@ -145,15 +167,8 @@ So, currently for this assignment 4 my feature works perfectly but for static da
 [11]"react-modal", npm, 2019. [Online]. Available: https://www.npmjs.com/package/react-modal. [Accessed: 17- Jul- 2019].
 
 ============================================================================================================================================
-8. Images used in vehicle description feature
+9. Images used in vehicle description feature
 ============================================================================================================================================
 
 [12]"Trip Icons - Free Download, PNG and SVG", Icons8.com, 2019. [Online]. 
     Available: http://icons8.com/icons/set/trip. [Accessed: 17- Jul- 2019].
-
-
-
-
-
-
-
