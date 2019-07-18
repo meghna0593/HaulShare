@@ -170,26 +170,25 @@ class PostAd extends Component{
                 "vhclNum":this.state.vhclNum,
                 "vhclImg":this.state.vhclImg
                 }
-                console.log(send_data);
-                
-    // fetch(url_post,{
-    //     method:'POST',
-    //     headers: {
-    //         'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Origin',
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': '*'
-    //       },
-    //     body:JSON.stringify(send_data),
+
+    fetch(url_post,{
+        method:'POST',
+        headers: {
+            'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Origin',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+        body:JSON.stringify(send_data),
         
-    // })
-    // .then((resp) => resp.json())
-    // .then((responseJson) => {
-    //     alert('Succesfully posted the ad')
-    //     /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
-    //     history.push('/home')
-    //     history.go()
-    // })
-    // .catch((e) => alert('Error Occured. Error is:',e))
+    })
+    .then((resp) => resp.json())
+    .then((responseJson) => {
+        alert('Succesfully posted the ad')
+        /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
+        history.push('/home')
+        history.go()
+    })
+    .catch((e) => alert('Error Occured. Error is:',e))
         })
         
 
