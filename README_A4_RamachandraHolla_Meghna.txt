@@ -39,7 +39,7 @@ MongoDB Atlas[9] is used as it is a cloud database service and can be easily acc
 1. The feature I worked on is 'Posting Advertisement'. 
 2. I have written a 'postAnAd' POST method to create new documents on MongoDB. 
 3. I have written a 'getUname' GET/id method to get a particular user based on ID passed.
-4. The files I worked on are 'server_m.js'(backend) and 'create-ad.js' (frontend) 
+4. The files I worked on for Assignment 4 are 'server_m.js'(backend) and 'create-ad.js' (frontend) 
 5. The implementation of the feature is inline with the initial design specification[11].
 
 ######Project Folder Structure######
