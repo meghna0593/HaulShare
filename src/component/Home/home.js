@@ -166,7 +166,43 @@ class Home extends Component {
           ).catch((e) => alert('Error occurred:',e));
          }
     
-    
+         
+    notifyUser=(ad)=>{        
+        let requestor=localStorage.getItem('user_id')
+        let postData={
+            'ad_user_id':ad.user_id,
+            'ad_id':ad._id,
+            'requestor_id':requestor,
+            'mailOptions':{
+                'from': 'haulshare2019@gmail.com',
+                'to': 'haulshare2019@gmail.com',
+                'subject': 'You have got a request!',
+                'html':'Greetings! <br/>You have received a request for the advertisement posted on HaulShare.<br/> Click on the following link to accept the request. <a href="http://localhost:5000/response/accept/'+ad._id+'/'+requestor+'">Accept the request</a> <br/>To Cancel: <a href="http://localhost:5000/response/cancel/'+ad._id+'/'+requestor+'">Reject the request</a>' 
+            }             
+        }
+        console.log(postData);
+        
+        let url_post="http://localhost:5000/offerTrip"
+        fetch(url_post,{
+            method:'POST',
+            headers: {
+                'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Origin',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+              },
+            body:JSON.stringify(postData),
+            
+        })
+        .then((resp) => resp.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+            
+            alert('Notified the User about your request')
+        })
+        .catch((e) => alert('Could not notify user, please try again after sometime'))
+
+    }  
+
 // This method will display the details on the card.
 // Since the card has a limited size, it will only 
 //display some fields only.
@@ -193,7 +229,7 @@ class Home extends Component {
                     </Col>  
                     <Col md={5} className="button-grp" >
                         <div className="btn-usage">
-                            <Button variant="primary" type="submit" id="trip" className="buttonSpacing" onClick={this.submitForm}>
+                            <Button variant="primary" type="submit" id="trip" className="buttonSpacing" onClick={()=>this.notifyUser(e)}>
                                 {(userType==='T')?<div>Request Trip</div>:<div>Offer Trip</div>}
                             </Button> 
                             <Button variant="secondary" type="submit" id="viewProfile" onClick={this.submitForm} >
