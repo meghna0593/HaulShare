@@ -75,9 +75,47 @@ app.post("/offerTrip", cors(corsHost), (req, res) => {
   res.send(true);
 }); 
 
-app.get("/response/:status/:adId/:requestorId", cors(corsHost), (req, res) => {  
-  console.log("helloo");
+// //start trip -> send email, update mongodb advertisement ->requestor should get email, starttrip update
+app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
+  // var table = 'Advertisements'
+  // var query={_id: ObjectId(req.params.adId) }
+  // var newvalues = { $set: {tripStatus: req.params.status} };
+  // database.collection(table).updateOne(query, newvalues, function(err, res) {
+  //   if (err) res.send(err);
+  //   console.log("1 document updated");
+  //   res.send(true)
+  // });
+  // let mailOptions={}
+  //send email notification
+  if(req.params.status==='S'){ //trip started
+    mailOptions={
+      'from': 'haulshare2019@gmail.com',
+      'to': req.params.reqId,
+      'subject': 'Trip started',
+      'html':'Greetings! <br/>Your trip has been started and is on route.<br/>' 
+    }
+  }
+  else{ //trip ended
+    mailOptions={
+      'from': 'haulshare2019@gmail.com',
+      'to': req.params.reqId,
+      'subject': 'Trip ended',
+      'html':'Greetings! <br/>Your trip has been ended.<br/>' 
+    }
+  }
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      res.send(error)
+    } else {
+      res.send(info.response)
+    }
+  })
   
+})
+
+//end trip
+
+app.get("/response/:status/:adId/:requestorId", cors(corsHost), (req, res) => {  
   let requestorId=''
   let mailOptions={}
   let accepted=0
@@ -106,11 +144,9 @@ app.get("/response/:status/:adId/:requestorId", cors(corsHost), (req, res) => {
       console.log(error);
     } else {
       console.log('Email sent: ' + info.response);
-     
     }
   });
 
-  // //update mongodb
   var table = 'Advertisements'
   var query={_id: ObjectId(req.params.adId) }
   var newvalues = { $set: { requestorId: requestorId, accepted: accepted} };
@@ -126,7 +162,6 @@ app.get("/response/:status/:adId/:requestorId", cors(corsHost), (req, res) => {
   }
   
 }); 
-
 
 app.listen(API_PORT, () => {
     console.log('Go to http://localhost:5000/getData to see posts');
