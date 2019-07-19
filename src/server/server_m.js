@@ -15,16 +15,16 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 const corsHost = { origin: '*' }
-const mongo_url_local = "mongodb://localhost:27017/"; //local server
-const mongo_url="mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/test?retryWrites=true&w=majority"; //remote server
+const mongo_url = "mongodb://localhost:27017/"; //local server
+// const mongo_url="mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/test?retryWrites=true&w=majority"; //remote server
 var database;
 MongoClient.connect(mongo_url,function(err,client){
     if (err) {
         console.log(err);
         return;
     }
-    // database = client.db("haulShare"); //local mongodb
-    database = client.db("Db_HaulShare") //remote mongodb
+    database = client.db("haulShare"); //local mongodb
+    // database = client.db("Db_HaulShare") //remote mongodb
 })
 
 //POST method to add new advertisements
@@ -77,15 +77,14 @@ app.post("/offerTrip", cors(corsHost), (req, res) => {
 
 // //start trip -> send email, update mongodb advertisement ->requestor should get email, starttrip update
 app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
-  // var table = 'Advertisements'
-  // var query={_id: ObjectId(req.params.adId) }
-  // var newvalues = { $set: {tripStatus: req.params.status} };
-  // database.collection(table).updateOne(query, newvalues, function(err, res) {
-  //   if (err) res.send(err);
-  //   console.log("1 document updated");
-  //   res.send(true)
-  // });
-  // let mailOptions={}
+  var table = 'Advertisements'
+  var query={_id: ObjectId(req.params.adId) }
+  var newvalues = { $set: {tripStatus: req.params.status} };
+  database.collection(table).updateOne(query, newvalues, function(err, res) {
+    if (err) throw err;
+    // res.send(true)
+  });
+  let mailOptions={}
   //send email notification
   if(req.params.status==='S'){ //trip started
     mailOptions={
