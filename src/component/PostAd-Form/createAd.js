@@ -144,7 +144,7 @@ class PostAd extends Component{
 
     postAdToMongo=()=>{
         // let url_post="http://localhost:5000/postAnAd"
-        // let url_get="http://localhost:5000/getUname"+localStorage.getItem('user_id');
+        // let url_get="http://localhost:5000/getUname/"+localStorage.getItem('user_id');
         let url_post="https://haul-share-meghna.herokuapp.com/postAnAd"
         let url_get="https://haul-share-meghna.herokuapp.com/getUname/"+localStorage.getItem('user_id');
         let uname=''
@@ -168,7 +168,10 @@ class PostAd extends Component{
                 "desc":this.state.desc,
                 "vhclType":this.state.vhclType,
                 "vhclNum":this.state.vhclNum,
-                "vhclImg":this.state.vhclImg
+                "vhclImg":this.state.vhclImg,
+                "requestorId":'',
+                "accepted":0,
+                "tripStatus":'',
                 }
 
     fetch(url_post,{
