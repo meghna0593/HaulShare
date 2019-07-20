@@ -15,16 +15,16 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 const corsHost = { origin: '*' }
-const mongo_url = "mongodb://localhost:27017/"; //local server
-// const mongo_url="mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/test?retryWrites=true&w=majority"; //remote server
+// const mongo_url = "mongodb://localhost:27017/"; //local server
+const mongo_url="mongodb+srv://HaulShare:aakmv@cluster0-9pfpk.mongodb.net/test?retryWrites=true&w=majority"; //remote server
 var database;
 MongoClient.connect(mongo_url,function(err,client){
     if (err) {
         console.log(err);
         return;
     }
-    database = client.db("haulShare"); //local mongodb
-    // database = client.db("Db_HaulShare") //remote mongodb
+    // database = client.db("haulShare"); //local mongodb
+    database = client.db("Db_HaulShare") //remote mongodb
 })
 
 //POST method to add new advertisements
