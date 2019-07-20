@@ -75,11 +75,10 @@ app.post("/offerTrip", cors(corsHost), (req, res) => {
   res.send(true);
 }); 
 
-// //start trip -> send email, update mongodb advertisement ->requestor should get email, starttrip update
 app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
   var table = 'Advertisements'
   var query={_id: ObjectId(req.params.adId) }
-  var newvalues = { $set: {tripStatus: req.params.status} };
+  var newvalues = { $set: {accepted:2,tripStatus: req.params.status} };
   database.collection(table).updateOne(query, newvalues, function(err, res) {
     if (err) throw err;
     // res.send(true)
@@ -111,8 +110,6 @@ app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
   })
   
 })
-
-//end trip
 
 app.get("/response/:status/:adId/:requestorId", cors(corsHost), (req, res) => {  
   let requestorId=''
