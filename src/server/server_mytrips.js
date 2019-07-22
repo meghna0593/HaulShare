@@ -5,9 +5,9 @@ const express = require("express");
 var cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
-const Data = require("./mapModel");
+const Data = require("./mytripModel.js");
 
-const API_PORT = process.env.PORT || 5543;
+const API_PORT = process.env.PORT || 5545;
 const app = express();
 
 //allow cors in the server
@@ -32,9 +32,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
-// this method fetches the specific document based on the user_id and trip_id
-router.get("/getData/:_id", (req, res, next) => {
-  Data.find({ _id: req.params._id }, (err, data) => {
+// this method fetches the specific document based on the user_id and accepted
+router.get("/getData/:user_id", (req, res, next) => {
+  Data.find({ user_id: req.params.user_id }, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
