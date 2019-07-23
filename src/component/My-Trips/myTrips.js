@@ -168,15 +168,18 @@ class MyTrips extends Component {
   };
   
   changeTripStatus=(e,status)=>{    
-    // let url_get='http://localhost:5000/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
-    let url_get='https://haul-share-meghna.herokuapp.com/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
+    let url_get='http://localhost:5000/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
+    // let url_get='https://haul-share-meghna.herokuapp.com/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
     fetch(url_get, { method: "PUT" })
       .then(data => data.json())
       .then(res => {
         if(res){
           alert('You have'+(status==='S')?'started':'ended'+'the trip');
+          if(status==='E'){
+          window.location.reload()
         }
-        console.log(res);
+        }
+        
       })
       .catch(e => alert("Error occurred:", e));
   }

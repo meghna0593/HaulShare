@@ -7,7 +7,11 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
   } from 'react-places-autocomplete';
-  const history = createBrowserHistory();
+const history = createBrowserHistory();
+const searchOptions = {
+    componentRestrictions: { country: ['ca'] },
+    types: ['address']
+}
 
 class PostAd extends Component{
 
@@ -324,6 +328,7 @@ class PostAd extends Component{
                                         <Col md="8" sm="12" className="text-area-placement">
                                         {/* Referred and altered from Hibiken. “Hibiken/React-Places-Autocomplete.” GitHub, 18 Feb. 2019, github.com/hibiken/react-places-autocomplete. */}
                                         <PlacesAutocomplete
+                                            searchOptions={searchOptions}
                                             value={this.state.src}
                                             onChange={this.handleChangeSrc}
                                             onSelect={this.handleSelectSrc}
