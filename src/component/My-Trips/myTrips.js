@@ -42,11 +42,9 @@ class MyTrips extends Component {
 
     const response = await fetch(url);
     const data = await response.json();
-    this.setState({ result: data.data },()=>{
+    this.setState({ result: data.data }, () => {
       console.log(this.state.result);
-      
     });
-
   }
 
   goToRating = () => {
@@ -195,20 +193,28 @@ class MyTrips extends Component {
       </Container>
     );
   };
-  
-  changeTripStatus=(e,status)=>{    
+
+  changeTripStatus = (e, status) => {
     // let url_get='http://localhost:5000/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
-    let url_get='https://haul-share-meghna.herokuapp.com/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
+    let url_get =
+      "https://haul-share-meghna.herokuapp.com/tripNotifiy/" +
+      e._id +
+      "/" +
+      e.requestorId +
+      "/" +
+      status;
     fetch(url_get, { method: "PUT" })
       .then(data => data.json())
       .then(res => {
-        if(res){
-          alert('You have'+(status==='S')?'started':'ended'+'the trip');
+        if (res) {
+          alert(
+            "You have" + (status === "S") ? "started" : "ended" + "the trip"
+          );
         }
         console.log(res);
       })
       .catch(e => alert("Error occurred:", e));
-  }
+  };
 
   displayCards = (_id, e) => {
     console.log(e);
@@ -330,7 +336,7 @@ class MyTrips extends Component {
                               type="submit"
                               id="trip"
                               className="buttonSpacing"
-                              onClick={()=>this.changeTripStatus(e,'S')}
+                              onClick={() => this.changeTripStatus(e, "S")}
                             >
                               Start Trip
                             </Button>
@@ -339,7 +345,7 @@ class MyTrips extends Component {
                               type="submit"
                               id="trip"
                               className="buttonSpacing"
-                              onClick={()=>this.changeTripStatus(e,'E')}
+                              onClick={() => this.changeTripStatus(e, "E")}
                             >
                               End Trip
                             </Button>
@@ -378,7 +384,6 @@ class MyTrips extends Component {
         <div className="wrapper">
           <Header />
           <div className="content" />
-          {this.state.result.map(e => this.displayCards(e._id, e))}
           {this.state.result.map(e => this.displayCards(e._id, e))}
         </div>
       </div>
