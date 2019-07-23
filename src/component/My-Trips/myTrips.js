@@ -77,7 +77,13 @@ class MyTrips extends Component {
                 md={12}
                 style={{ display: "flex", justifyContent: "center" }}
               >
-                <Card style={{ backgroundColor: "white", width: "97%" }}>
+                <Card
+                  style={{
+                    backgroundColor: "white",
+                    width: "97%",
+                    marginBottom: "30px"
+                  }}
+                >
                   <Row>
                     <Col md={8} sm={12}>
                       <Card.Img
@@ -92,38 +98,61 @@ class MyTrips extends Component {
                         style={{ alignItems: "0px", marginTop: "50px" }}
                       >
                         <div>
-                          <b style={{ color: "blue" }}>Name:</b>
-                          <b> {e.uname}</b>
+                          <b>Name:</b>
+                          <div style={{ display: "inline" }}>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {e.uname}
+                          </div>
                           <br />
                         </div>
 
                         <div>
-                          <b style={{ color: "blue" }}>Vehicle type:</b>
-                          <b>{e.vhclType}</b>
+                          <b>Vehicle type:</b>
+                          <div style={{ display: "inline" }}>
+                            &nbsp;&nbsp;&nbsp;
+                            {e.vhclType}
+                          </div>
                           <br />
                         </div>
 
                         <div>
-                          <b style={{ color: "blue" }}>Trip date:</b>
-                          <b> {e.tripDt}</b>
+                          <b>Trip date:</b>
+                          <div style={{ display: "inline" }}>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {e.tripDt}
+                          </div>
                           <br />
                         </div>
 
                         <div>
-                          <b style={{ color: "blue" }}>Trip Time:</b>
-                          <b> {e.tripTime}</b>
+                          <b>Trip Time:</b>
+                          <div style={{ display: "inline" }}>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {e.tripTime}
+                          </div>
                           <br />
                         </div>
 
                         <div>
-                          <b style={{ color: "blue" }}>email id:</b>
-                          <b> {e.requestorId}</b>
+                          <b>email id:</b>
+                          <div style={{ display: "inline" }}>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {e.requestorId}
+                          </div>
+
                           <br />
                         </div>
 
                         <div>
-                          <b style={{ color: "blue" }}>Trip cost:</b>
-                          <b> {e.tripFee}</b>
+                          <b style={{ display: "inline" }}>Trip cost:</b>
+                          <row
+                            style={{
+                              display: "inline"
+                            }}
+                          >
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {"$" + e.tripFee}
+                          </row>
                           <br />
                         </div>
                         <div
@@ -168,7 +197,11 @@ class MyTrips extends Component {
     return (
       <div
         className="inner"
-        style={{ backgroundColor: "#ededed", height: "500px" }}
+        style={{
+          backgroundColor: "#ededed",
+          height: "500px",
+          overflowY: "hidden"
+        }}
       >
         {e.accepted === 1 ? (
           <Container>
@@ -187,7 +220,13 @@ class MyTrips extends Component {
                   md={12}
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  <Card style={{ backgroundColor: "white", width: "97%" }}>
+                  <Card
+                    style={{
+                      backgroundColor: "white",
+                      width: "97%",
+                      marginBottom: "30px"
+                    }}
+                  >
                     <Row>
                       <Col md={8} sm={12}>
                         <Card.Img
@@ -202,41 +241,63 @@ class MyTrips extends Component {
                           style={{ alignItems: "0px", marginTop: "50px" }}
                         >
                           <div>
-                            <b style={{ color: "blue" }}>Name:</b>
-                            <b> {e.uname}</b>
+                            <b>Name:</b>
+                            <div style={{ display: "inline" }}>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              {e.uname}
+                            </div>
                             <br />
                           </div>
 
                           <div>
-                            <b style={{ color: "blue" }}>Vehicle type:</b>
-                            <b> {e.vhclType}</b>
+                            <b>Vehicle type:</b>
+                            <div style={{ display: "inline" }}>
+                              &nbsp;&nbsp;&nbsp;
+                              {e.vhclType}
+                            </div>
                             <br />
                           </div>
 
                           <div>
-                            <b style={{ color: "blue" }}>Trip date:</b>
-                            <b> {e.tripDt}</b>
+                            <b>Trip date:</b>
+                            <div style={{ display: "inline" }}>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              {e.tripDt}
+                            </div>
                             <br />
                           </div>
 
                           <div>
-                            <b style={{ color: "blue" }}>Trip Time:</b>
-                            <b> {e.tripTime}</b>
+                            <b>Trip Time:</b>
+                            <div style={{ display: "inline" }}>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              {e.tripTime}
+                            </div>
                             <br />
                           </div>
 
                           <div>
-                            <b style={{ color: "blue" }}>email id:</b>
-                            <b>{e.requestorId}</b>
+                            <b>email id:</b>
+                            <div style={{ display: "inline" }}>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              {e.requestorId}
+                            </div>
+
                             <br />
                           </div>
 
                           <div>
-                            <b style={{ color: "blue" }}>Trip cost:</b>
-                            <b> {e.tripFee}</b>
+                            <b style={{ display: "inline" }}>Trip cost:</b>
+                            <row
+                              style={{
+                                display: "inline"
+                              }}
+                            >
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              {"$" + e.tripFee}
+                            </row>
                             <br />
                           </div>
-
                           <div
                             className="vehicle-det"
                             onClick={() => this.goToMaps(e._id)}
@@ -297,6 +358,7 @@ class MyTrips extends Component {
         <div className="wrapper">
           <Header />
           <div className="content" />
+          {this.state.result.map(e => this.displayCards(e._id, e))}
           {this.state.result.map(e => this.displayCards(e._id, e))}
         </div>
       </div>
