@@ -6,7 +6,7 @@ var MongoClient = require("mongodb").MongoClient;
 var nodemailer = require("nodemailer");
 const { ObjectId } = require("mongodb");
 
-const API_PORT = 5000;
+const API_PORT = process.env.PORT ||  5000;
 const app = express();
 app.use(bodyParser.json()); //application/json
 app.use(
@@ -80,10 +80,11 @@ app.post("/offerTrip", cors(corsHost), (req, res) => {
   res.send(true);
 });
 
-app.put("/tripNotifiy/:adId/:reqId/:status", cors(corsHost), (req, res) => {
-  var table = "Advertisements";
-  var query = { _id: ObjectId(req.params.adId) };
-  var newvalues = { $set: { accepted: 2, tripStatus: req.params.status } };
+app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
+  var table = 'Advertisements'
+  var query={_id: ObjectId(req.params.adId) }
+  var newvalues=(req.params.status==='S')?{ $set: {tripStatus: req.params.status} }:{ $set: {accepted:2,tripStatus: req.params.status} }
+   
   database.collection(table).updateOne(query, newvalues, function(err, res) {
     if (err) throw err;
     // res.send(true)
@@ -116,28 +117,28 @@ app.put("/tripNotifiy/:adId/:reqId/:status", cors(corsHost), (req, res) => {
   });
 });
 
-app.get("/response/:status/:adId/:requestorId", cors(corsHost), (req, res) => {
-  let requestorId = "";
-  let mailOptions = {};
-  let accepted = 0;
-  if (req.params.status === "accept") {
-    requestorId = encodeURI(req.params.requestorId);
-    accepted = 1;
-    mailOptions = {
-      from: "haulshare2019@gmail.com",
-      to: req.params.requestorId,
-      subject: "Request has been accepted",
-      html:
-        "Greetings! <br/>Your request has been accepted!<br/>Check the application to get trip details."
-    };
-  } else {
-    mailOptions = {
-      from: "haulshare2019@gmail.com",
-      to: req.params.requestorId,
-      subject: "Request has been rejected",
-      html:
-        "Hello,<br/> We regret to inform you that your request has been rejected.<br/> Please try making a request with another user"
-    };
+app.get("/response/:status/:adId/:requestorId", cors(corsHost), (req, res) => {  
+  let requestorId=''
+  let mailOptions={}
+  let accepted=0
+  if(req.params.status==='accept'){
+    requestorId=encodeURI(req.params.requestorId)
+    accepted=1
+    mailOptions={
+      'from': 'haulshare2019@gmail.com',
+      'to': req.params.requestorId,
+      'subject': 'Request has been accepted',
+      'html':'Greetings! <br/>Your request has been accepted!<br/>Check the application to get trip details.' 
+    }
+  }
+  else{
+    accepted=0
+    mailOptions={
+      'from': 'haulshare2019@gmail.com',
+      'to': req.params.requestorId,
+      'subject': 'Request has been rejected',
+      'html':'Hello,<br/> We regret to inform you that your request has been rejected.<br/> Please try making a request with another user' 
+    }
   }
   console.log(requestorId);
 
