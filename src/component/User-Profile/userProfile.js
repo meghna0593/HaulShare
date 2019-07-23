@@ -2,34 +2,39 @@ import React, { Component } from 'react'
 import Header from '../Header/header.js';
 import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
+import { createBrowserHistory } from 'history';
 import './userProfile.css'
+const history = createBrowserHistory();
 
 class UserProfile extends Component{
     constructor() {
         super();
-     
+
         this.state = {
           rating: 4,
           editOption:true,
-          name:"Arya Stark",
-          dob:'1993-03-05',
-          phone:9021110000,
-          email:'arya93@gmail.com',
+          name:'',
+          dob:'',
+          phone:''  ,
+          email:'',
           name_err:'',
           dob_err:'',
           phone_err:'',
           email_err:'',
-          edu:'Bachelor\'s in CS',
-          emp:'Software Engineer',
-          hobbies:'Archery',
+          edu:'',
+          emp:'',
+          hobbies:'',
           intro:'Some quick example text to build on the card title and make up the bulk of the card\'s content'
         }
-        
+
+    }
+    componentWillMount(){
+      console.log(localStorage.getItem('user_id'));
     }
 
     onStarClick(nextValue, prevValue, name) {
         console.log();
-        
+
         this.setState({rating: nextValue});
     }
 
@@ -37,7 +42,7 @@ class UserProfile extends Component{
         console.log(event.target.value);
         this.setState({
             [event.target.id]:event.target.value,
-            [event.target.id+'_err']:'',            
+            [event.target.id+'_err']:'',
         })
     }
 
@@ -69,28 +74,100 @@ class UserProfile extends Component{
             this.setState({phone_err:'Please enter a valid Phone number with 10 digits'})
             return false
         }
-        if(this.state.email==='' || !emailRe.test(this.state.email)){
+        else if(this.state.email==='' || !emailRe.test(this.state.email)){
             // alert('Please enter a valid email address')
-            this.setState({email_err:'Please enter a valid email address'})        
+            this.setState({email_err:'Please enter a valid email address'})
             return false
         }
         else{
             alert('Succesfully saved the changes')
             return true
         }
-
     }
+
+    deleteprofile = () => {
+      console.log("HI");
+       //  let url_post = "http://localhost:19000/login" //local
+       let url_post = "http://localhost:17650/delete/:email_reg"
+        //let url_post="https://haul-share-archana.herokuapp.com/register"
+        let send_data = {
+            "uname": this.state.uname,
+            "email_reg": this.state.email_reg
+
+        }
+        console.log("hi")
+        fetch(url_post, {
+                method: 'DELETE',
+                headers: {
+                    'Access-Control-Allow-Headers': 'Content-Type,Access-Control-Allow-Origin',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify(send_data),
+
+            })
+            .then((resp) => resp.json())
+            .then((responseJson) => {
+                console.log(responseJson)
+                alert('Are you sure?')
+                history.push('/')
+                history.go()
+            })
+            .catch((e) => alert('Error Occured. Error is:',e))
+    }
+
+    userprofile =()=>{
+        // let url_post="http://localhost:5000/postAnAd"
+        // let url_get="http://localhost:5000/getUname"+localStorage.getItem('user_id');
+        let url_post="http://localhost:17650/userprofileform"
+            let send_data= {
+                "name":this.state.name,
+                "dob":this.state.dob,
+                "phone":this.state.phone,
+                "email":this.state.email
+                }
+
+    fetch(url_post,{
+        method:'POST',
+        headers: {
+            'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Origin',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+        body:JSON.stringify(send_data),
+
+    })
+    .then((resp) => resp.json())
+    .then((responseJson) => {
+        alert('Succesfully updated')
+        /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
+        history.push('/profile')
+        history.go()
+    })
+    .catch((e) => alert('Error Occured. Error is:',e))
+
+}
 
     submitForm=()=>{
         var allowSubmission = this.validate()
         if(allowSubmission){
             this.setState({
-            editOption:true
+            editOption:true,
+            name :this.state.name,
+            dob:this.state.dob,
+            phone:this.state.phone,
+            email:this.state.email
+
             })
+            this.userprofile()
         }
     }
 
-    render(){
+    submitForm1=()=>{
+      this.deleteprofile()
+    }
+
+render(){
         return(
             <div className="wrapper">
                 <Header/>
@@ -108,8 +185,8 @@ class UserProfile extends Component{
                                             </div>
                                             <div className="profile-flex">
                                                 {/* Stars for rating from “React-Star-Rating-Component.” Npm, www.npmjs.com/package/react-star-rating-component. */}
-                                                <StarRatingComponent 
-                                                    name="rate1" 
+                                                <StarRatingComponent
+                                                    name="rate1"
                                                     starCount={5}
                                                     value={this.state.rating}
                                                     onStarClick={this.onStarClick.bind(this)}
@@ -137,11 +214,11 @@ class UserProfile extends Component{
                                                 </Card>
                                             </div>
                                             <div className="btn-usage profile-flex small-scr-btn" style={{bottom:'0'}}>
-                                                <Button variant="secondary" type="submit" onClick={this.submitForm}>
+                                                <Button variant="secondary" type="submit" onClick={this.submitForm1}>
                                                     Delete Profile
                                                 </Button>
                                             </div>
-                                            
+
                                         </Col>
                                         <Col md={9} style={{paddingRight:'4%'}}>
                                             <div style={{marginBottom:'25px'}}>
@@ -154,14 +231,14 @@ class UserProfile extends Component{
                                                             Name *
                                                             </Form.Label>
                                                             <Col md="8" sm="12" className="text-area-placement">
-                                                            <FormControl 
-                                                                defaultValue={this.state.name} 
-                                                                placeholder="Full Name" 
+                                                            <FormControl
+                                                                defaultValue={this.state.name}
+                                                                placeholder="Full Name"
                                                                 value={this.state.name}
                                                                 onChange={this.assignValue}
                                                                 id="name"
                                                                 aria-describedby="basic-addon1"
-                                                                disabled={this.state.editOption}
+                                                                // disabled={this.state.editOption}
                                                             />
                                                             <div className="validationLogin">{this.state.name_err}</div>
                                                             </Col>
@@ -171,14 +248,14 @@ class UserProfile extends Component{
                                                             Date of Birth *
                                                             </Form.Label>
                                                             <Col sm="8" className="text-area-placement">
-                                                            <FormControl 
-                                                                type="date" 
-                                                                placeholder="Date of Birth" 
+                                                            <FormControl
+                                                                type="date"
+                                                                placeholder="Date of Birth"
                                                                 value={this.state.dob}
                                                                 onChange={this.assignValue.bind(this)}
                                                                 id="dob"
                                                                 aria-describedby="basic-addon1"
-                                                                disabled={this.state.editOption}
+                                                                // disabled={this.state.editOption}
                                                             />
                                                             <div className="validationLogin">{this.state.dob_err}</div>
                                                             </Col>
@@ -188,14 +265,14 @@ class UserProfile extends Component{
                                                             Phone *
                                                             </Form.Label>
                                                             <Col sm="8" className="text-area-placement">
-                                                            <FormControl 
-                                                                type="number" 
-                                                                placeholder="Phone Number" 
+                                                            <FormControl
+                                                                type="number"
+                                                                placeholder="Phone Number"
                                                                 value={this.state.phone}
                                                                 onChange={this.assignValue.bind(this)}
                                                                 id="phone"
                                                                 aria-describedby="basic-addon1"
-                                                                disabled={this.state.editOption}    
+                                                                // disabled={this.state.editOption}
                                                             />
                                                             <div className="validationLogin">{this.state.phone_err}</div>
                                                             </Col>
@@ -205,13 +282,13 @@ class UserProfile extends Component{
                                                             E-mail *
                                                             </Form.Label>
                                                             <Col sm="8" className="text-area-placement">
-                                                            <FormControl 
-                                                                placeholder="Email" 
+                                                            <FormControl
+                                                                placeholder="Email"
                                                                 value={this.state.email}
                                                                 onChange={this.assignValue.bind(this)}
                                                                 id="email"
                                                                 aria-describedby="basic-addon1"
-                                                                disabled={this.state.editOption}                                                        
+                                                                // disabled={this.state.editOption}
                                                             />
                                                             <div className="validationLogin">{this.state.email_err}</div>
                                                             </Col>
@@ -230,13 +307,13 @@ class UserProfile extends Component{
                                                              Education
                                                             </Form.Label>
                                                             <Col sm="8" className="text-area-placement">
-                                                            <Form.Control  
-                                                                placeholder="Highest Education" 
+                                                            <Form.Control
+                                                                placeholder="Highest Education"
                                                                 value={this.state.edu}
                                                                 onChange={this.assignValue.bind(this)}
                                                                 id="edu"
                                                                 aria-describedby="basic-addon1"
-                                                                disabled={this.state.editOption}
+                                                                // disabled={this.state.editOption}
                                                             />
                                                             </Col>
                                                         </Form.Group>
@@ -245,13 +322,13 @@ class UserProfile extends Component{
                                                              Employment
                                                             </Form.Label>
                                                             <Col sm="8" className="text-area-placement">
-                                                            <Form.Control 
-                                                                placeholder="Currently employed in" 
+                                                            <Form.Control
+                                                                placeholder="Employed in"
                                                                 value={this.state.emp}
                                                                 onChange={this.assignValue.bind(this)}
                                                                 id="emp"
                                                                 aria-describedby="basic-addon1"
-                                                                disabled={this.state.editOption}
+                                                                // disabled={this.state.editOption}
                                                             />
                                                             </Col>
                                                         </Form.Group>
@@ -260,13 +337,13 @@ class UserProfile extends Component{
                                                              Hobbies
                                                             </Form.Label>
                                                             <Col sm="8" className="text-area-placement">
-                                                            <Form.Control 
+                                                            <Form.Control
                                                                 placeholder="My Hobbies"
                                                                 value={this.state.hobbies}
                                                                 onChange={this.assignValue.bind(this)}
                                                                 id="hobbies"
                                                                 aria-describedby="basic-addon1"
-                                                                disabled={this.state.editOption}
+                                                                // disabled={this.state.editOption}
                                                             />
                                                             </Col>
                                                         </Form.Group>
@@ -275,8 +352,8 @@ class UserProfile extends Component{
                                                 </Card>
                                             </div>
                                             <div className="btn-usage profile-flex">
-                                            <Button variant="primary" type="submit" style={{marginTop:'25px'}} onClick={this.submitForm}>Save</Button> 
-                                            </div> 
+                                            <Button variant="primary" type="submit" style={{marginTop:'25px'}} onClick={this.submitForm}>Save</Button>
+                                            </div>
                                             <Card className="card-shadow" style={{marginTop:'25px',marginBottom:'25px'}}>
                                                     <Card.Body>
                                                         <Card.Title className="text-overlay" style={{color:'#1a61ad',fontSize:'12px',width:'141px'}}><i>Feedback and Reviews</i></Card.Title>
@@ -299,7 +376,7 @@ class UserProfile extends Component{
                                 </Col>
                             </Row>
                             </Card>
-                        </Container>                      
+                        </Container>
                     </div>
                 </div>
             </div>
