@@ -41,10 +41,6 @@ class Home extends Component {
     };
   }
 
-  componentWillMount() {
-    console.log(localStorage.getItem("user_id"));
-  }
-
   handleSliderChange = (event, value) => {
     this.setState({ price_value: value });
   };
@@ -161,19 +157,29 @@ class Home extends Component {
   // values using the GET request and save it
   // in the declared variables.
   componentWillMount() {
+    
+    if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
+      alert('Please login first')
+      history.push("/");
+      history.go();
+    }
+    else{
     //on page load
     fetch("https://haul-share-anuj.herokuapp.com/users", { method: "GET" })
-      .then(data => data.json())
-      .then(res => {
-        console.log(res);
-        this.setState({
-          result: res,
-          storage: res[0].storageSpace,
-          dest: res[0].destination,
-          uType: res[0].typeOfUser
-        });
-      })
-      .catch(e => alert("Error occurred:", e));
+    .then(data => data.json())
+    .then(res => {
+      console.log(res);
+      this.setState({
+        result: res,
+        storage: res[0].storageSpace,
+        dest: res[0].destination,
+        uType: res[0].typeOfUser
+      });
+    })
+    .catch(e => alert("Error occurred:", e));
+    }
+
+    
   }
 
   //function implemented by Meghna R Holla
