@@ -50,19 +50,19 @@ class PostAd extends Component{
       handleChangeDestn = destn => {
         this.setState({ destn });
       };
-      handleSelectSrc = (address) => {          
+      handleSelectSrc = (address) => {
         geocodeByAddress(address)
         .then(results =>  {console.log(results);
          this.setState({ src:results[0].formatted_address,src_err:'' })})
         .catch(error => console.error(error));
       };
-      handleSelectDestn = (address) => {          
+      handleSelectDestn = (address) => {
         geocodeByAddress(address)
         .then(results =>  {console.log(results);
          this.setState({ destn:results[0].formatted_address,destn_err:'' })})
         .catch(error => console.error(error));
       };
-    
+
 
     assignValue=(event)=>{
         console.log(event.target.value);
@@ -77,13 +77,13 @@ class PostAd extends Component{
         let today = new Date()
         if(selectedDate < today){
             console.log("inside");
-            
+
             return false
         }
-        return true        
+        return true
     }
 
-    validate=()=>{        
+    validate=()=>{
         /*
         “Regular Expressions.” MDN Web Docs, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions.
         */
@@ -146,6 +146,14 @@ class PostAd extends Component{
         }
     }
 
+    componentWillMount() {
+      if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
+        alert('Please login first')
+        history.push("/");
+        history.go();
+      }
+    }
+    
     postAdToMongo=()=>{
         // let url_post="http://localhost:5000/postAnAd"
         // let url_get="http://localhost:5000/getUname/"+localStorage.getItem('user_id');
@@ -186,7 +194,7 @@ class PostAd extends Component{
             'Access-Control-Allow-Origin': '*'
           },
         body:JSON.stringify(send_data),
-        
+
     })
     .then((resp) => resp.json())
     .then((responseJson) => {
@@ -197,13 +205,13 @@ class PostAd extends Component{
     })
     .catch((e) => alert('Error Occured. Error is:',e))
         })
-        
+
 
     }
 
     submitForm=()=>{
         var allowSubmission = this.validate()
-        
+
         //posting advertisement only if the validation of all fields pass
         if(allowSubmission){
             this.postAdToMongo()
@@ -211,17 +219,17 @@ class PostAd extends Component{
     }
 
     /* Referred and altered code from “FileReader.readAsDataURL().” MDN Web Docs, developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL. */
-    getFileUpload=(event)=>{        
-        var file    = document.querySelector('input[type=file]').files[0]; 
-        var img = document.getElementById('img1') 
+    getFileUpload=(event)=>{
+        var file    = document.querySelector('input[type=file]').files[0];
+        var img = document.getElementById('img1')
         var reader  = new FileReader();
-        
+
         reader.onloadend = function () {
-            document.getElementById('img1').style.height = "170px" 
+            document.getElementById('img1').style.height = "170px"
             img.src = reader.result;
 
         }
- 
+
         if (file) {
             reader.readAsDataURL(file);
         } else {
@@ -272,7 +280,7 @@ class PostAd extends Component{
                                         <input type="radio" class="custom-control-input" id="customRadio2" onClick={this.userTypeOption}/>
                                         <label class="custom-control-label" for="customRadio2">Customer</label>
                                         </div>
-                                        
+
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -280,14 +288,14 @@ class PostAd extends Component{
                                         Ad Title *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="Ad Title" 
+                                        <FormControl
+                                            placeholder="Ad Title"
                                             value={this.state.adTitle}
                                             onChange={this.assignValue}
                                             id="adTitle"
                                             aria-describedby="basic-addon1"
                                         />
-                                        <div className="validationLogin">{this.state.adTitle_err}</div> 
+                                        <div className="validationLogin">{this.state.adTitle_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -295,14 +303,14 @@ class PostAd extends Component{
                                         Storage Dimension *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="widthxheightxdepth Eg:2x2x2" 
+                                        <FormControl
+                                            placeholder="widthxheightxdepth Eg:2x2x2"
                                             value={this.state.strgDim}
                                             onChange={this.assignValue}
                                             id="strgDim"
                                             aria-describedby="basic-addon1"
                                         />
-                                        <div className="validationLogin">{this.state.strgDim_err}</div> 
+                                        <div className="validationLogin">{this.state.strgDim_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -310,15 +318,15 @@ class PostAd extends Component{
                                         Luggage Weight *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="in kilogram" 
+                                        <FormControl
+                                            placeholder="in kilogram"
                                             value={this.state.luggageWgt}
                                             onChange={this.assignValue}
                                             id="luggageWgt"
                                             type="number"
                                             aria-describedby="basic-addon1"
                                         />
-                                        <div className="validationLogin">{this.state.luggageWgt_err}</div> 
+                                        <div className="validationLogin">{this.state.luggageWgt_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -337,7 +345,7 @@ class PostAd extends Component{
                                             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                                             <div >
                                                 <input
-                                                style={{  
+                                                style={{
                                                     width:'100%', height:'38px',fontSize: '1rem',
                                                     fontWeight: 400,
                                                     lineHeight: 1.5,
@@ -376,8 +384,8 @@ class PostAd extends Component{
                                             </div>
                                             )}
                                         </PlacesAutocomplete>
-                                       
-                                        <div className="validationLogin">{this.state.src_err}</div> 
+
+                                        <div className="validationLogin">{this.state.src_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -433,8 +441,8 @@ class PostAd extends Component{
                                             </div>
                                             )}
                                         </PlacesAutocomplete>
-                                        
-                                        <div className="validationLogin">{this.state.destn_err}</div> 
+
+                                        <div className="validationLogin">{this.state.destn_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -442,15 +450,15 @@ class PostAd extends Component{
                                         Trip Date *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="Trip Date" 
+                                        <FormControl
+                                            placeholder="Trip Date"
                                             value={this.state.tripDate}
                                             onChange={this.assignValue}
                                             id="tripDate"
                                             type="date"
                                             aria-describedby="basic-addon1"
                                         />
-                                        <div className="validationLogin">{this.state.tripDate_err}</div> 
+                                        <div className="validationLogin">{this.state.tripDate_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -458,15 +466,15 @@ class PostAd extends Component{
                                         Trip Time *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="Trip Time" 
+                                        <FormControl
+                                            placeholder="Trip Time"
                                             value={this.state.tripTime}
                                             onChange={this.assignValue}
                                             id="tripTime"
                                             type="time"
                                             aria-describedby="basic-addon1"
                                         />
-                                        <div className="validationLogin">{this.state.tripTime_err}</div> 
+                                        <div className="validationLogin">{this.state.tripTime_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -474,24 +482,24 @@ class PostAd extends Component{
                                         Trip Cost *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="Trip Cost" 
+                                        <FormControl
+                                            placeholder="Trip Cost"
                                             value={this.state.tripCost}
                                             onChange={this.assignValue}
                                             id="tripCost"
                                             type="number"
                                             aria-describedby="basic-addon1"
                                         />
-                                        <div className="validationLogin">{this.state.tripCost_err}</div> 
+                                        <div className="validationLogin">{this.state.tripCost_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
                                         <Form.Label column md="4" sm="12" className="label-placement">
-                                        Description 
+                                        Description
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
                                         <Form.Control as="textarea" rows="3"
-                                            placeholder="Description" 
+                                            placeholder="Description"
                                             value={this.state.desc}
                                             onChange={this.assignValue}
                                             id="desc"
@@ -506,41 +514,41 @@ class PostAd extends Component{
                                         Vehicle Type *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="Eg: Car, Truck" 
+                                        <FormControl
+                                            placeholder="Eg: Car, Truck"
                                             value={this.state.vhclType}
                                             onChange={this.assignValue}
                                             id="vhclType"
                                             aria-describedby="basic-addon1"
                                         />
-                                        <div className="validationLogin">{this.state.vhclType_err}</div> 
+                                        <div className="validationLogin">{this.state.vhclType_err}</div>
                                         </Col>
-                                    </Form.Group> 
+                                    </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
                                         <Form.Label column md="4" sm="12" className="label-placement">
                                         Vehicle Number *
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl 
-                                            placeholder="Vehicle Number" 
+                                        <FormControl
+                                            placeholder="Vehicle Number"
                                             value={this.state.vhclNum}
                                             onChange={this.assignValue}
                                             id="vhclNum"
                                             aria-describedby="basic-addon1"
                                         />
-                                        <div className="validationLogin">{this.state.vhclNum_err}</div> 
+                                        <div className="validationLogin">{this.state.vhclNum_err}</div>
                                         </Col>
                                     </Form.Group>
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
                                         <Form.Label column md="4" sm="12" className="label-placement">
-                                        Vehicle Image 
+                                        Vehicle Image
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small" style={{display:'flex'}}>
                                             <div>
                                             <input type="file" onChange={this.getFileUpload} id="inputFile" multiple/><br/>
-                                            <Image id="img1"/> 
-                                            </div>   
-                                       
+                                            <Image id="img1"/>
+                                            </div>
+
                                         </Col>
                                     </Form.Group></div>: <div></div>}
                                     <div className="justify-center btn-usage" style={{marginBottom:'25px'}}>

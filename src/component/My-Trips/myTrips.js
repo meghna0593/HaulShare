@@ -47,6 +47,14 @@ class MyTrips extends Component {
     });
   }
 
+  componentWillMount() {
+    if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
+      alert('Please login first')
+      history.push("/");
+      history.go();
+    }
+  }
+
   goToRating = req_id => {
     localStorage.setItem("req_id", req_id);
     history.push("/my-feedback");

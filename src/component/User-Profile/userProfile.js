@@ -28,9 +28,7 @@ class UserProfile extends Component{
         }
 
     }
-    componentWillMount(){
-      console.log(localStorage.getItem('user_id'));
-    }
+
 
     onStarClick(nextValue, prevValue, name) {
         console.log();
@@ -51,6 +49,18 @@ class UserProfile extends Component{
             editOption:false
         })
     }
+
+
+        componentWillMount() {
+          console.log(localStorage.getItem('user_id'));
+
+          if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
+            alert('Please login first')
+            history.push("/");
+            history.go();
+          }
+        }
+
 
     validate=()=>{
         /*

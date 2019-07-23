@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Header from '../Header/header.js';
 import {FormControl,Card,Form,Button,Image,Container,Row,Col} from 'react-bootstrap';
 import { PromiseProvider } from 'mongoose';
+import { createBrowserHistory } from 'history';
 
+const history = createBrowserHistory();
 class VehicleInfo extends Component{
 
     constructor (props){
@@ -24,10 +26,13 @@ class VehicleInfo extends Component{
         objectToUpdate: null,
       };
 
-
-
-      componentWillMount(){
-
+      componentWillMount() {
+        if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
+          alert('Please login first')
+          history.push("/");
+          history.go();
+        }
+      else{
         //api
         //static id mongo
         //fetch() method:GET
@@ -43,6 +48,8 @@ class VehicleInfo extends Component{
                 })
             })
     }
+  }
+
 
     render(){
         var {isLoaded, vehicles} = this.state;

@@ -4,7 +4,9 @@ import GoogleMapReact from "google-map-react";
 import Header from "../Header/header";
 import MarkerPin from "./place.jsx";
 import Geocode from "react-geocode";
+import { createBrowserHistory } from 'history';
 
+const history = createBrowserHistory();
 //setting initial position in map.
 class SimpleMap extends Component {
   static defaultProps = {
@@ -41,6 +43,16 @@ class SimpleMap extends Component {
     this.getGeocode(this.state.location.source, "p");
     this.getGeocode(this.state.location.destination, "d");
   }
+
+  componentWillMount() {
+
+    if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
+      alert('Please login first')
+      history.push("/");
+      history.go();
+    }
+
+}
 
   componentWillUnmount() {
     if (this.state.intervalIsSet) {

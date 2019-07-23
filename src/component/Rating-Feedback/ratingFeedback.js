@@ -16,9 +16,7 @@ class RatingFeedback extends Component{
         }
     }
 
-    componentWillMount(){
-        localStorage.removeItem('req_id')        
-    }
+
 
     assignValue=(event)=>{
         console.log(event.target.value);
@@ -27,8 +25,15 @@ class RatingFeedback extends Component{
         })
     }
 
+    componentWillMount() {
 
-    RatingFeedback=()=>{
+      if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
+        alert('Please login first')
+        history.push("/");
+        history.go();
+      }
+    }
+       RatingFeedback=()=>{
         // let url_post="http://localhost:5000/postAnAd"
         // let url_get="http://localhost:5000/getUname"+localStorage.getItem('user_id');
         let url_post="http://localhost:17650/feedbackandrating"
@@ -69,6 +74,7 @@ class RatingFeedback extends Component{
 
 
 
+
     submitForm=()=>{
         this.RatingFeedback()
         /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
@@ -103,7 +109,7 @@ class RatingFeedback extends Component{
                                         </Form.Label>
                                         </Col>
                                     </Form.Group>
-                                
+
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
                                         <Form.Label column md="4" sm="12" className="label-placement">
                                         Review and Feedback

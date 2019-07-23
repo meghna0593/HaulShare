@@ -24,11 +24,19 @@ class MyAd extends Component{
     }
 
     handleVehicleDesc=()=>{
-        
+
         this.setState({
             showVehicleDesc:!this.state.showVehicleDesc
         })
     }
+    componentWillMount() {
+      if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
+        alert('Please login first')
+        history.push("/");
+        history.go();
+      }
+    }
+
 
     adCards=()=>{
         return(
@@ -76,17 +84,19 @@ class MyAd extends Component{
                 </Row>
                 <Row className="row-padding">
                     <Col md={12} className="label-header-style" style={{paddingBottom:'8px'}}>
-                    <div className="btn-usage">    
+                    <div className="btn-usage">
                         <Button variant="secondary" type="submit" id="viewProfile" onClick={this.submitForm}>
                             <div>Delete Ad</div>
                         </Button>
-                    </div> 
+                    </div>
                     </Col>
                 </Row>
             </div>
         )
     }
-    
+
+
+
     render(){
         return(
             <div>
@@ -111,7 +121,7 @@ class MyAd extends Component{
                                             <Image src="/images/suv.png" style={{height:'100%',width:'50%'}}/>
                                             <div className="vehicle-det" onClick={this.handleVehicleDesc}>Click here for Vehicle Details</div>
                                         </div>
-                                        
+
                                     </Col>
                                 </Row>
                             </Card>
@@ -130,7 +140,7 @@ class MyAd extends Component{
                                             <Image src="/images/truck1.png" style={{height:'100%',width:'50%'}}/>
                                             <div className="vehicle-det" onClick={this.handleVehicleDesc}>Click here for Vehicle Details</div>
                                         </div>
-                                        
+
                                     </Col>
                                 </Row>
                             </Card>
