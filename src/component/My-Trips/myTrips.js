@@ -47,8 +47,8 @@ class MyTrips extends Component {
     });
   }
 
-  goToRating = (req_id) => {
-    localStorage.setItem('req_id',req_id)
+  goToRating = req_id => {
+    localStorage.setItem("req_id", req_id);
     history.push("/my-feedback");
     history.go();
   };
@@ -78,27 +78,27 @@ class MyTrips extends Component {
       </Container>
     );
   };
-  
-  changeTripStatus=(e,status)=>{    
-    let url_get='http://localhost:5000/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
+
+  changeTripStatus = (e, status) => {
+    let url_get =
+      "http://localhost:5000/tripNotifiy/" +
+      e._id +
+      "/" +
+      e.requestorId +
+      "/" +
+      status;
     // let url_get='https://haul-share-meghna.herokuapp.com/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
     fetch(url_get, { method: "PUT" })
       .then(data => data.json())
       .then(res => {
-        if(res){
-          if(status==='S'){
-            alert('The trip has started');
+        if (res) {
+          if (status === "S") {
+            alert("The trip has started");
+          } else {
+            alert("The trip has ended");
+            window.location.reload();
           }
-          else{
-            alert('The trip has ended')
-            window.location.reload()
-          }
-          
-         
-          
-        
         }
-        
       })
       .catch(e => alert("Error occurred:", e));
   };
@@ -196,28 +196,44 @@ class MyTrips extends Component {
                     </div>
                     <br />
                     <br />
-                    <div className="btn-usage">
-                      <Button
-                        variant="primary"
-                        type="submit"
-                        id="trip"
-                        className="buttonSpacing"
-                        onClick={() => this.changeTripStatus(e, "S")}
-                      >
-                        Start Trip
-                      </Button>
-                      <Button
-                        variant="primary"
-                        type="submit"
-                        id="trip"
-                        className="buttonSpacing"
-                        onClick={() => this.changeTripStatus(e, "E")}
-                      >
-                        End Trip
-                      </Button>
-                    </div>
+                    {acc === 1 ? (
+                      <div className="btn-usage">
+                        <Button
+                          variant="primary"
+                          type="submit"
+                          id="trip"
+                          className="buttonSpacing"
+                          onClick={() => this.changeTripStatus(e, "S")}
+                        >
+                          Start Trip
+                        </Button>
+                        <Button
+                          variant="primary"
+                          type="submit"
+                          id="trip"
+                          className="buttonSpacing"
+                          onClick={() => this.changeTripStatus(e, "E")}
+                        >
+                          End Trip
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="btn-usage">
+                        <Button
+                          variant="secondary"
+                          type="submit"
+                          id="viewProfile"
+                        >
+                          View Profile
+                        </Button>
+                      </div>
+                    )}
+
                     <br />
-                    <div className="vehicle-det" onClick={()=>this.goToRating(e.requestorId)}>
+                    <div
+                      className="vehicle-det"
+                      onClick={() => this.goToRating(e.requestorId)}
+                    >
                       Give Rating and Feedback
                     </div>
                     {/* <div>
