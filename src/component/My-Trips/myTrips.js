@@ -47,7 +47,8 @@ class MyTrips extends Component {
     });
   }
 
-  goToRating = () => {
+  goToRating = (req_id) => {
+    localStorage.setItem('req_id',req_id)
     history.push("/my-feedback");
     history.go();
   };
@@ -85,10 +86,17 @@ class MyTrips extends Component {
       .then(data => data.json())
       .then(res => {
         if(res){
-          alert('You have'+(status==='S')?'started':'ended'+'the trip');
-          if(status==='E'){
-          window.location.reload()
-        }
+          if(status==='S'){
+            alert('The trip has started');
+          }
+          else{
+            alert('The trip has ended')
+            window.location.reload()
+          }
+          
+         
+          
+        
         }
         
       })
@@ -209,7 +217,7 @@ class MyTrips extends Component {
                       </Button>
                     </div>
                     <br />
-                    <div className="vehicle-det" onClick={this.goToRating}>
+                    <div className="vehicle-det" onClick={()=>this.goToRating(e.requestorId)}>
                       Give Rating and Feedback
                     </div>
                     {/* <div>

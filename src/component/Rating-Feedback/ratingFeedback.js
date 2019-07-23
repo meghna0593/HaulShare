@@ -11,8 +11,13 @@ class RatingFeedback extends Component{
         this.state={
             serviceName:'',
             yourName:'',
-            desc:''
+            desc:'',
+            req_id:localStorage.getItem('req_id')
         }
+    }
+
+    componentWillMount(){
+        localStorage.removeItem('req_id')        
     }
 
     assignValue=(event)=>{
@@ -35,9 +40,9 @@ class RatingFeedback extends Component{
             uname=res[0].uname
 
             let send_data= {
-                "user_id":(localStorage.getItem('user_id')===null?'xyz':localStorage.getItem('user_id')),
-                "serviceName":this.state.serviceName,
-                "yourName":this.state.yourName,
+                "user_id":(localStorage.getItem('user_id')===null?'':localStorage.getItem('user_id')),
+                "user_name":uname,
+                "service_id":this.state.req_id,
                 "desc":this.state.desc
                 }
 
@@ -53,7 +58,7 @@ class RatingFeedback extends Component{
     })
     .then((resp) => resp.json())
     .then((responseJson) => {
-        alert('Feedback updated successfully')
+        alert('Feedback posted successfully')
         /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
         history.push('/profile')
         history.go()
@@ -93,30 +98,12 @@ class RatingFeedback extends Component{
                                         Service Taken from
                                         </Form.Label>
                                         <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl as="textarea" rows="2"
-                                            placeholder="Transporter/Customer Name"
-                                            value={this.state.serviceName}
-                                            onChange={this.assignValue}
-                                            id="adTitle"
-                                            aria-describedby="basic-addon1"
-                                        />
-                                        </Col>
-                                    </Form.Group>
-                                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                                        <Form.Label column md="4" sm="12" className="label-placement">
-                                        Service Taken by
+                                        <Form.Label >
+                                        {this.state.req_id}
                                         </Form.Label>
-                                        <Col md="8" sm="12" className="text-area-placement text-area-placement-small">
-                                        <FormControl as="textarea" rows="2"
-                                            placeholder="Your Name"
-                                            value={this.state.yourName }
-                                            onChange={this.assignValue}
-                                            id="adTitle"
-                                            aria-describedby="basic-addon1"
-                                        />
                                         </Col>
                                     </Form.Group>
-
+                                
                                     <Form.Group as={Row} controlId="formPlaintextPassword">
                                         <Form.Label column md="4" sm="12" className="label-placement">
                                         Review and Feedback
