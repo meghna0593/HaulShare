@@ -86,17 +86,15 @@ class UserProfile extends Component{
     }
 
     deleteprofile = () => {
-      console.log("HI");
+let user_id= localStorage.getItem('user_id')
        //  let url_post = "http://localhost:19000/login" //local
-       let url_post = "http://localhost:17650/delete/:email_reg"
+       let url_delete = "http://localhost:17650/delete/"+user_id
         //let url_post="https://haul-share-archana.herokuapp.com/register"
         let send_data = {
             "uname": this.state.uname,
             "email_reg": this.state.email_reg
-
         }
-        console.log("hi")
-        fetch(url_post, {
+        fetch(url_delete, {
                 method: 'DELETE',
                 headers: {
                     'Access-Control-Allow-Headers': 'Content-Type,Access-Control-Allow-Origin',
@@ -141,11 +139,8 @@ class UserProfile extends Component{
     .then((responseJson) => {
         alert('Succesfully updated')
         /* Navigating between pages using “History.” Npm, www.npmjs.com/package/history. */
-        history.push('/profile')
-        history.go()
     })
     .catch((e) => alert('Error Occured. Error is:',e))
-
 }
 
     submitForm=()=>{
@@ -157,9 +152,10 @@ class UserProfile extends Component{
             dob:this.state.dob,
             phone:this.state.phone,
             email:this.state.email
-
             })
             this.userprofile()
+            history.push('/profile')
+            history.go()
         }
     }
 

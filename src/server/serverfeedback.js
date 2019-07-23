@@ -63,7 +63,7 @@ app.post("/userprofileform", cors(corsHost), (req, res) => {
           const email_reg = req.params.email_reg;
           console.log(email_reg)
           database.collection('users').findOneAndDelete({email_reg: email_reg}),
-          database.collection('Advertisements').findOneAndDelete({user_id: email_reg},
+          database.collection('Advertisements').find({user_id: email_reg},
           (err, result) => {
           if (err) return res.send(500, err)
           console.log('got deleted');
