@@ -37,7 +37,8 @@ class Home extends Component {
       price_max: 200,
       result: [],
       adId: "",
-      fullDesc: ""
+      fullDesc: "",
+      res_dup:[]
     };
   }
 
@@ -59,19 +60,81 @@ class Home extends Component {
         filter_price: !this.state.filter_price
       });
     } else if (event.target.id === "filter_transporter") {
-      this.setState({
-        filter_transporter: !this.state.filter_transporter
-      });
+
+      if(document.getElementById("filter_transporter").checked == true)
+            {
+                var userT = 'T';//document.getElementById("filter_transporter").value.toLowerCase();
+                let res=[]
+                res=this.state.result.filter((e)=>e.userType.includes(userT))
+                console.log(res);
+        
+                this.setState({res_dup:res})
+            }
+            else
+            {
+                this.setState({
+                    res_dup:this.state.result
+                });
+            }
+      // this.setState({
+      //   filter_transporter: !this.state.filter_transporter
+      // });
     } else if (event.target.id === "filter_customer") {
-      this.setState({
-        filter_customer: !this.state.filter_customer
-      });
+      if(document.getElementById("filter_customer").checked == true)
+            {
+                var userC = 'C';//document.getElementById("filter_transporter").value.toLowerCase();
+                let res=[]
+                res=this.state.result.filter((e)=>e.userType.includes(userC))
+                console.log(res);
+        
+                this.setState({res_dup:res})
+            }
+            else
+            {
+                this.setState({
+                    res_dup:this.state.result
+                });
+            }
+      // this.setState({
+      //   filter_customer: !this.state.filter_customer
+      // });
     } else if (event.target.id === "filter_distance") {
       this.setState({
         filter_distance: !this.state.filter_distance
       });
     }
   };
+
+  clearSearch=(e)=>{
+    console.log(e.target.value);
+    if(e.target.value===''){
+        this.setState({
+            res_dup:this.state.result
+        })
+    }
+}
+
+searchKeywords = () => {        
+  var searchValue = document.getElementById("searchId").value.toLowerCase();
+ 
+  let res=[]
+  res=this.state.result.filter((e)=>e.source.toLowerCase().includes(searchValue)||e.destination.toLowerCase().includes(searchValue))
+  console.log(res);
+  
+  this.setState({res_dup:res}) 
+  
+  if(res.length == 0)
+  {
+      setTimeout(() => {
+      
+          alert("no match");
+      
+      
+  }, 1000);
+     
+  }
+  
+}
 
   userDetails = (userType, e) => {
     return (
@@ -173,7 +236,8 @@ class Home extends Component {
         result: res,
         storage: res[0].storageSpace,
         dest: res[0].destination,
-        uType: res[0].typeOfUser
+        uType: res[0].typeOfUser,
+        res_dup : res
       });
     })
     .catch(e => alert("Error occurred:", e));
@@ -452,12 +516,14 @@ class Home extends Component {
                     <FormControl
                       type="text"
                       placeholder="Search"
+                      id ="searchId"
+                      onChange={this.clearSearch}
                       className="mr-sm-2"
                     />
                     <Image
                       src="/images/search.svg"
                       style={{ height: "23px", cursor: "pointer" }}
-                      onClick={this.editEnable}
+                      onClick={this.searchKeywords}
                     />{" "}
                     {/*image from "Search Icons.” Free Download, PNG and SVG, http://icons8.com/icons/set/search */}
                   </div>
@@ -494,7 +560,7 @@ class Home extends Component {
                   {/* {this.state.result.map((e)=>{
                                         {this.displayCards('transporter',e)}
                                     })} */}
-                  {this.state.result.map(e => this.displayCards(e.userType, e))}
+                  {this.state.res_dup.map(e => this.displayCards(e.userType, e))}
                   {/* {this.displayCards('customer')} */}
                 </Col>
                 <Col
