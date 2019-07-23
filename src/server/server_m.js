@@ -78,7 +78,8 @@ app.post("/offerTrip", cors(corsHost), (req, res) => {
 app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
   var table = 'Advertisements'
   var query={_id: ObjectId(req.params.adId) }
-  var newvalues = { $set: {accepted:2,tripStatus: req.params.status} };
+  var newvalues=(req.params.status==='S')?{ $set: {tripStatus: req.params.status} }:{ $set: {accepted:2,tripStatus: req.params.status} }
+   
   database.collection(table).updateOne(query, newvalues, function(err, res) {
     if (err) throw err;
     // res.send(true)
@@ -126,6 +127,7 @@ app.get("/response/:status/:adId/:requestorId", cors(corsHost), (req, res) => {
     }
   }
   else{
+    accepted=0
     mailOptions={
       'from': 'haulshare2019@gmail.com',
       'to': req.params.requestorId,
