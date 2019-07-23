@@ -81,13 +81,16 @@ app.post("/offerTrip", cors(corsHost), (req, res) => {
 });
 
 app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
+
   var table = 'Advertisements'
   var query={_id: ObjectId(req.params.adId) }
   var newvalues=(req.params.status==='S')?{ $set: {tripStatus: req.params.status} }:{ $set: {accepted:2,tripStatus: req.params.status} }
-   
+  var flagDb=0
   database.collection(table).updateOne(query, newvalues, function(err, res) {
-    if (err) throw err;
-    // res.send(true)
+    if (err) {
+      throw err
+    };
+    flagDb=1
   });
   let mailOptions = {};
   //send email notification
@@ -110,9 +113,11 @@ app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
   }
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-      res.send(error);
+      res.send(false);
+    } else if(flagDb==0) {
+      res.send(false);
     } else {
-      res.send(info.response);
+      res.send(true)
     }
   });
 });

@@ -176,7 +176,10 @@ class Home extends Component {
       .catch(e => alert("Error occurred:", e));
   }
 
+  //function implemented by Meghna R Holla
   notifyUser = ad => {
+    console.log("notify");
+    
     let requestor = localStorage.getItem("user_id");
     let postData = {
       ad_user_id: ad.user_id,
