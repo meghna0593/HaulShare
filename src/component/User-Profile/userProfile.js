@@ -22,7 +22,8 @@ class UserProfile extends Component{
           edu:'Bachelor\'s in CS',
           emp:'Software Engineer',
           hobbies:'Archery',
-          intro:'Some quick example text to build on the card title and make up the bulk of the card\'s content'
+          intro:'Some quick example text to build on the card title and make up the bulk of the card\'s content',
+          reviews:[]
         }
         
     }
@@ -89,10 +90,29 @@ class UserProfile extends Component{
             })
         }
     }
+    componentWillMount(){
 
+        //api
+        //static id mongo
+        //fetch() method:GET
+        //responsejson -> state variable
+        //http://localhost:4000/data/hs_data/_id/5d2251d91b28ca7ea49eaad7
+        fetch('http://localhost:4000/data/Feedbackandrating/'+localStorage.getItem('user_id'), { method: "GET" })
+            .then(res => res.json())
+            .then(json => {
+
+                this.setState({
+                    isLoaded:true,
+                    reviews:json,
+                })
+            })
+    }
     render(){
+        console.log(this.state.reviews);
+        
         return(
-            <div className="wrapper">
+            <div>
+            
                 <Header/>
                 <div className="content">
                     <div className="inner" style={{backgroundColor:'#ededed'}}>
@@ -280,18 +300,15 @@ class UserProfile extends Component{
                                             <Card className="card-shadow" style={{marginTop:'25px',marginBottom:'25px'}}>
                                                     <Card.Body>
                                                         <Card.Title className="text-overlay" style={{color:'#1a61ad',fontSize:'12px',width:'141px'}}><i>Feedback and Reviews</i></Card.Title>
-                                                        <Card.Text style={{fontSize:'12px'}}>
-                                                            <div style={{marginBottom:'15px'}}>
-                                                                <div style={{fontWeight:'bold',color:'grey'}}>Username</div>
-                                                                <div>Review1 - Some quick example text to build on the card title and make up the bulk of
-                                                                the card's content.</div>
-                                                            </div>
-                                                            <div style={{marginBottom:'15px'}}>
-                                                                <div style={{fontWeight:'bold',color:'grey'}}>Username</div>
-                                                                <div>Review2 - Some quick example text to build on the card title and make up the bulk of
-                                                                the card's content.</div>
-                                                            </div>
-                                                        </Card.Text>
+                                                        {this.state.reviews.map((e)=>
+                                                            <Card.Text style={{fontSize:'12px'}}>
+                                                                <div style={{marginBottom:'15px'}}>
+                                                                    <div style={{fontWeight:'bold',color:'grey'}}>Name: {e.user_name}</div>
+                                                                    <div>{e.desc}</div>
+                                                                </div> 
+                                                            </Card.Text>
+                                                        )}
+                                                        
                                                     </Card.Body>
                                                 </Card>
                                         </Col>
@@ -302,7 +319,9 @@ class UserProfile extends Component{
                         </Container>                      
                     </div>
                 </div>
-            </div>
+                        </div>
+                      
+            
         )
     }
 }
