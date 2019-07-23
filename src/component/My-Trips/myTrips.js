@@ -47,7 +47,8 @@ class MyTrips extends Component {
     });
   }
 
-  goToRating = () => {
+  goToRating = (req_id) => {
+    localStorage.setItem('req_id',req_id)
     history.push("/my-feedback");
     history.go();
   };
@@ -175,7 +176,7 @@ class MyTrips extends Component {
                           </Button>
                         </div>
                         <br />
-                        <div className="vehicle-det" onClick={this.goToRating}>
+                        <div className="vehicle-det" onClick={()=>this.goToRating(e.requestorId)}>
                           Give Rating and Feedback
                         </div>
                         {}
@@ -348,7 +349,7 @@ class MyTrips extends Component {
                           <br />
                           <div
                             className="vehicle-det"
-                            onClick={this.goToRating}
+                            onClick={()=>this.goToRating(e.requestorId)}
                           >
                             Give Rating and Feedback
                           </div>
