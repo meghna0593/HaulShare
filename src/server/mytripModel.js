@@ -6,23 +6,23 @@ const Schema = mongoose.Schema;
 // database structure in MongoDb atlas is defined below
 const DataSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId, // mongoose Type objectId is used for generating unique ID's
+  uname: {
+    type: String,
+    required: true
+  },
   user_id: {
     type: String,
     required: true
   },
-  trip_id: {
-    type: String,
+  accepted: {
+    type: Number,
     required: true
   },
-  pickup_addr: {
-    type: String,
-    required: true
-  },
-  drop_addr: {
+  tripFee: {
     type: String,
     required: true
   }
 });
 
 // schema is exported to modify as required in server file.
-module.exports = mongoose.model("Data", DataSchema, "c_map_locations");
+module.exports = mongoose.model("Data", DataSchema, "Advertisements");

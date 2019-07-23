@@ -22,24 +22,24 @@ class SimpleMap extends Component {
     p_lng: null,
     d_lat: null,
     d_lng: null,
-    trip_id: localStorage.getItem("trip_id")
+    obj_id: localStorage.getItem("obj_id")
   };
 
   // async call to fetch pickup and drop address and extract lat,lng using geo-encoding.
   async componentDidMount() {
-    console.log(this.state.trip_id);
-    localStorage.removeItem("trip_id");
-    const url =
-      // "http://localhost:5543/api/getData/100/" +
-      "https://web-backend-server.herokuapp.com/api/getData/100/" +
-      (this.state.trip_id === null ? 1 : this.state.trip_id);
+    console.log(this.state.obj_id);
+    //localStorage.removeItem("obj_id");
+    const url = "http://localhost:5543/api/getData/" + this.state.obj_id;
+    // "https://web-backend-server.herokuapp.com/api/getData/100/" +
+    // (this.state.trip_id === null ? 1 : this.state.trip_id);
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data);
     this.setState({ location: data.data[0], loading: false });
 
     // geo-encoder function call, to change address to lat and lng.
-    this.getGeocode(this.state.location.pickup_addr, "p");
-    this.getGeocode(this.state.location.drop_addr, "d");
+    this.getGeocode(this.state.location.source, "p");
+    this.getGeocode(this.state.location.destination, "d");
   }
 
   componentWillUnmount() {
