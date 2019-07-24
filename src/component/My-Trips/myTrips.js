@@ -175,7 +175,7 @@ class MyTrips extends Component {
                     </div>
 
                     <div>
-                      <b>email id:</b>
+                      <b>Email Id:</b>
                       <div style={{ display: "inline" }}>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {e.requestorId}
@@ -288,7 +288,7 @@ class MyTrips extends Component {
             className="inner"
             style={{
               backgroundColor: "#ededed",
-              height: "500px"
+              height: "auto"
             }}
           >
             {this.displayCards()}

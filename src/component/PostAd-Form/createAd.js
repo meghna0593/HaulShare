@@ -153,7 +153,7 @@ class PostAd extends Component{
         history.go();
       }
     }
-    
+
     postAdToMongo=()=>{
         // let url_post="http://localhost:5000/postAnAd"
         // let url_get="http://localhost:5000/getUname/"+localStorage.getItem('user_id');

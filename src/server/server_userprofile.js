@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongo = require('mongodb').MongoClient
 const { ObjectId } = require('mongodb');
-const PORT = 4000;
+const PORT = 2344;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -27,10 +27,10 @@ app.get('/data/:table/:id/', (req, res) => {
       var dbo = db.db("Db_HaulShare");
       var email = encodeURI(req.params.id);
       var table = req.params.table
-      
+
       var query = {};
        query["service_id"] = email;
-      
+
       dbo
     .collection(table)
     .find(query)

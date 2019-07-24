@@ -67,7 +67,7 @@ class Home extends Component {
                 let res=[]
                 res=this.state.result.filter((e)=>e.userType.includes(userT))
                 console.log(res);
-        
+
                 this.setState({res_dup:res})
             }
             else
@@ -86,7 +86,7 @@ class Home extends Component {
                 let res=[]
                 res=this.state.result.filter((e)=>e.userType.includes(userC))
                 console.log(res);
-        
+
                 this.setState({res_dup:res})
             }
             else
@@ -114,26 +114,26 @@ class Home extends Component {
     }
 }
 
-searchKeywords = () => {        
+searchKeywords = () => {
   var searchValue = document.getElementById("searchId").value.toLowerCase();
- 
+
   let res=[]
   res=this.state.result.filter((e)=>e.source.toLowerCase().includes(searchValue)||e.destination.toLowerCase().includes(searchValue))
   console.log(res);
-  
-  this.setState({res_dup:res}) 
-  
+
+  this.setState({res_dup:res})
+
   if(res.length == 0)
   {
       setTimeout(() => {
-      
+
           alert("no match");
-      
-      
+
+
   }, 1000);
-     
+
   }
-  
+
 }
 
   userDetails = (userType, e) => {
@@ -220,7 +220,7 @@ searchKeywords = () => {
   // values using the GET request and save it
   // in the declared variables.
   componentWillMount() {
-    
+
     if(localStorage.getItem('user_id')===null||localStorage.getItem('user_id')===''){
       alert('Please login first')
       history.push("/");
@@ -243,13 +243,13 @@ searchKeywords = () => {
     .catch(e => alert("Error occurred:", e));
     }
 
-    
+
   }
 
   //function implemented by Meghna R Holla
   notifyUser = ad => {
     console.log("notify");
-    
+
     let requestor = localStorage.getItem("user_id");
     let postData = {
       ad_user_id: ad.user_id,
@@ -257,7 +257,7 @@ searchKeywords = () => {
       requestor_id: requestor,
       mailOptions: {
         from: "haulshare2019@gmail.com",
-        to: "haulshare2019@gmail.com",
+        to: ad.user_id,
         subject: "You have got a request!",
         html:
           'Greetings! <br/>You have received a request for the advertisement posted on HaulShare.<br/> Click on the following link to accept the request. <a href="http://localhost:5000/response/accept/' +
@@ -434,7 +434,7 @@ searchKeywords = () => {
           value={this.state.filter_customer}
           onChange={this.checkBoxChange}
           id="filter_customer"
-          label="Customer"
+          label="Requestor"
         />
         {this.sliderValue()}
       </div>
@@ -443,20 +443,23 @@ searchKeywords = () => {
 
   displayCards = (userType, e) => {
     console.log(e);
-    return (
-      <div className="card-container">
-        <Container style={{ maxWidth: "100%", padding: "0px" }}>
-          <Row style={{ marginRight: "0px", marginLeft: "0px" }}>
-            <Col md={2} style={{ padding: "0px" }}>
-              {this.userDetails(userType, e)}
-            </Col>
-            <Col md={10} style={{ padding: "0px" }}>
-              {this.adDetails(userType, e)}
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
+    if(e.accepted===0){
+      return (
+        <div className="card-container">
+          <Container style={{ maxWidth: "100%", padding: "0px" }}>
+            <Row style={{ marginRight: "0px", marginLeft: "0px" }}>
+              <Col md={2} style={{ padding: "0px" }}>
+                {this.userDetails(userType, e)}
+              </Col>
+              <Col md={10} style={{ padding: "0px" }}>
+                {this.adDetails(userType, e)}
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      );
+    }
+
   };
 
   // This will display the Trip suggestions based on the user search
