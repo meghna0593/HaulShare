@@ -46,7 +46,7 @@ app.get("/getUname/:id", cors(corsHost), (req, res) => {
   var email = encodeURI(req.params.id);
   var table = "users";
   console.log(email);
-  query = {};
+  var query = {};
   query["email_reg"] = email;
   database
     .collection(table)
@@ -55,7 +55,7 @@ app.get("/getUname/:id", cors(corsHost), (req, res) => {
       if (err) console.log(err);
       console.log(result);
       res.send(result);
-      db.close();
+      // db.close();
     });
 });
 
@@ -114,7 +114,7 @@ app.put("/tripNotifiy/:adId/:reqId/:status",cors(corsHost),(req,res)=>{
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       res.send(false);
-    } else if(flagDb==0) {
+    } else if(flagDb===0) {
       res.send(false);
     } else {
       res.send(true)
