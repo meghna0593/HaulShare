@@ -176,7 +176,7 @@ let user_id= localStorage.getItem('user_id')
         //fetch() method:GET
         //responsejson -> state variable
         //http://localhost:4000/data/hs_data/_id/5d2251d91b28ca7ea49eaad7
-        fetch('http://localhost:2344/data/Feedbackandrating/'+localStorage.getItem('user_id'), { method: "GET" })
+        fetch('https://haulshare-feedback.herokuapp.com/data/Feedbackandrating/'+localStorage.getItem('user_id'), { method: "GET" })
             .then(res => res.json())
             .then(json => {
 
