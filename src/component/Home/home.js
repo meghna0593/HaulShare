@@ -243,7 +243,6 @@ searchKeywords = () => {
     .catch(e => alert("Error occurred:", e));
     }
 
-
   }
 
   //function implemented by Meghna R Holla
@@ -260,11 +259,11 @@ searchKeywords = () => {
         to: ad.user_id,
         subject: "You have got a request!",
         html:
-          'Greetings! <br/>You have received a request for the advertisement posted on HaulShare.<br/> Click on the following link to accept the request. <a href="http://localhost:5000/response/accept/' +
+          'Greetings! <br/>You have received a request for the advertisement posted on HaulShare.<br/> Click on the following link to accept the request. <a href="https://haul-share-meghna.herokuapp.com/response/accept/' +
           ad._id +
           "/" +
           requestor +
-          '">Accept the request</a> <br/>To Cancel: <a href="http://localhost:5000/response/cancel/' +
+          '">Accept the request</a> <br/>To Cancel: <a href="https://haul-share-meghna.herokuapp.com/response/cancel/' +
           ad._id +
           "/" +
           requestor +
@@ -273,7 +272,7 @@ searchKeywords = () => {
     };
     console.log(postData);
 
-    let url_post = "http://localhost:5000/offerTrip";
+    let url_post = "https://haul-share-meghna.herokuapp.com/offerTrip";
     fetch(url_post, {
       method: "POST",
       headers: {
