@@ -36,7 +36,8 @@ class RatingFeedback extends Component{
        RatingFeedback=()=>{
         // let url_post="http://localhost:5000/postAnAd"
         // let url_get="http://localhost:5000/getUname"+localStorage.getItem('user_id');
-        let url_post="http://localhost:17650/feedbackandrating"
+        // let url_post="http://localhost:17650/feedbackandrating"
+        let url_post="https://feedbackhaul.herokuapp.com/feedbackandrating"
         let url_get="https://haul-share-meghna.herokuapp.com/getUname/"+localStorage.getItem('user_id');
         let uname=''
         fetch(url_get,{method:'GET'})

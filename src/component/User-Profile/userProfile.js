@@ -13,17 +13,17 @@ class UserProfile extends Component{
         this.state = {
           rating: 4,
           editOption:true,
-          name:'',
-          dob:'',
-          phone:''  ,
-          email:'',
+          name:'Jeremy',
+          dob:'1991-04-12',
+          phone:9020000000,
+          email:'jeremy@gmail.com',
           name_err:'',
           dob_err:'',
           phone_err:'',
           email_err:'',
-          edu:'',
-          emp:'',
-          hobbies:'',
+          edu:'Bachelor\'s in CS',
+          emp:'Software Engineer',
+          hobbies:'Surfing',
           intro:'Some quick example text to build on the card title and make up the bulk of the card\'s content',
           reviews:[]
         }
@@ -90,7 +90,9 @@ class UserProfile extends Component{
     deleteprofile = () => {
 let user_id= localStorage.getItem('user_id')
        //  let url_post = "http://localhost:19000/login" //local
-       let url_delete = "http://localhost:17650/delete/"+user_id
+    //    let url_delete = "http://localhost:17650/delete/"+user_id
+            let url_delete = "https://feedbackhaul.herokuapp.com/delete/"+user_id
+
         //let url_post="https://haul-share-archana.herokuapp.com/register"
         let send_data = {
             "uname": this.state.uname,
@@ -121,12 +123,12 @@ let user_id= localStorage.getItem('user_id')
         // let url_post="http://localhost:5000/postAnAd"
         // let url_get="http://localhost:5000/getUname"+localStorage.getItem('user_id');
         let url_post="http://localhost:17650/userprofileform"
-            let send_data= {
-                "name":this.state.name,
-                "dob":this.state.dob,
-                "phone":this.state.phone,
-                "email":this.state.email
-                }
+            // let send_data= {
+            //     "name":this.state.name,
+            //     "dob":this.state.dob,
+            //     "phone":this.state.phone,
+            //     "email":this.state.email
+            //     }
 
     fetch(url_post,{
         method:'POST',
@@ -135,7 +137,7 @@ let user_id= localStorage.getItem('user_id')
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
           },
-        body:JSON.stringify(send_data),
+        // body:JSON.stringify(send_data),
 
     })
     .then((resp) => resp.json())
