@@ -38,8 +38,8 @@ class MyTrips extends Component {
   async componentDidMount() {
     console.log(localStorage.getItem("user_id"));
     let user_id = localStorage.getItem("user_id");
-    const url = "http://localhost:5545/api/getData/" + user_id;
-
+    // const url = "http://localhost:5545/api/getData/" + user_id;
+    const url = "https://web-project-mytrips.herokuapp.com/api/getData/"+ user_id;
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ result: data.data }, () => {
@@ -87,14 +87,9 @@ class MyTrips extends Component {
     );
   };
 
+  //code added by Meghna
   changeTripStatus = (e, status) => {
-    // let url_get =
-    //   "http://localhost:5000/tripNotifiy/" +
-    //   e._id +
-    //   "/" +
-    //   e.requestorId +
-    //   "/" +
-    //   status;
+    // let url_get ="http://localhost:5000/tripNotifiy/" + e._id + "/" + e.requestorId +"/" +status;
     let url_get='https://haul-share-meghna.herokuapp.com/tripNotifiy/'+e._id+'/'+e.requestorId+'/'+status;
     fetch(url_get, { method: "PUT" })
       .then(data => data.json())

@@ -42,8 +42,8 @@ class MyAd extends Component {
   async componentDidMount() {
     console.log(localStorage.getItem("user_id"));
     let user_id = localStorage.getItem("user_id");
-    const url = "http://localhost:5565/api/getData/0/" + user_id;
-
+    // const url = "http://localhost:5565/api/getData/0/" + user_id;
+    const url ="https://web-project-myads.herokuapp.com/api/getData/0/"+user_id
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ result: data.data }, () => {

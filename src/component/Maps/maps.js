@@ -31,9 +31,10 @@ class SimpleMap extends Component {
   async componentDidMount() {
     console.log(this.state.obj_id);
     //localStorage.removeItem("obj_id");
-    const url = "http://localhost:5543/api/getData/" + this.state.obj_id;
+    // const url = "http://localhost:5543/api/getData/" + this.state.obj_id;
     // "https://web-backend-server.herokuapp.com/api/getData/100/" +
     // (this.state.trip_id === null ? 1 : this.state.trip_id);
+    const url = "https://web-project-maps.herokuapp.com/api/getData/"+ this.state.obj_id;
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);

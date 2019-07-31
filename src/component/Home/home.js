@@ -123,7 +123,7 @@ searchKeywords = () => {
 
   this.setState({res_dup:res})
 
-  if(res.length == 0)
+  if(res.length === 0)
   {
       setTimeout(() => {
 
@@ -398,30 +398,6 @@ searchKeywords = () => {
         <Form.Check
           className="filter-options"
           type="checkbox"
-          value={this.state.filter_time}
-          onChange={this.checkBoxChange}
-          id="filter_time"
-          label="Time"
-        />
-        <Form.Check
-          className="filter-options"
-          type="checkbox"
-          value={this.state.filter_distance}
-          onChange={this.checkBoxChange}
-          id="filter_distance"
-          label="Distance"
-        />
-        <Form.Check
-          className="filter-options"
-          type="checkbox"
-          value={this.state.filter_price}
-          onChange={this.checkBoxChange}
-          id="filter_price"
-          label="Price"
-        />
-        <Form.Check
-          className="filter-options"
-          type="checkbox"
           value={this.state.filter_transporter}
           onChange={this.checkBoxChange}
           id="filter_transporter"
@@ -435,7 +411,6 @@ searchKeywords = () => {
           id="filter_customer"
           label="Requestor"
         />
-        {this.sliderValue()}
       </div>
     );
   };
